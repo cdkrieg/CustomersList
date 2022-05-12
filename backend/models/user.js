@@ -18,6 +18,7 @@ const userSchema = mongoose.Schema({
   state: {type: String, required:true,minLength:2,maxLength:255},
   zipCode: {type: String,required:true,minLength:5,maxLength:10},
   image: {type: String, default:""},
+  admin: {type: Boolean, default: false}
 });
 
 userSchema.methods.generateAuthToken = function () {
@@ -28,7 +29,8 @@ userSchema.methods.generateAuthToken = function () {
         streetAddressLine1: this.streetAddressLine1,
         streetAddressLine2: this.streetAddressLine2,
         state: this.state,
-        zipCode: this.zipCode
+        zipCode: this.zipCode,
+        admin: this.admin,
     },
     process.env.JWT_SECRET)
 }
@@ -43,6 +45,7 @@ const validateUser = (user) => {
       streetAddressLine1: Joi.string().minLength(5).maxLength(255).required(),
       state: Joi.string().minLength(2).maxLength(255).required(),
       zipCode: Joi.string().minLength(5).maxLength(10).required(),
+      admin: Joi.boolean(),
       
     });
     return schema.validate(user);
