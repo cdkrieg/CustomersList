@@ -20,11 +20,12 @@ const contractorSchema = mongoose.Schema({
     maxLength: 255,
   },
   streetAddressLine2: { type: String },
+  city: { type: String, minLength: 2, maxLength: 255, required: true },
   state: { type: String, required: true, minLength: 2, maxLength: 255 },
   zipCode: { type: String, required: true, minLength: 5, maxLength: 10 },
   image: { type: String, default: "" },
   admin: { type: Boolean, default: false },
-  reviewIds: {type: Array, default: []},
+  reviewIds: { type: Array, default: [] },
 });
 
 contractorSchema.methods.generateAuthToken = function () {
@@ -35,6 +36,7 @@ contractorSchema.methods.generateAuthToken = function () {
       businessName: this.businessName,
       streetAddressLine1: this.streetAddressLine1,
       streetAddressLine2: this.streetAddressLine2,
+      city: this.city,
       state: this.state,
       zipCode: this.zipCode,
       admin: this.admin,
@@ -52,10 +54,12 @@ const validatecontractor = (contractor) => {
     businessName: Joi.string().min(5).max(255),
     image: Joi.string(),
     streetAddressLine1: Joi.string().min(5).max(255).required(),
+    streetAddressLine2: Joi.string(),
+    city: Joi.string().min(2).max(255).required(),
     state: Joi.string().min(2).max(255).required(),
     zipCode: Joi.string().min(5).max(10).required(),
     admin: Joi.boolean(),
-    reviewIds: Joi.string(),
+    reviewIds: Joi.array().items(Joi.string()),
   });
   return schema.validate(contractor);
 };
