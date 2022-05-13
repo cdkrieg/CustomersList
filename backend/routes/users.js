@@ -90,12 +90,11 @@ router.get("/", [auth], async (req, res) => {
   // DELETE a single user from the database
   router.delete("/:userId", [auth, admin], async (req, res) => {
     try {
-      const user = await User.findById(req.params.userId);
+      const user = await User.findByIdAndDelete(req.params.userId);
       if (!user)
         return res
           .status(400)
           .send(`User with id ${req.params.userId} does not exist!`);
-      await user.remove();
       return res.send(user);
     } catch (error) {
       return res.status(500).send(`Internal Server Error: ${error}`);
@@ -117,11 +116,11 @@ router.get("/", [auth], async (req, res) => {
   });
   
   // Update property of user
-  router.put("/update", async (req, res) => {
+  router.put("/update/:userId", async (req, res) => {
     try {
       const users = await User.findByIdAndUpdate(
-        { _id: req.body.id },
-        req.body.body,
+        { _id: req.params.userId },
+        req.body.updates,
         { new: true }
       );
   

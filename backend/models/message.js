@@ -8,8 +8,7 @@ const messageSchema = new mongoose.Schema({
   read: { type: Boolean },
   dateSent: { type: Date, default: Date.now() },
   dateRead: { type: Date },
-  parentReviewId: { type: String, required: true },
-  parentMessageId: { type: String },
+  reviewId: { type: String, required: true },
   flagged: { type: Boolean, default: false },
 });
 
@@ -18,7 +17,7 @@ const validateMessage = (message) => {
     senderId: Joi.string().required(),
     receiverId: Joi.string().required(),
     body: Joi.string().min(2).max(255).required(),
-    parentReviewId: Joi.string().required(),
+    reviewId: Joi.string().required(),
     flagged: Joi.boolean(),
   });
   return validateMessage(message);
