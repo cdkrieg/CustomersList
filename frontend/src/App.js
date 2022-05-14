@@ -14,6 +14,7 @@ function App() {
 
   return (
     <div className='App'>
+      <div id="wrapper">
       <Navbar setShowMenu={setShowMenu} showMenu={showMenu} />
       {showMenu && <Sidebar  setShowMenu={setShowMenu} showMenu={showMenu} />}
       <Routes>
@@ -25,6 +26,7 @@ function App() {
             </PrivateRoute>
           }></Route>
       </Routes>
+      </div>
       <Footer />
     </div>
   );

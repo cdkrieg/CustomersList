@@ -4,68 +4,42 @@ import React, { useContext, useEffect, useState } from "react";
 import AuthContext from "../../context/AuthContext";
 import { MdMenu } from "react-icons/md";
 
-const Sidebar = ({showMenu, setShowMenu}) => {
+const Sidebar = ({ showMenu, setShowMenu }) => {
   const { user } = useContext(AuthContext);
 
+  useEffect(() => {}, []);
 
-  useEffect(() => {
+  return (
+      <CDBSidebar textColor='#fff' backgroundColor='rgb(51, 59, 65)'>
+        <CDBSidebarHeader prefix={<i className='fa fa-large'></i>}>
+          <MdMenu className='material-icons'
+            onClick={() => setShowMenu(!showMenu)}
+          />
+        </CDBSidebarHeader>
 
-  }, []);
+        <CDBSidebarMenuItem className="sidebarMenu">
+          View/Edit Profile
+        </CDBSidebarMenuItem>
+        <hr />
 
-  
-    return (
-      <div
-        style={{
-          display: "flex",
-          width: "60px",
-          height: "100vh",
-          overflow: "scroll initial",
-          marginTop: "-32px",
-          position: "absolute",
-          fontSize: "2em",
-        }}
-      >
-        <CDBSidebar textColor="#fff" backgroundColor="rgb(51, 59, 65)">
-          <CDBSidebarHeader prefix={<i className="fa fa-bars fa-large"></i>}>
-            <a
-              href="/"
-              className="text-decoration-none"
-              style={{ color: "inherit" }}
-            >
-              <span>
-                  <button onClick={()=> setShowMenu(!showMenu)}><MdMenu /></button>
-              <h4
-                style={{
-                  textAlign: "center",
-                  fontSize: "1em",
-                  margin: "0em 0em 0em 1em",
-                  paddingBottom: "0em",
-                }}
-              >
-                {user && user.name}
-              </h4></span>
-            </a>
-          </CDBSidebarHeader>
+        <CDBSidebarMenuItem className="sidebarMenu">
+          Add Contractor/Review
+        </CDBSidebarMenuItem>
+        <hr />
 
-          <CDBSidebarMenuItem style={{ fontSize: "1rem" }}>
-            View/Edit Profile
-          </CDBSidebarMenuItem>
-
-          <CDBSidebarMenuItem style={{ fontSize: "1rem" }}>
-            Add Contractor/Review
-          </CDBSidebarMenuItem>
-
-          <CDBSidebarMenuItem style={{ fontSize: "1rem" }}>
-            View/Edit "My Reviews"
-          </CDBSidebarMenuItem>
-          <CDBSidebarMenuItem style={{ fontSize: "1rem" }}>
-            Request Contractor Access
-          </CDBSidebarMenuItem>
-          <CDBSidebarMenuItem>Contact Support</CDBSidebarMenuItem>
-        </CDBSidebar>
-      </div>
-    )
-
+        <CDBSidebarMenuItem className="sidebarMenu">
+          View/Edit "My Reviews"
+        </CDBSidebarMenuItem>
+        <hr />
+        <CDBSidebarMenuItem className="sidebarMenu">
+          Request Contractor Access
+        </CDBSidebarMenuItem>
+        <hr />
+        <CDBSidebarMenuItem className="sidebarMenu">
+          Contact Support
+        </CDBSidebarMenuItem>
+      </CDBSidebar>
+  );
 };
 
 export default Sidebar;
