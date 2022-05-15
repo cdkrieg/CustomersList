@@ -33,7 +33,7 @@ function App() {
             <Route path="/profile" element={<ProfilePage />} />
         </Routes>
       </div>
-      <Footer />
+      <Footer className="footer" />
     </div>
   );
 }

@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useContext } from "react";
 import AuthContext from "../../context/AuthContext";
-import { Form, Button } from "react-bootstrap";
+import { Form, Button, Alert } from "react-bootstrap";
 import stateArray from "../../components/StateList/StateList";
 import useCustomForm from "../../hooks/UseCustomForm";
 import "./ProfilePage.css";
@@ -89,15 +89,41 @@ const ProfilePage = () => {
         <Form.Control
           name='password'
           placeholder='Enter new password'
+          autoComplete="off"
           value={formData.password}
           onChange={handleInputChange}
         />
         <Form.Control
           name='passwordConfirm'
+          className={passwordValidation}
+          autoComplete='off'
           placeholder='Enter password to confirm'
           value={passwordConfirm}
           onChange={(e) => setPasswordConfirm(e.target.value)}
         />
+        <p>
+          {showPasswordAlert1 && (
+            <Alert
+            className="alert"
+              variant='danger'
+              onClose={() => setShowPasswordAlert1(false)}
+              dismissible>
+              <Alert.Heading>Passwords do not match!</Alert.Heading>
+            </Alert>
+          )}
+        </p>
+        <p>
+          {showPasswordAlert2 && (
+            <Alert
+            className="alert"
+              variant='danger'
+              onClose={() => setShowPasswordAlert2(false)}
+              dismissible>
+              <Alert.Heading>Password too short!</Alert.Heading>Passwords must
+              contain at least 8 characters.
+            </Alert>
+          )}
+        </p>
         <div className="submitButton">
         <Button
           id='submitButton'

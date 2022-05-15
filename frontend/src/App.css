@@ -24,3 +24,6 @@
   margin-left: 15px;
 
 }  
+.footer {
+  z-index: 1009;
+}

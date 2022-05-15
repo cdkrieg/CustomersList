@@ -1,7 +1,7 @@
 
 .footer {
-position:absolute;
-top: 90vh;
+position:relative;
+top: auto;
 left:0;
 bottom:0;
 right:0;
