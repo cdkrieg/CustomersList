@@ -10,13 +10,16 @@ const Sidebar = ({ showMenu, setShowMenu }) => {
   useEffect(() => {}, []);
 
   return (
-      <CDBSidebar textColor='#fff' backgroundColor='rgb(51, 59, 65)'>
-        <CDBSidebarHeader prefix={<i className='fa fa-large'></i>}>
-          <MdMenu className='material-icons'
-            onClick={() => setShowMenu(!showMenu)}
-          />
-        </CDBSidebarHeader>
-
+      <CDBSidebar id="sidebar" textColor='#fff' backgroundColor='rgb(51, 59, 65)'
+      style={{display: "block",
+        height: "55vh",
+        marginTop: "-15px",
+        position: "relative",
+        fontSize: "1em",
+        paddingTop: "0",
+      textAlign: "center",
+    minWidth: "390px"}}
+        >
         <CDBSidebarMenuItem className="sidebarMenu">
           View/Edit Profile
         </CDBSidebarMenuItem>

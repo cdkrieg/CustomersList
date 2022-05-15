@@ -12,18 +12,22 @@
   padding: 5px 22px;
 }
 
-.navBar button:hover {
-  background: steelblue;
-  color: rgb(255, 255, 255);
-  cursor: pointer;
-  border-radius: 12px;
-}
+.navBar button:active{
+  background: rgb(51, 59, 65);
+  border: none;
+  color: white;
+} 
+.navBar button:hover{
+  background: rgb(51, 59, 65);
+  border: none;
+  color: white;
+} 
+.navBar button:focus{
+  background: rgb(51, 59, 65);
+  border: none;
+  color: white;
+} 
 
-.navBar button:focus {
-  background: steelblue;
-  color: rgb(255, 255, 255);
-  border-radius: 12px;
-}
 
 .brand {
   cursor: pointer;
@@ -35,10 +39,12 @@
   text-transform: uppercase;
 }
 
-.hamburger {
-  text-align: left;
-}
-b span {
+#customer {
   color: steelblue;
   font-style: italic;
+}
+
+.navBarMenu {
+  display: flex;
+  justify-content: space-between;
 }
