@@ -7,7 +7,7 @@ const router = express.Router();
 const fileUpload = require("../middleware/file-upload");
 
 //POST register a new user
-router.post("/", async (req, res) => {
+router.post("/register", async (req, res) => {
   try {
     const { error } = validateUser(req.body);
     if (error) return res.status(400).send(error.details[0].message);
@@ -30,7 +30,6 @@ router.post("/", async (req, res) => {
       city: req.body.city,
       state: req.body.state,
       zipCode: req.body.zipCode,
-      admin: req.body.admin,
     });
 
     await user.save();

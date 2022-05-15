@@ -1,0 +1,56 @@
+form{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    text-align: left;
+    margin-left: 0.3em;
+    margin-right: 0.3em;
+}
+.form div{
+    margin-top: 1.5rem;
+    width: 100%;
+
+}
+.state{
+    margin-left: 1.4rem;
+    margin-right: auto;
+}
+
+.form * {
+    margin-top: 0.3em;
+}
+
+.form>*:nth-child(1), /* userName */
+.form>*:nth-child(2), /* email */
+.form>*:nth-child(3), /* password */
+.form>*:nth-child(4), /* passwordConfirm */
+.form>*:nth-child(8), /* streetAddressLine1 */
+.form>*:nth-child(9), /* streetAddressLine2 */
+.form>*:nth-child(10), /* city */
+.form>*:nth-child(11), /* state */
+.form>*:nth-child(13) /* zipCode */ {
+    width: 47%;
+
+}
+.notValid {
+    color: red;
+}
+.valid {
+    color: rgb(55, 208, 55);
+}
+.submitButton {
+    display: flex;
+    margin-left: auto;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+}
+#submitButton{
+    background-color: rgb(51, 59, 65);
+    color: aliceblue;
+    font-size: large;
+    height: 3rem;
+    width: 6rem;
+
+
+}

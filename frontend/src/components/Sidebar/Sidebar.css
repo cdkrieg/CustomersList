@@ -1,0 +1,13 @@
+#sidebar{
+    display: block;
+    height: 65vh;
+    margin-top: 20;
+    position: absolute;
+    font-size: 2em;
+    padding-top: 0;
+}
+.sidebarMenu{
+    font-size: 1rem;
+    text-align: center;
+}
+

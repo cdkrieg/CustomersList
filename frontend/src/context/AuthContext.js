@@ -26,6 +26,7 @@ export const AuthProvider = ({ children }) => {
   const registerUser = async (registerData) => {
     
     try {
+      console.log(registerData)
       let response = await axios.post(`${BASE_URL}/register`, registerData);
       if (response.status === 200) {
         let token = response.headers["x-auth-token"];
