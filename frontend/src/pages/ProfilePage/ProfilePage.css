@@ -1,0 +1,44 @@
+.form{
+    display: flex;
+    flex-flow: wrap row;
+    margin-top: 2em;
+    width: 70vw;
+}
+.form>*:nth-child(1), /* name */
+.form>*:nth-child(2), /* streetAddressLine1 */
+.form>*:nth-child(3), /* streetAddressLine2 */
+
+.form>*:nth-child(4),  /* state */
+.form>*:nth-child(7), /* password */
+.form>*:nth-child(8) /* passwordConfirm */ {
+    width: 100%;
+
+}
+.form>*:nth-child(6), /* zipCode */
+.form>*:nth-child(5) /* city */
+{
+    width: 47%;
+}
+.notValid {
+    color: red;
+}
+.valid {
+    color: rgb(55, 208, 55);
+}
+.submitButton {
+    display: flex;
+    margin-left: auto;
+    margin-right: auto;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+}
+#submitButton{
+    background-color: rgb(51, 59, 65);
+    color: aliceblue;
+    font-size: large;
+    height: 3rem;
+    width: 6rem;
+
+
+}

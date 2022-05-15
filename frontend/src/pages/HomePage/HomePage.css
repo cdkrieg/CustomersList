@@ -1,0 +1,13 @@
+.container-homePage {
+  margin-top: 2em;
+  margin-bottom: 2em;
+}
+.container-homePage p {
+  font-size: large;
+  font-weight: bold;
+}
+.dropdown{
+    margin-right: auto;
+    margin-left: auto;
+    justify-content: right;
+}
