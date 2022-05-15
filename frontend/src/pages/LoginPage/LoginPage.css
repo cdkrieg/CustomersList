@@ -1,3 +1,19 @@
 .error {
     color: red;
   }
+  .form {
+    margin-top: 40%;
+    margin-left: auto;
+    margin-right: auto;
+    display: flex;
+    flex-flow: wrap column;
+    align-items: center;
+  }
+  input{
+    margin-bottom: 1em;
+  }
+
+ .link{
+    margin-bottom: 1em;
+    text-align: center;
+  }

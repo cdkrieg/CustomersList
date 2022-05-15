@@ -3,6 +3,7 @@ import { Alert } from "react-bootstrap";
 import AuthContext from "../../context/AuthContext";
 import useCustomForm from "../../hooks/UseCustomForm";
 import stateArray from "../../components/StateList/StateList";
+import { Form, Button } from "react-bootstrap";
 import "./RegisterPage.css";
 
 const RegisterPage = () => {
@@ -67,46 +68,46 @@ const RegisterPage = () => {
 
   return (
     <div className='container-0'>
-      <form className='form' onSubmit={(event) => passwordCheck(event)}>
-        <label>
+      <Form className='form' onSubmit={(event) => passwordCheck(event)}>
+        <Form.Label>
           User Name:{" "}
-          <input
+          <Form.Control
             type='text'
             name='userName'
             value={formData.userName}
             onChange={handleInputChange}
           />
-        </label>
-        <label>
+        </Form.Label>
+        <Form.Label>
           Email:{" "}
-          <input
+          <Form.Control
             type='text'
             name='email'
             value={formData.email}
             onChange={handleInputChange}
           />
-        </label>
-        <label>
+        </Form.Label>
+        <Form.Label>
           Password:{" "}
-          <input
+          <Form.Control
             type='text'
             name='password'
             autoComplete='off'
             value={formData.password}
             onChange={handleInputChange}
           />
-        </label>
+        </Form.Label>
 
-        <label className={passwordValidation}>
+        <Form.Label className={passwordValidation}>
           Re-Enter Password:{" "}
-          <input
+          <Form.Control
             type='text'
             name='passwordConfirm'
             autoComplete='off'
             value={passwordConfirm}
             onChange={(e)=>setPasswordConfirm(e.target.value)}
           />
-        </label>
+        </Form.Label>
         <p> (Password must be at least 8 characters long)</p>
         <p>
           {showPasswordAlert1 && (
@@ -129,44 +130,44 @@ const RegisterPage = () => {
             </Alert>
           )}
         </p>
-        <label>
+        <Form.Label>
           Street Address Line 1:{" "}
-          <input
+          <Form.Control
             type='text'
             name='streetAddressLine1'
             value={formData.streetAddressLine1}
             onChange={handleInputChange}
           />
-        </label>
-        <label>
+        </Form.Label>
+        <Form.Label>
           Street Address Line 2:{" "}
-          <input
+          <Form.Control
             type='text'
             name='streetAddressLine2'
             value={formData.streetAddressLine2}
             onChange={handleInputChange}
           />
-        </label>
-        <label>
+        </Form.Label>
+        <Form.Label>
           City:{" "}
-          <input
+          <Form.Control
             type='text'
             name='city'
             value={formData.city}
             onChange={handleInputChange}
           />
-        </label>
-        <label className="state">
+        </Form.Label>
+        <Form.Label className="state">
           State:{" "}
-          <select
+          <Form.Select
             name='state'
             value={formData.state}
             onChange={(event) => handleInputChange(event)}>
             {stateArray.map((item, index) => {
               return <option key={index}>{item.value}</option>;
             })}
-          </select>
-        </label>
+          </Form.Select>
+        </Form.Label>
         <p>
           {showStateAlert && (
             <Alert
@@ -177,24 +178,25 @@ const RegisterPage = () => {
             </Alert>
           )}
         </p>
-        <label>
+        <Form.Label>
           Zip Code:{" "}
-          <input
+          <Form.Control
             type='text'
             name='zipCode'
             checked={formData.isAdmin}
             onChange={handleInputChange}
           />
-        </label>
+        </Form.Label>
         <div className='submitButton'>
-          <button
+          <Button
             id='submitButton'
             type='submit'
+            variant="dark"
             onSubmit={(event) => passwordCheck(event)}>
             Submit
-          </button>
+          </Button>
         </div>
-      </form>
+      </Form>
     </div>
   );
 };

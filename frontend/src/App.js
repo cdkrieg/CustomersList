@@ -9,6 +9,7 @@ import Footer from "./components/Footer/Footer";
 import AuthContext from "./context/AuthContext";
 import LoginPage from './pages/LoginPage/LoginPage'
 import RegisterPage from "./pages/RegisterPage/RegisterPage";
+import ProfilePage from "./pages/ProfilePage/ProfilePage";
 
 function App() {
   const {user} = useContext(AuthContext)
@@ -29,6 +30,7 @@ function App() {
             }/>
             <Route path="/register" element={<RegisterPage />}/>
             <Route path="/login" element={<LoginPage />} />
+            <Route path="/profile" element={<ProfilePage />} />
         </Routes>
       </div>
       <Footer />

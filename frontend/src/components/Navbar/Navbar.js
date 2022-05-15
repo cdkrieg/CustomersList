@@ -38,7 +38,7 @@ const Navbar = ({ showMenu, setShowMenu }) => {
               <Button>
                 <MdLogout
                   className='material-icons logout'
-                  onClick={() => logoutUser}
+                  onClick={() => logoutUser()}
                 />
               </Button>
             </OverlayTrigger>
