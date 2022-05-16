@@ -22,8 +22,6 @@
   white-space: nowrap;
   direction: ltr;
   margin-left: 15px;
+  cursor: pointer;
 
 }  
-.footer {
-  z-index: 1009;
-}

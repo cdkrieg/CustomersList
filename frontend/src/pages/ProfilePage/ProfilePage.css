@@ -1,24 +1,24 @@
-.form{
+.container-profilePage > .form{
     display: flex;
     flex-flow: wrap row;
     margin-top: 1em;
     width: 70vw;
 }
-.form>*:nth-child(1), /* name */
-.form>*:nth-child(2), /* streetAddressLine1 */
-.form>*:nth-child(3), /* streetAddressLine2 */
+.container-profilePage > .form>*:nth-child(1), /* name */
+.container-profilePage > .form>*:nth-child(2), /* streetAddressLine1 */
+.container-profilePage > .form>*:nth-child(3), /* streetAddressLine2 */
 
-.form>*:nth-child(4),  /* state */
-.form>*:nth-child(7), /* password */
-.form>*:nth-child(8), /* passwordConfirm */ 
-.form>*:nth-child(9), /* passwordConfirm */ 
-.form>*:nth-child(10) /* passwordConfirm */ 
+.container-profilePage > .form>*:nth-child(4),  /* state */
+.container-profilePage > .form>*:nth-child(7), /* password */
+.container-profilePage > .form>*:nth-child(8), /* passwordConfirm */ 
+.container-profilePage > .form>*:nth-child(9), /* passwordConfirm */ 
+.container-profilePage > .form>*:nth-child(10) /* passwordConfirm */ 
 {
     width: 100%;
 
 }
-.form>*:nth-child(6), /* zipCode */
-.form>*:nth-child(5) /* city */
+.container-profilePage > .form>*:nth-child(6), /* zipCode */
+.container-profilePage > .form>*:nth-child(5) /* city */
 {
     width: 47%;
     margin-bottom: 1em;
@@ -29,14 +29,14 @@
 .valid {
     color: rgb(55, 208, 55);
 }
-.submitButton {
+.container-profilePage > .form > .submitButton {
     display: flex;
     justify-content: center;
     align-items: center;
     position: relative;
     margin: auto;
 }
-#submitButton{
+.container-profilePage > .form >  #submitButton{
     background-color: rgb(51, 59, 65);
     color: aliceblue;
     font-size: large;

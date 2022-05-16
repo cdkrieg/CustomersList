@@ -5,22 +5,24 @@ const express = require("express");
 const router = express.Router();
 const fileUpload = require("../middleware/file-upload");
 
+//## POST METHODS
 // Post a review
-// http://localhost:3007/api/review
+// http://localhost:3010/api/reviews
 router.post("/", async (req, res) => {
   try {
     const { error } = validateReview(req.body);
     if (error) return res.status(400).send(error);
     let newReview = await new Review(req.body);
     await newReview.save();
-    return res.status(201).send(newreview);
+    return res.status(201).send(newReview);
   } catch (error) {
     return res.status(500).send(`Internal Server Error: ${error}`);
   }
 });
 
+//## GET METHODS
 // Get all reviews
-// http://localhost:3007/api/reviews
+// http://localhost:3010/api/reviews
 router.get("/", async (req, res) => {
   try {
     // console.log(req.review);
@@ -32,7 +34,7 @@ router.get("/", async (req, res) => {
   }
 });
 // Get all reviews from single user
-// http://localhost:3007/api/reviews/:userId
+// http://localhost:3010/api/reviews/:userId
 router.get("/:userId", async (req, res) => {
   try {
     // console.log(req.review);
@@ -43,8 +45,10 @@ router.get("/:userId", async (req, res) => {
     return res.status(500).send(`Internal Server Error: ${error}`);
   }
 });
+
+//## PUT METHODS
 // PUT an existing review
-// http://localhost:3007/api/reviews/:reviewId
+// http://localhost:3010/api/reviews/:reviewId
 router.put("/:reviewId", [auth, admin], async (req, res) => {
   try {
     const review = await Review.UpdateOne(
@@ -57,22 +61,8 @@ router.put("/:reviewId", [auth, admin], async (req, res) => {
     return res.status(500).send(`Internal Server Error: ${error}`);
   }
 });
-
-// DELETE a single review from the database
-// http://localhost:3007/api/:reviewId
-router.delete("/:reviewId", [admin], async (req, res) => {
-  try {
-    const review = await Review.findById(req.params.reviewId);
-    if (!review)
-      return res
-        .status(400)
-        .send(`review with id ${req.params.reviewId} does not exist!`);
-    await Review.remove();
-    return res.send(review);
-  } catch (error) {
-    return res.status(500).send(`Internal Server Error: ${error}`);
-  }
-});
+//Add an image to a review
+// http://localhost:3010/api/reviews/:reviewId
 router.put(
   "/updateImage/:reviewId",
   fileUpload.single("image"),
@@ -90,5 +80,24 @@ router.put(
     }
   }
 );
+
+//## DELETE METHODS
+// DELETE a single review from the database
+// http://localhost:3010/api/:reviewId
+router.delete("/:reviewId", [auth, admin], async (req, res) => {
+  try {
+    const review = await Review.findById(req.params.reviewId);
+    if (!review)
+      return res
+        .status(400)
+        .send(`review with id ${req.params.reviewId} does not exist!`);
+    await Review.remove();
+    return res.send(review);
+  } catch (error) {
+    return res.status(500).send(`Internal Server Error: ${error}`);
+  }
+});
+
+
 
 module.exports = router;

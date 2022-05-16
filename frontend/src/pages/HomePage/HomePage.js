@@ -16,7 +16,7 @@ const HomePage = () => {
                 <DropdownToggle variant='dark'>
                     Select Filters
                 </DropdownToggle>
-                <DropdownMenu>
+                <DropdownMenu variant='dark'>
                     <DropdownItem>Item 1</DropdownItem>
                     <DropdownItem>Item 2</DropdownItem>
                     <DropdownItem>Item 3</DropdownItem>

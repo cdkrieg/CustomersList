@@ -1,4 +1,4 @@
-form{
+.container-register > form{
     display: flex;
     flex-wrap: wrap;
     justify-content: space-between;
@@ -6,28 +6,26 @@ form{
     margin-left: 0.3em;
     margin-right: 0.3em;
 }
-.form div{
+.container-register > .form div{
     width: 100%;
 
 }
-.state{
+.container-register > .state{
     margin-left: 1.4rem;
     margin-right: auto;
 }
 
-.form * {
+.container-register > .form * {
     margin-top: 0.3em;
 }
 
-.form>*:nth-child(1), /* userName */
-.form>*:nth-child(2), /* email */
-.form>*:nth-child(3), /* password */
-.form>*:nth-child(4), /* passwordConfirm */
-.form>*:nth-child(8), /* streetAddressLine1 */
-.form>*:nth-child(9), /* streetAddressLine2 */
-.form>*:nth-child(10), /* city */
-.form>*:nth-child(11), /* state */
-.form>*:nth-child(13) /* zipCode */ {
+.container-register > .form>*:nth-child(1), /* userName */
+.container-register > .form>*:nth-child(2), /* email */
+.container-register > .form>*:nth-child(3), /* password */
+.container-register > .form>*:nth-child(4), /* passwordConfirm */
+.container-register > .form>*:nth-child(10), /* city */
+.container-register > .form>*:nth-child(11), /* state */
+.container-register > .form>*:nth-child(13) /* zipCode */ {
     width: 47%;
 
 }
@@ -37,19 +35,20 @@ form{
 .valid {
     color: rgb(55, 208, 55);
 }
-.submitButton {
+.container-register > .submitButton {
     display: flex;
     margin-left: auto;
     justify-content: center;
     align-items: center;
     position: relative;
 }
-#submitButton{
+.container-register > #submitButton{
     background-color: rgb(51, 59, 65);
     color: aliceblue;
     font-size: large;
     height: 3rem;
     width: 6rem;
-
-
+}
+.container-register label{
+    text-align: left;
 }

@@ -67,7 +67,7 @@ const RegisterPage = () => {
   }, [formData.state]);
 
   return (
-    <div className='container-0'>
+    <div className='container-register'>
       <Form className='form' onSubmit={(event) => passwordCheck(event)}>
         <Form.Label>
           User Name:{" "}

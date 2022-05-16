@@ -10,6 +10,7 @@ import AuthContext from "./context/AuthContext";
 import LoginPage from './pages/LoginPage/LoginPage'
 import RegisterPage from "./pages/RegisterPage/RegisterPage";
 import ProfilePage from "./pages/ProfilePage/ProfilePage";
+import ReviewsPage from "./pages/ReviewsPage/ReviewsPage"
 
 function App() {
   const {user} = useContext(AuthContext)
@@ -31,6 +32,7 @@ function App() {
             <Route path="/register" element={<RegisterPage />}/>
             <Route path="/login" element={<LoginPage />} />
             <Route path="/profile" element={<ProfilePage />} />
+            <Route path="/reviews" element={<ReviewsPage />} /> 
         </Routes>
       </div>
       <Footer className="footer" />

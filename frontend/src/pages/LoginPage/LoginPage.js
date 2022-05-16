@@ -19,7 +19,7 @@ const LoginPage = () => {
   }, [isServerError]);
 
   return (
-    <div className="container-0">
+    <div className="container-login">
       <form className="form" onSubmit={handleSubmit}>
         <label>
           Email:{" "}
@@ -35,6 +35,7 @@ const LoginPage = () => {
           <input
             type="text"
             name="password"
+            autoComplete="off"
             value={formData.password}
             onChange={handleInputChange}
           />

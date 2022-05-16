@@ -6,8 +6,9 @@
   font-size: large;
   font-weight: bold;
 }
-.dropdown{
+.container-homePage .dropdown{
     margin-right: auto;
     margin-left: auto;
     justify-content: right;
+    
 }
