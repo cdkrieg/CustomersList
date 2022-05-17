@@ -6,7 +6,10 @@ const reviewSchema = mongoose.Schema({
     rating:{type: Number, default:0},
     body: {type: String, minLength:50, maxLength: 2048, required: true},
     image: {type:String, default:""},
-    contractor: {type: String, required: true}, 
+    contractorName: {type: String, required: true},
+    contractorPhone: {type: String, required: true},
+    categoryOfService: {type: String, required: true}, 
+    dateOfService: {type: Date, required: true},
     reviewer: {type: String, required: true}, // userName
     dateAdded: {type: Date, default: Date.now()},
 })
@@ -16,8 +19,11 @@ const validateReview = (review) => {
         title: Joi.string().min(8).max(255).required(),
         body: Joi.string().minLength(50).maxLength(2048).required(),
         rating: Joi.number(),
-        contractor: Joi.string().required(),
-        revier: Joi.string().required(),
+        contractorName: Joi.string().required(),
+        contractorPhone: Joi.string().required(),
+        categoryOfService: Joi.string().required(),
+        dateOfService: Joi.date().required(),
+        reviewer: Joi.string().required(),
         image: Joi.string(),
     })
     return schema.validate(review)
