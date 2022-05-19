@@ -3,25 +3,24 @@ import { Table } from "react-bootstrap";
 import ReactStars from "react-rating-stars-component";
 
 import AxiosReviews from "../../Routes/reviewsRoutes";
-import "./ReviewsList.css";
 import AuthContext from "../../context/AuthContext";
+import "./ReviewsList.css";
 
 const ReviewsList = (props) => {
-  const { user } = useContext(AuthContext);
   const [reviews, setReviews] = useState();
   const [update, setUpdate] = useState(false);
+  const { user } = useContext(AuthContext);
 
   useEffect(() => {
     (async () => {
-      if (props.filter){
+      if (props.filter) {
         try {
           let temp = await getUserReviews(props.filter);
           setReviews(temp);
         } catch (error) {
           console.log("Error with setReviews in useEffect");
         }
-      
-    } else if (user) {
+      } else if (user) {
         try {
           let temp = await getAllReviews();
           setReviews(temp);
@@ -31,6 +30,7 @@ const ReviewsList = (props) => {
       }
     })();
   }, [update]);
+
   async function getAllReviews() {
     try {
       let tempReviews = AxiosReviews.getReviews();
@@ -42,6 +42,7 @@ const ReviewsList = (props) => {
       console.log(`Error getting all reviews on Reviews Page: ${error}`);
     }
   }
+
   async function getUserReviews(userName) {
     try {
       let tempReviews = AxiosReviews.getUserReviews(userName);
@@ -53,6 +54,7 @@ const ReviewsList = (props) => {
       console.log(`Error getting all reviews on Reviews Page: ${error}`);
     }
   }
+
   return (
     <div>
       <p></p>

@@ -1,15 +1,8 @@
+import React, { useEffect } from "react";
 import { CDBSidebar, CDBSidebarMenuItem } from "cdbreact";
-import React, { useContext, useEffect, useState } from "react";
-import { useNavigate } from "react-router";
-
-import AuthContext from "../../context/AuthContext";
-import { MdMenu } from "react-icons/md";
 import { NavLink } from "react-router-dom";
 
 const Sidebar = ({ showMenu, setShowMenu }) => {
-  const { user } = useContext(AuthContext);
-  const navigate = useNavigate();
-
   useEffect(() => {}, []);
 
   return (
@@ -35,15 +28,15 @@ const Sidebar = ({ showMenu, setShowMenu }) => {
       <hr />
 
       <CDBSidebarMenuItem className='sidebarMenu'>
-        <NavLink to='/addReviews'onClick={() => setShowMenu(!showMenu)}>
-        Add Contractor/Review
+        <NavLink to='/addReviews' onClick={() => setShowMenu(!showMenu)}>
+          Add Contractor/Review
         </NavLink>
       </CDBSidebarMenuItem>
       <hr />
 
       <CDBSidebarMenuItem className='sidebarMenu'>
-      <NavLink to='/reviews'onClick={() => setShowMenu(!showMenu)}>
-        View/Edit "My Reviews"
+        <NavLink to='/reviews' onClick={() => setShowMenu(!showMenu)}>
+          View/Edit "My Reviews"
         </NavLink>
       </CDBSidebarMenuItem>
       <hr />

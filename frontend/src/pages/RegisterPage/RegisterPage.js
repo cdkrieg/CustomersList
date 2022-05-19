@@ -1,14 +1,19 @@
 import React, { useContext, useState, useEffect } from "react";
 import { Alert } from "react-bootstrap";
+import { Form, Button } from "react-bootstrap";
+
 import AuthContext from "../../context/AuthContext";
 import useCustomForm from "../../hooks/UseCustomForm";
 import stateArray from "../../components/StateList/StateList";
-import { Form, Button } from "react-bootstrap";
 import "./RegisterPage.css";
 
 const RegisterPage = () => {
   const { registerUser } = useContext(AuthContext);
   const [passwordConfirm, setPasswordConfirm] = useState(""); 
+  const [passwordValidation, setPasswordValidation] = useState("notValid");
+  const [showPasswordAlert1, setShowPasswordAlert1] = useState(false);
+  const [showPasswordAlert2, setShowPasswordAlert2] = useState(false);
+  const [showStateAlert, setShowStateAlert] = useState(false);
   const defaultValues = {
     userName: "",
     email: "",
@@ -23,32 +28,6 @@ const RegisterPage = () => {
     defaultValues,
     registerUser
   );
-  const [passwordValidation, setPasswordValidation] = useState("notValid");
-  const [showPasswordAlert1, setShowPasswordAlert1] = useState(false);
-  const [showPasswordAlert2, setShowPasswordAlert2] = useState(false);
-  const [showStateAlert, setShowStateAlert] = useState(false);
-  const mask = (item) => {
-    let temp = "";
-    for (let i = 0; i < item.length; i++) {
-      temp = temp + "*";
-    }
-    return temp;
-  };
-
-  function passwordCheck(event) {
-    event.preventDefault();
-    if (formData.password !== passwordConfirm) {
-      return setShowPasswordAlert1(true);
-    } else if (formData.password.length < 8) {
-      return setShowPasswordAlert2(true);
-    } else if (formData.state === "Choose State") {
-      console.log(formData.state);
-      return setShowStateAlert(true);
-    } else {
-      console.log(formData.state);
-      handleSubmit(event);
-    }
-  }
 
   useEffect(() => {
     if (
@@ -65,6 +44,21 @@ const RegisterPage = () => {
   useEffect(() => {
     if (formData.state !== stateArray[0].value) setShowStateAlert(false);
   }, [formData.state]);
+
+  function passwordCheck(event) {
+    event.preventDefault();
+    if (formData.password !== passwordConfirm) {
+      return setShowPasswordAlert1(true);
+    } else if (formData.password.length < 8) {
+      return setShowPasswordAlert2(true);
+    } else if (formData.state === "Choose State") {
+      console.log(formData.state);
+      return setShowStateAlert(true);
+    } else {
+      console.log(formData.state);
+      handleSubmit(event);
+    }
+  }
 
   return (
     <div className='container-register'>

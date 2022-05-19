@@ -1,4 +1,3 @@
-
   const stateArray = 
   [
       {label: "Choose State", value: "Choose State"},
@@ -53,8 +52,5 @@
       {label: "Wisonsin", value: "Wisonsin"},
     {label: "Wyoming", value: "Wyoming"}
   ]
-
-  
-
 
 export default stateArray;

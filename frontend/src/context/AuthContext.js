@@ -1,4 +1,4 @@
-import { createContext, useEffect, useState } from "react";
+import { createContext, useState } from "react";
 import jwtDecode from "jwt-decode";
 import { useNavigate } from "react-router-dom";
 import AxiosUser from "../Routes/userRoutes";
@@ -6,36 +6,13 @@ import AxiosUser from "../Routes/userRoutes";
 const AuthContext = createContext();
 
 export default AuthContext;
-
 export const AuthProvider = ({ children }) => {
   const decodedUser = localStorage.getItem("token");
   const decodedToken = decodedUser ? jwtDecode(decodedUser) : null;
-  const [user, setUser] = useState(() => decodedToken);
-  const [isServerError, setIsServerError] = useState(false);
   const [file, setFile] = useState();
-
+  const [isServerError, setIsServerError] = useState(false);
   const navigate = useNavigate();
-
-  // useEffect(() => {
-  //   if (user !== null) {
-  //   }
-  // }, [user]);
-
-  const registerUser = async (registerData) => {
-    try {
-      let result = await AxiosUser.registerUser(registerData);
-      if (result) {
-        let token = result.headers["x-auth-token"];
-        localStorage.setItem("token", JSON.stringify(token));
-        setUser(jwtDecode(token));
-        navigate("/");
-      } else {
-        navigate("/register");
-      }
-    } catch (error) {
-      console.log(`Error registering user: ${error}`);
-    }
-  };
+  const [user, setUser] = useState(() => decodedToken);
 
   const loginUser = async (loginData) => {
     try {
@@ -54,18 +31,6 @@ export const AuthProvider = ({ children }) => {
     }
   };
 
-  const updateUser = async (userData) => {
-    try {
-      let result = await AxiosUser.editUser(user._id, userData);
-      if (result) {
-        setIsServerError(false)
-      }
-    } catch (error) {
-      console.log(`Error updating user: ${error}`);
-      setIsServerError(true);
-    }
-  }
-
   const logoutUser = async () => {
     if (user) {
       navigate("/");
@@ -73,6 +38,34 @@ export const AuthProvider = ({ children }) => {
       console.log("token removed");
       setUser(null);
       setFile(null);
+    }
+  };
+
+  const registerUser = async (registerData) => {
+    try {
+      let result = await AxiosUser.registerUser(registerData);
+      if (result) {
+        let token = result.headers["x-auth-token"];
+        localStorage.setItem("token", JSON.stringify(token));
+        setUser(jwtDecode(token));
+        navigate("/");
+      } else {
+        navigate("/register");
+      }
+    } catch (error) {
+      console.log(`Error registering user: ${error}`);
+    }
+  };
+
+  const updateUser = async (userData) => {
+    try {
+      let result = await AxiosUser.editUser(user._id, userData);
+      if (result) {
+        setIsServerError(false);
+      }
+    } catch (error) {
+      console.log(`Error updating user: ${error}`);
+      setIsServerError(true);
     }
   };
 
@@ -84,7 +77,7 @@ export const AuthProvider = ({ children }) => {
     isServerError,
     file,
     setFile,
-    updateUser
+    updateUser,
   };
 
   return (

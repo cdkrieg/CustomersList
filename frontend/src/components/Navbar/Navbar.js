@@ -1,13 +1,14 @@
-import "./Navbar.css";
-import React, { useState, useContext } from "react";
+import React, { useContext } from "react";
 import { Link } from "react-router-dom";
 import { MdMenu, MdLogout } from "react-icons/md";
-import AuthContext from "../../context/AuthContext";
 import { Tooltip, OverlayTrigger, Button } from "react-bootstrap";
+
+import AuthContext from "../../context/AuthContext";
+import "./Navbar.css";
 
 const Navbar = ({ showMenu, setShowMenu }) => {
   const { logoutUser } = useContext(AuthContext);
-  const {user} = useContext(AuthContext)
+  const { user } = useContext(AuthContext);
 
   return (
     <div className='navBar'>

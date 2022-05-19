@@ -1,20 +1,19 @@
-import React, { useState, useEffect, useContext } from "react";
+import React, { useState} from "react";
 import { Routes, Route } from "react-router-dom";
+
 import HomePage from "./pages/HomePage/HomePage";
-import "./App.css";
 import PrivateRoute from "./utils/PrivateRoute";
 import Navbar from "./components/Navbar/Navbar";
 import Sidebar from "./components/Sidebar/Sidebar";
 import Footer from "./components/Footer/Footer";
-import AuthContext from "./context/AuthContext";
 import LoginPage from './pages/LoginPage/LoginPage'
 import RegisterPage from "./pages/RegisterPage/RegisterPage";
 import ProfilePage from "./pages/ProfilePage/ProfilePage";
 import ReviewsPage from "./pages/ReviewsPage/ReviewsPage"
 import AddReviewsPage from "./pages/AddReviewsPage/AddReviewsPage";
+import "./App.css";
 
 function App() {
-  const {user} = useContext(AuthContext)
   const [showMenu, setShowMenu] = useState(false);
 
   return (

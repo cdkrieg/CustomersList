@@ -1,12 +1,9 @@
-import React, { useState, useEffect, useContext } from "react";
+import React, { useContext } from "react";
 import AuthContext from "../../context/AuthContext";
 import { Dropdown } from "react-bootstrap";
 
-import "./HomePage.css";
-import DropdownToggle from "react-bootstrap/esm/DropdownToggle";
-import DropdownMenu from "react-bootstrap/esm/DropdownMenu";
-import DropdownItem from "react-bootstrap/esm/DropdownItem";
 import ReviewsList from "../../components/Reviews/ReviewsList";
+import "./HomePage.css";
 
 const HomePage = () => {
   const { user } = useContext(AuthContext);
@@ -14,12 +11,12 @@ const HomePage = () => {
     <div className='container-homePage'>
       <p>Welcome, {user.userName} </p>
       <Dropdown className='dropdown'>
-        <DropdownToggle variant='dark'>Select Filters</DropdownToggle>
-        <DropdownMenu variant='dark'>
-          <DropdownItem>Item 1</DropdownItem>
-          <DropdownItem>Item 2</DropdownItem>
-          <DropdownItem>Item 3</DropdownItem>
-        </DropdownMenu>
+        <Dropdown.Toggle variant='dark'>Select Filters</Dropdown.Toggle>
+        <Dropdown.Menu variant='dark'>
+          <Dropdown.Item>Item 1</Dropdown.Item>
+          <Dropdown.Item>Item 2</Dropdown.Item>
+          <Dropdown.Item>Item 3</Dropdown.Item>
+        </Dropdown.Menu>
       </Dropdown>
       <ReviewsList />
     </div>

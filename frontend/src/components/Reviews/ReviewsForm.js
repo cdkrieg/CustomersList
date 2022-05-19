@@ -1,18 +1,19 @@
 import React, { useState, useEffect, useContext } from "react";
 import { Form, Button } from "react-bootstrap";
+import { useNavigate } from "react-router";
+import DatePicker from "react-datepicker";
+import ReactStars from "react-rating-stars-component";
+import "react-datepicker/dist/react-datepicker.css";
+
 import AxiosReviews from "../../Routes/reviewsRoutes";
 import useCustomForm from "../../hooks/UseCustomForm";
 import AuthContext from "../../context/AuthContext";
-import reactStars from "react-rating-stars-component";
-import DatePicker from 'react-datepicker'
-import "react-datepicker/dist/react-datepicker.css";
-import ReactStars from "react-rating-stars-component";
-import { useNavigate } from "react-router";
 
 const ReviewsForm = ({ username, setShow }) => {
   const { user } = useContext(AuthContext);
-  const navigate = useNavigate()
-  
+  const navigate = useNavigate();
+  const [date, setDate] = useState(new Date());
+  const [showNotListed, setShowNotListed] = useState(false);
   const defaultValues = {
     contractorName: "",
     contractorPhone: "",
@@ -24,39 +25,34 @@ const ReviewsForm = ({ username, setShow }) => {
     reviewer: user.userName,
     tempCategory: "",
     tempCategory2: "",
+    reviewCity: user.city,
+    reviewState: user.state,
   };
-  const [showNotListed, setShowNotListed] = useState(false);
   const [formData, handleInputChange, handleSubmit] = useCustomForm(
     defaultValues,
     AxiosReviews.postReview
   );
-const [date, setDate] = useState(new Date())
-let tempCategory, tempCategory2;
 
   useEffect(() => {
     if (formData.tempCategory === "Other") setShowNotListed(true);
     else setShowNotListed(false);
   }, [formData.tempCategory]);
 
-
-  function submit(e){
-      e.preventDefault()
+  function submit(e) {
+    e.preventDefault();
     if (formData.tempCategory === "Other") {
       formData.categoryOfService = formData.tempCategory2.valueOf();
       delete formData.tempCategory;
       delete formData.tempCategory2;
-
     } else {
-
       formData.categoryOfService = formData.tempCategory.valueOf();
       delete formData.tempCategory;
       delete formData.tempCategory2;
-
     }
-    formData.dateOfService = date
-    console.log('submitting data')
+    formData.dateOfService = date;
+    console.log("submitting data");
     handleSubmit(e);
-  };
+  }
 
   return (
     <div>
@@ -102,12 +98,39 @@ let tempCategory, tempCategory2;
             onChange={handleInputChange}
           />
         )}
-        <DatePicker selected={date} onChange={(date) => setDate(date) } />
-        <Form.Control type="text" name="title" value={formData.title} placeholder="Enter a title for your review" onChange={handleInputChange} />
-        <ReactStars count={5} name="rating" onChange={(rating)=>formData.rating = rating } size={24} color2={'#ffd700'} value={formData.rating} half={true} />
-        <Form.Control type="textarea" name="body" value={formData.body} onChange={handleInputChange} placeholder="Enter your review"/>
-        <Button  type="submit" onSubmit={(event) => submit(event)} variant="dark">Submit</Button>
-        <Button type="cancel" onClick={()=>navigate("/")} variant="dark">Cancel</Button>
+        <DatePicker selected={date} onChange={(date) => setDate(date)} />
+        <Form.Control
+          type='text'
+          name='title'
+          value={formData.title}
+          placeholder='Enter a title for your review'
+          onChange={handleInputChange}
+        />
+        <ReactStars
+          count={5}
+          name='rating'
+          onChange={(rating) => (formData.rating = rating)}
+          size={24}
+          color2={"#ffd700"}
+          value={formData.rating}
+          half={true}
+        />
+        <Form.Control
+          type='textarea'
+          name='body'
+          value={formData.body}
+          onChange={handleInputChange}
+          placeholder='Enter your review'
+        />
+        <Button
+          type='submit'
+          onSubmit={(event) => submit(event)}
+          variant='dark'>
+          Submit
+        </Button>
+        <Button type='cancel' onClick={() => navigate("/")} variant='dark'>
+          Cancel
+        </Button>
       </Form>
     </div>
   );
