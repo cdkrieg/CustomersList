@@ -1,23 +1,24 @@
 import React, { useState, useEffect, useContext } from 'react';
 import AuthContext from "../../context/AuthContext";
-import { Form, Button, Alert, FormCheck } from "react-bootstrap";
+import { Form, Button, Alert} from "react-bootstrap";
 import { useNavigate } from 'react-router';
 import stateArray from "../../components/StateList/StateList";
 import useCustomForm from "../../hooks/UseCustomForm";
+import './EditProfile.css'
 
 const EditProfile = () => {
-    const { user } = useContext(AuthContext);
+    const { user, updateUser } = useContext(AuthContext);
     const navigate = useNavigate()
     const defaultValues = {
-      name: user.name || "",
+      name: user.name,
       streetAddressLine1: user.streetAddressLine1,
-      streetAddressLine2: user.streetAddressLine2 || "",
+      streetAddressLine2: user.streetAddressLine2,
       city: user.city,
       state: user.state,
       zipCode: user.zipCode,
     };
     const [formData, handleInputChange, handleSubmit] = useCustomForm(
-      defaultValues
+      defaultValues, updateUser
     );
     const [passwordConfirm, setPasswordConfirm] = useState("");
     const [passwordValidation, setPasswordValidation] = useState("notValid");
@@ -25,9 +26,24 @@ const EditProfile = () => {
     const [showPasswordAlert2, setShowPasswordAlert2] = useState(false);
     const [showStateAlert, setShowStateAlert] = useState(false);
     const [checked, setChecked] = useState(false)
+
+    useEffect(() => {
+        if (formData.password) {
+          if (formData.password !== passwordConfirm) {
+            setPasswordValidation("notValid");
+          } else {
+            setPasswordValidation("valid");
+            setShowPasswordAlert1(false);
+          }
+        }
+      }, [passwordConfirm]);
   
     function passwordCheck(event) {
       event.preventDefault()
+      if(!checked){
+          handleSubmit(event)
+          navigate("/")
+      }
       if (formData.password && formData.password !== passwordConfirm) {
         return setShowPasswordAlert1(true);
       } else if (
@@ -40,26 +56,14 @@ const EditProfile = () => {
         console.log(formData.state);
         return setShowStateAlert(true);
       } else {
-        return ((event)=>handleSubmit(event))
+        handleSubmit(event)
+        navigate("/")
         
       }
     }
-  
-    useEffect(() => {
-      if (formData.password) {
-        if (formData.password !== passwordConfirm) {
-          setPasswordValidation("notValid");
-        } else {
-          setPasswordValidation("valid");
-          setShowPasswordAlert1(false);
-        }
-      }
-    }, [passwordConfirm]);
-  
-
 
     return ( 
-        <div>
+        <div className='container-editProfile'>
             <Form className='form' onSubmit={(event) => passwordCheck(event)}>
         <Form.Control
           name='name'

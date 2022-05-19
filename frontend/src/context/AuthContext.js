@@ -1,14 +1,13 @@
 import { createContext, useEffect, useState } from "react";
-import axios from "axios";
 import jwtDecode from "jwt-decode";
 import { useNavigate } from "react-router-dom";
+import AxiosUser from "../Routes/userRoutes";
 
 const AuthContext = createContext();
 
 export default AuthContext;
 
 export const AuthProvider = ({ children }) => {
-  const BASE_URL = "http://localhost:3010/api/users";
   const decodedUser = localStorage.getItem("token");
   const decodedToken = decodedUser ? jwtDecode(decodedUser) : null;
   const [user, setUser] = useState(() => decodedToken);
@@ -17,48 +16,55 @@ export const AuthProvider = ({ children }) => {
 
   const navigate = useNavigate();
 
-  useEffect(() => {
-    if (user !== null) {
-  
-    }
-  }, [user]);
+  // useEffect(() => {
+  //   if (user !== null) {
+  //   }
+  // }, [user]);
 
   const registerUser = async (registerData) => {
-    
     try {
-      console.log(registerData)
-      let response = await axios.post(`${BASE_URL}/register`, registerData);
-      if (response.status === 200) {
-        let token = response.headers["x-auth-token"];
+      let result = await AxiosUser.registerUser(registerData);
+      if (result) {
+        let token = result.headers["x-auth-token"];
         localStorage.setItem("token", JSON.stringify(token));
         setUser(jwtDecode(token));
-        console.log(localStorage.getItem("token"))
         navigate("/");
       } else {
         navigate("/register");
       }
     } catch (error) {
-      console.log(error);
+      console.log(`Error registering user: ${error}`);
     }
   };
 
   const loginUser = async (loginData) => {
     try {
-      let response = await axios.post(`${BASE_URL}/login`, loginData);
-      if (response.status === 200) {
-        localStorage.setItem("token", JSON.stringify(response.data));
-        setUser(jwtDecode(response.data));
-        console.log(localStorage.getItem("token"))
+      let result = await AxiosUser.loginUser(loginData);
+      if (result) {
+        localStorage.setItem("token", JSON.stringify(result));
+        setUser(jwtDecode(result));
         setIsServerError(false);
         navigate("/");
       } else {
         navigate("/register");
       }
     } catch (error) {
-      console.log(error.message);
+      console.log(`Error logging in user: ${error}`);
       setIsServerError(true);
     }
   };
+
+  const updateUser = async (userData) => {
+    try {
+      let result = await AxiosUser.editUser(user._id, userData);
+      if (result) {
+        setIsServerError(false)
+      }
+    } catch (error) {
+      console.log(`Error updating user: ${error}`);
+      setIsServerError(true);
+    }
+  }
 
   const logoutUser = async () => {
     if (user) {
@@ -77,7 +83,8 @@ export const AuthProvider = ({ children }) => {
     registerUser,
     isServerError,
     file,
-    setFile
+    setFile,
+    updateUser
   };
 
   return (
