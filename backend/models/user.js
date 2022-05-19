@@ -38,6 +38,7 @@ userSchema.methods.generateAuthToken = function () {
   return jwt.sign(
     {
       _id: this._id,
+      name: this.name,
       userName: this.userName,
       email: this.email,
       streetAddressLine1: this.streetAddressLine1,
@@ -46,6 +47,7 @@ userSchema.methods.generateAuthToken = function () {
       state: this.state,
       zipCode: this.zipCode,
       admin: this.admin,
+      image: this.image
     },
     process.env.JWT_SECRET
   );
