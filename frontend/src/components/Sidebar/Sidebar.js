@@ -35,12 +35,16 @@ const Sidebar = ({ showMenu, setShowMenu }) => {
       <hr />
 
       <CDBSidebarMenuItem className='sidebarMenu'>
+        <NavLink to='/addReviews'onClick={() => setShowMenu(!showMenu)}>
         Add Contractor/Review
+        </NavLink>
       </CDBSidebarMenuItem>
       <hr />
 
       <CDBSidebarMenuItem className='sidebarMenu'>
+      <NavLink to='/reviews'onClick={() => setShowMenu(!showMenu)}>
         View/Edit "My Reviews"
+        </NavLink>
       </CDBSidebarMenuItem>
       <hr />
       <CDBSidebarMenuItem className='sidebarMenu'>

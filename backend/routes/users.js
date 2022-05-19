@@ -26,7 +26,7 @@ router.post("/register", async (req, res) => {
       email: req.body.email,
       password: await bcrypt.hash(req.body.password, salt),
       streetAddressLine1: req.body.streetAddressLine1,
-      streetAddressLine2: req.body.streetAddressLine2,
+      streetAddressLine2: req.body.streetAddressLine2 || "",
       city: req.body.city,
       state: req.body.state,
       zipCode: req.body.zipCode,

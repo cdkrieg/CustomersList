@@ -1,8 +1,14 @@
+
 .container-profilePage > .form{
     display: flex;
     flex-flow: wrap row;
     margin-top: 1em;
     width: 70vw;
+    align-items: center;
+    justify-content: center;
+    margin-left: auto;
+    margin-right: auto;
+
 }
 .container-profilePage > .form>*:nth-child(1), /* name */
 .container-profilePage > .form>*:nth-child(2), /* streetAddressLine1 */
@@ -21,7 +27,7 @@
 .container-profilePage > .form>*:nth-child(5) /* city */
 {
     width: 47%;
-    margin-bottom: 1em;
+    margin-bottom: 2em;
 }
 .notValid {
     color: red;
@@ -47,4 +53,7 @@
 }
 .alert{
     width: 100%;
+}
+#profileCity{
+    margin-right: 1em;
 }

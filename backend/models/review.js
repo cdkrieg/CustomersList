@@ -4,7 +4,7 @@ const Joi = require('joi')
 const reviewSchema = mongoose.Schema({
     title: {type: String, minlength: 8, maxlength:35, required: true},
     rating:{type: Number, default:0},
-    body: {type: String, minLength:50, maxLength: 2048, required: true},
+    body: {type: String, minLength:10, maxLength: 2048, required: true},
     image: {type:String, default:""},
     contractorName: {type: String, required: true},
     contractorPhone: {type: String, required: true},
@@ -16,8 +16,8 @@ const reviewSchema = mongoose.Schema({
 
 const validateReview = (review) => {
     const schema = Joi.object({
-        title: Joi.string().min(8).max(255).required(),
-        body: Joi.string().minLength(50).maxLength(2048).required(),
+        title: Joi.string().min(8).max(35).required(),
+        body: Joi.string().min(10).max(2048).required(),
         rating: Joi.number(),
         contractorName: Joi.string().required(),
         contractorPhone: Joi.string().required(),

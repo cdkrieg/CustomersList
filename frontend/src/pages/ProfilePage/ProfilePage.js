@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useContext } from "react";
 import AuthContext from "../../context/AuthContext";
-import { Form, Button, Alert } from "react-bootstrap";
+import { Form, Button, Alert, FormCheck } from "react-bootstrap";
 import stateArray from "../../components/StateList/StateList";
 import useCustomForm from "../../hooks/UseCustomForm";
 import "./ProfilePage.css";
@@ -8,11 +8,9 @@ import "./ProfilePage.css";
 const ProfilePage = () => {
   const { user } = useContext(AuthContext);
   const defaultValues = {
-    name: user.name || "Enter first and last name (optional)",
-    password: "",
+    name: user.name || "",
     streetAddressLine1: user.streetAddressLine1,
-    streetAddressLine2:
-      user.streetAddressLine2 || "Enter Street Address Line 2",
+    streetAddressLine2: user.streetAddressLine2 || "",
     city: user.city,
     state: user.state,
     zipCode: user.zipCode,
@@ -25,28 +23,35 @@ const ProfilePage = () => {
   const [showPasswordAlert1, setShowPasswordAlert1] = useState(false);
   const [showPasswordAlert2, setShowPasswordAlert2] = useState(false);
   const [showStateAlert, setShowStateAlert] = useState(false);
+  const [checked, setChecked] = useState(false)
 
   function passwordCheck(event) {
-    event.preventDefault();
-    if (formData.password !== passwordConfirm) {
+    event.preventDefault()
+    if (formData.password && formData.password !== passwordConfirm) {
       return setShowPasswordAlert1(true);
-    } else if (formData.password.length < 8) {
+    } else if (
+      formData.password &&
+      formData.password !== "" &&
+      formData.password.length < 8
+    ) {
       return setShowPasswordAlert2(true);
     } else if (formData.state === "Choose State") {
       console.log(formData.state);
       return setShowStateAlert(true);
     } else {
-      console.log(formData.state);
-      handleSubmit(event);
+      return ((event)=>handleSubmit(event))
+      
     }
   }
 
   useEffect(() => {
-    if (formData.password === "" || formData.password !== passwordConfirm) {
-      setPasswordValidation("notValid");
-    } else {
-      setPasswordValidation("valid");
-      setShowPasswordAlert1(false);
+    if (formData.password) {
+      if (formData.password !== passwordConfirm) {
+        setPasswordValidation("notValid");
+      } else {
+        setPasswordValidation("valid");
+        setShowPasswordAlert1(false);
+      }
     }
   }, [passwordConfirm]);
 
@@ -56,6 +61,7 @@ const ProfilePage = () => {
         <Form.Control
           name='name'
           value={formData.name}
+          placeholder={"Enter first and last name (optional)"}
           onChange={handleInputChange}
         />
         <Form.Control
@@ -68,7 +74,7 @@ const ProfilePage = () => {
           value={formData.streetAddressLine2}
           onChange={handleInputChange}
         />
-        
+
         <Form.Select
           name='state'
           value={formData.state}
@@ -76,46 +82,50 @@ const ProfilePage = () => {
           {stateArray.map((item, index) => {
             return <option key={index}>{item.value}</option>;
           })}
-        </Form.Select><Form.Control
+        </Form.Select>
+        <Form.Control
           name='city'
           value={formData.city}
           onChange={handleInputChange}
+          id="profileCity"
         />
         <Form.Control
           name='zipCode'
           value={formData.zipCode}
           onChange={handleInputChange}
         />
-        <Form.Control
+        <Form.Check type="checkbox" label="Check to change password" onChange={()=>{setChecked(!checked);defaultValues.password=""}}/>
+        {checked && <Form.Control
           name='password'
           placeholder='Enter new password'
-          autoComplete="off"
+          type="password"
+          autoComplete='off'
           value={formData.password}
           onChange={handleInputChange}
-        />
-        <Form.Control
+        />}
+        {checked && <Form.Control
           name='passwordConfirm'
           className={passwordValidation}
           autoComplete='off'
+          type="password"
           placeholder='Enter password to confirm'
           value={passwordConfirm}
           onChange={(e) => setPasswordConfirm(e.target.value)}
-        />
-        <p>
-          {showPasswordAlert1 && (
+        />}
+        
+          {checked && showPasswordAlert1 && (
             <Alert
-            className="alert"
+              className='alert'
               variant='danger'
               onClose={() => setShowPasswordAlert1(false)}
               dismissible>
               <Alert.Heading>Passwords do not match!</Alert.Heading>
             </Alert>
           )}
-        </p>
-        <p>
-          {showPasswordAlert2 && (
+   
+          {checked && showPasswordAlert2 && (
             <Alert
-            className="alert"
+              className='alert'
               variant='danger'
               onClose={() => setShowPasswordAlert2(false)}
               dismissible>
@@ -123,15 +133,15 @@ const ProfilePage = () => {
               contain at least 8 characters.
             </Alert>
           )}
-        </p>
-        <div className="submitButton">
-        <Button
-          id='submitButton'
-          type='submit'
-          variant='dark'
-          onSubmit={(event) => passwordCheck(event)}>
-          Submit
-        </Button>
+       
+        <div className='submitButton'>
+          <Button
+            id='submitButton'
+            type='submit'
+            variant='dark'
+            onSubmit={(event) => passwordCheck(event)}>
+            Submit
+          </Button>
         </div>
       </Form>
     </div>

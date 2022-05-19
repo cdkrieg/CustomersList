@@ -109,7 +109,7 @@ const RegisterPage = () => {
           />
         </Form.Label>
         <p> (Password must be at least 8 characters long)</p>
-        <p>
+
           {showPasswordAlert1 && (
             <Alert
               variant='danger'
@@ -118,8 +118,7 @@ const RegisterPage = () => {
               <Alert.Heading>Passwords do not match!</Alert.Heading>
             </Alert>
           )}
-        </p>
-        <p>
+
           {showPasswordAlert2 && (
             <Alert
               variant='danger'
@@ -129,7 +128,7 @@ const RegisterPage = () => {
               contain at least 8 characters.
             </Alert>
           )}
-        </p>
+
         <Form.Label>
           Street Address Line 1:{" "}
           <Form.Control

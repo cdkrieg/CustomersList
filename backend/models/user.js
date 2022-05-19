@@ -31,6 +31,7 @@ const userSchema = mongoose.Schema({
   zipCode: { type: String, required: true, minLength: 5, maxLength: 10 },
   image: { type: String, default: "" },
   admin: { type: Boolean, default: false },
+  dateAdded: {type: Date, default: Date.now()}
 });
 
 userSchema.methods.generateAuthToken = function () {
