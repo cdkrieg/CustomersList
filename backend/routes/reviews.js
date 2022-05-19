@@ -35,10 +35,10 @@ router.get("/", async (req, res) => {
 });
 // Get all reviews from single user
 // http://localhost:3010/api/reviews/:userId
-router.get("/:userId", async (req, res) => {
+router.get("/:userName", async (req, res) => {
   try {
     // console.log(req.review);
-    const reviews = await Review.find({ userId: req.params.userId });
+    const reviews = await Review.find({ reviewer: req.params.userName });
     if (!reviews) return res.status(400).send(`No reviews to show!`);
     return res.send(reviews);
   } catch (error) {
