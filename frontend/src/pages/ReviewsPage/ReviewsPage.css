@@ -1,0 +1,5 @@
+.container-reviews{
+    display: flex;
+    flex-flow: wrap column;
+}
+
