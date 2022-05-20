@@ -5,7 +5,7 @@ const express = require("express");
 const router = express.Router();
 
 // Post a message
-// http://localhost:3007/api/message
+// http://localhost:3007/api/messages
 router.post("/", async (req, res) => {
   try {
     const { error } = validateMessage(req.body);
@@ -58,7 +58,7 @@ router.put("/:messageId", [auth, admin], async (req, res) => {
 });
 
 // DELETE a single message from the database
-// http://localhost:3007/api/:messageId
+// http://localhost:3007/api/messages/:messageId
 router.delete("/:messageId", [admin], async (req, res) => {
   try {
     const message = await Message.findById(req.params.messageId);

@@ -4,8 +4,8 @@ const Joi = require("joi");
 const messageSchema = new mongoose.Schema({
   senderId: { type: String, required: true },
   receiverId: { type: String, required: true },
-  body: { type: String, minlength: 2, maxlength: 255, required: true },
-  read: { type: Boolean },
+  message: { type: String, minlength: 2, maxlength: 255, required: true },
+  read: { type: Boolean, default: false },
   dateSent: { type: Date, default: Date.now() },
   dateRead: { type: Date },
   reviewId: { type: String, required: true },
@@ -16,11 +16,10 @@ const validateMessage = (message) => {
   const schema = Joi.object({
     senderId: Joi.string().required(),
     receiverId: Joi.string().required(),
-    body: Joi.string().min(2).max(255).required(),
+    message: Joi.string().min(2).max(255).required(),
     reviewId: Joi.string().required(),
-    flagged: Joi.boolean(),
   });
-  return validateMessage(message);
+  return schema.validate(message);
 };
 
 const Message =
