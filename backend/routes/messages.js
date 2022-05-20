@@ -44,11 +44,11 @@ router.get("/:userId", async (req, res) => {
 });
 // PUT an existing message
 // http://localhost:3007/api/messages/:messageId
-router.put("/:messageId", [auth, admin], async (req, res) => {
+router.put("/:messageId", async (req, res) => {
   try {
-    const message = await Message.UpdateOne(
+    const message = await Message.findByIdAndUpdate(
       { _id: req.params.messageId },
-      req.body
+      req.body, {new: true}
     );
     if (!message) return res.status(400).send(`No message to show!`);
     return res.send(message);
