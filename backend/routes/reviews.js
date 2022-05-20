@@ -46,12 +46,12 @@ router.get("/:userName", async (req, res) => {
   }
 });
 
-router.get("/:reviewId", async (req, res) => {
+router.get("/", async (req, res) => {
   try {
     // console.log(req.review);
-    const review = await Review.find({ _id: req.params.reviewId });
-    if (!review) return res.status(400).send(`No reviews to show!`);
-    return res.send(review);
+    const reviews = await Review.findById(req.body.reviewId);
+    if (!reviews) return res.status(400).send(`No reviews to show!`);
+    return res.send(reviews);
   } catch (error) {
     return res.status(500).send(`Internal Server Error: ${error}`);
   }
