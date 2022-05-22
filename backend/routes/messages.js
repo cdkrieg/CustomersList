@@ -50,6 +50,7 @@ router.put("/:messageId", async (req, res) => {
       { _id: req.params.messageId },
       req.body, {new: true}
     );
+    console.log(JSON.stringify(req.body))
     if (!message) return res.status(400).send(`No message to show!`);
     return res.send(message);
   } catch (error) {

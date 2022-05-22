@@ -24,6 +24,16 @@ const getReviews = async () =>  {
   }
 }
 
+const getReviewsById = async (reviewId) => {
+  try {
+    let response = await axios.get(baseUrl, reviewId)
+    if (response)
+    return response.data
+  } catch (error) {
+    console.log(`Error getting review ID: ${reviewId}` )
+  }
+}
+
 const getUserReviews = async (userName) => {
   try {
     let response = await axios.get(`${baseUrl}/${userName}`);
@@ -70,5 +80,5 @@ const updateReviewImage = async (reviewId, formData) => {
 
 
 
-const AxiosReviews = { postReview, getReviews, getUserReviews, updateReview, updateReviewImage, deleteReview };
+const AxiosReviews = { postReview, getReviews, getReviewsById ,getUserReviews, updateReview, updateReviewImage, deleteReview };
 export default AxiosReviews;

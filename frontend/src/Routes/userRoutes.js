@@ -17,6 +17,18 @@ const editUser = async (userId, userData) => {
   }
 };
 
+const getAllUsers = async () => {
+  try {
+    let response = await axios.get(BASE_URL)
+    if (response)
+    return response.data.map((user)=>{
+      return{userId: user._id, userName: user.userName}
+    })
+  } catch (error) {
+    
+  }
+}
+
 const loginUser = async (loginData) => {
   try {
     let response = await axios.post(`${BASE_URL}/login`, loginData);
@@ -35,5 +47,5 @@ const registerUser = async (registerData) => {
   }
 };
 
-const AxiosUser = { loginUser, registerUser, editUser };
+const AxiosUser = { loginUser, registerUser, editUser, getAllUsers };
 export default AxiosUser;

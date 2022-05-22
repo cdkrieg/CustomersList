@@ -12,7 +12,7 @@ const Sidebar = ({ showMenu, setShowMenu }) => {
       backgroundColor='rgb(51, 59, 65)'
       style={{
         display: "block",
-        height: "55vh",
+        height: "70vh",
         marginTop: "-15px",
         position: "relative",
         fontSize: "1em",
@@ -20,6 +20,12 @@ const Sidebar = ({ showMenu, setShowMenu }) => {
         textAlign: "center",
         minWidth: "390px",
       }}>
+      <CDBSidebarMenuItem className='sidebarMenu'>
+        <NavLink to='/' onClick={() => setShowMenu(!showMenu)}>
+          Home
+        </NavLink>
+      </CDBSidebarMenuItem>
+      <hr />
       <CDBSidebarMenuItem className='sidebarMenu'>
         <NavLink to='/profile' onClick={() => setShowMenu(!showMenu)}>
           View/Edit Profile
@@ -36,7 +42,13 @@ const Sidebar = ({ showMenu, setShowMenu }) => {
 
       <CDBSidebarMenuItem className='sidebarMenu'>
         <NavLink to='/reviews' onClick={() => setShowMenu(!showMenu)}>
-          View/Edit "My Reviews"
+          View/Add "My Reviews"
+        </NavLink>
+      </CDBSidebarMenuItem>
+      <hr />
+      <CDBSidebarMenuItem className='sidebarMenu'>
+        <NavLink to='/messages' onClick={() => setShowMenu(!showMenu)}>
+          View Messages 
         </NavLink>
       </CDBSidebarMenuItem>
       <hr />

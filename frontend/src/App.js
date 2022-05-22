@@ -11,6 +11,8 @@ import RegisterPage from "./pages/RegisterPage/RegisterPage";
 import ProfilePage from "./pages/ProfilePage/ProfilePage";
 import ReviewsPage from "./pages/ReviewsPage/ReviewsPage"
 import AddReviewsPage from "./pages/AddReviewsPage/AddReviewsPage";
+import MessagesPage from "./pages/MessagesPage/MessagesPage";
+import SendMessagePage from "./pages/MessagesPage/SendMessagePage";
 import "./App.css";
 
 function App() {
@@ -34,6 +36,8 @@ function App() {
             <Route path="/profile" element={<ProfilePage />} />
             <Route path="/reviews" element={<ReviewsPage />} /> 
             <Route path="/addReviews" element={<AddReviewsPage />} />
+            <Route path="/messages" element={<MessagesPage />} />
+            <Route path="/sendMessage" element={<SendMessagePage />} />
         </Routes>
       </div>
       <Footer className="footer" />
