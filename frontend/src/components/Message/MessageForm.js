@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from "react";
 import { Form, Button, Alert } from "react-bootstrap";
-import { useNavigate } from "react-router";
+import { useNavigate, useLocation } from "react-router";
 import useCustomForm from "../../hooks/UseCustomForm";
+
 
 const MessageForm = ({
   messageToReply,
@@ -10,17 +11,19 @@ const MessageForm = ({
   sendMessage,
 }) => {
     const navigate = useNavigate()
+    const location = useLocation()
+    const {webMaster} = location.state
 
     const [showAlert, setShowAlert] = useState(false)
 
   const defaultValues = {
     senderId: user._id,
     senderUserName: user.userName,
-    receiverId: receiver.id,
-    receiverUserName: receiver.userName,
+    receiverId: receiver ? receiver.id : webMaster.id,
+    receiverUserName: receiver ? receiver.userName : webMaster.userName,
     message: "",
-    reviewId: messageToReply.id,
-    reviewTitle: messageToReply.title,
+    reviewId: messageToReply ? messageToReply.id : " ",
+    reviewTitle: messageToReply ? messageToReply.title : " ",
   };
 
   const [formData, handleInputChange, handleSubmit, reset] = useCustomForm(

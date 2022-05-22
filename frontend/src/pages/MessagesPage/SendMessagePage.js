@@ -28,7 +28,7 @@ const SendMessagePage = () => {
 
     return ( 
         <div>
-            <MessageForm sendMessage={sendMessage} receiver={receiver} messageToReply={messageToReply} user={user} />
+            <MessageForm sendMessage={sendMessage} receiver={receiver} messageToReply={messageToReply} user={user}/>
 
         </div>
      );

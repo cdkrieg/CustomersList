@@ -30,7 +30,7 @@ export const AuthProvider = ({ children }) => {
       setIsServerError(true);
     }
   };
-
+  const webMaster = {id: "62858a96c113086f6d55662a", userName: "cdkrieg"}
   const logoutUser = async () => {
     if (user) {
       navigate("/");
@@ -78,6 +78,7 @@ export const AuthProvider = ({ children }) => {
     file,
     setFile,
     updateUser,
+    webMaster
   };
 
   return (

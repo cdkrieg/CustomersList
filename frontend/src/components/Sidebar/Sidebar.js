@@ -1,8 +1,10 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useContext } from "react";
 import { CDBSidebar, CDBSidebarMenuItem } from "cdbreact";
 import { NavLink } from "react-router-dom";
+import AuthContext from "../../context/AuthContext";
 
 const Sidebar = ({ showMenu, setShowMenu }) => {
+  const {webMaster} = useContext(AuthContext)
   useEffect(() => {}, []);
 
   return (
@@ -57,7 +59,9 @@ const Sidebar = ({ showMenu, setShowMenu }) => {
       </CDBSidebarMenuItem>
       <hr />
       <CDBSidebarMenuItem className='sidebarMenu'>
+      <NavLink to='/sendMessage' state={{webMaster: {id: webMaster.id, userName: webMaster.userName}}} onClick={() => setShowMenu(!showMenu)}>
         Contact Support
+        </NavLink>
       </CDBSidebarMenuItem>
     </CDBSidebar>
   );
