@@ -23,6 +23,7 @@ const ReviewsForm = ({ username, setShow }) => {
     rating: 0,
     body: "",
     reviewer: user.userName,
+    reviewerId: user._id,
     tempCategory: "",
     tempCategory2: "",
     reviewCity: user.city,

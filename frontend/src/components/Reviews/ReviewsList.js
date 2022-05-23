@@ -79,7 +79,7 @@ const ReviewsList = (props) => {
                 <tr>
                   <td>Date of Review: {formatDate(review.dateAdded)}</td>
                   <td>Contractor: {review.contractorName}</td>        
-                  <Td to='/sendMessage' state={{receiver: {id: " ", userName: review.reviewer}, messageToReply:{id: review._id, title: review.title}}} >Reviewer: {review.reviewer}</Td>
+                  <Td to='/sendMessage' state={{receiver: {id: review.reviewerId, userName: review.reviewer}, messageToReply:{id: review._id, title: review.title}}} >Reviewer: {review.reviewer}</Td>
                 </tr>
                 <tr>
                   <td>Category: {review.categoryOfService}</td>
