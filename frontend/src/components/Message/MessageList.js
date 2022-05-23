@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from "react";
-import { Button, Form, Table } from "react-bootstrap";
+import { Table, Form } from "react-bootstrap";
 import { Link } from 'react-router-dom';
+import '../../utils/CommonMethods'
+import CommonMethods from "../../utils/CommonMethods";
 
 const MessageList = ({
   messages,
@@ -11,11 +13,7 @@ const MessageList = ({
   sendMessageToUser
 }) => {
   const [checked, setChecked] = useState();
-  const formatDate = (date) => {
-    let temp = new Date(date);
-    temp = temp.toLocaleDateString();
-    return temp;
-  }
+  const formatDate = (date) => CommonMethods.formatDate(date)
 
   const handleChecked = async (message, index) => {
     let temp = await updateMessage(message._id, { flagged: !message.flagged });

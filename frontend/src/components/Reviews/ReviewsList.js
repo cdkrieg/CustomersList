@@ -1,15 +1,18 @@
 import React, { useState, useEffect, useContext } from "react";
 import { Table } from "react-bootstrap";
 import ReactStars from "react-rating-stars-component";
+import { Link } from "react-router-dom";
 
 import AxiosReviews from "../../Routes/reviewsRoutes";
 import AuthContext from "../../context/AuthContext";
+import CommonMethods from "../../utils/CommonMethods";
 import "./ReviewsList.css";
 
 const ReviewsList = (props) => {
   const [reviews, setReviews] = useState();
   const [update, setUpdate] = useState(false);
   const { user } = useContext(AuthContext);
+  const formatDate = (date) => CommonMethods.formatDate(date)
 
   useEffect(() => {
     (async () => {
@@ -55,6 +58,16 @@ const ReviewsList = (props) => {
     }
   }
 
+  function Td({ children, to, state }) {
+    const ContentTag = to ? Link : 'div';
+  
+    return (
+      <td>
+        <ContentTag to={to} state={state}>{children}</ContentTag>
+      </td>
+    );
+  }
+
   return (
     <div>
       <p></p>
@@ -64,9 +77,13 @@ const ReviewsList = (props) => {
             return (
               <tbody key={index}>
                 <tr>
-                  <td>{review.dateAdded}</td>
-                  <td>{review.contractorName}</td>
-                  <td>{review.reviewer}</td>
+                  <td>Date of Review: {formatDate(review.dateAdded)}</td>
+                  <td>Contractor: {review.contractorName}</td>        
+                  <Td to='/sendMessage' state={{receiver: {id: " ", userName: review.reviewer}, messageToReply:{id: review._id, title: review.title}}} >Reviewer: {review.reviewer}</Td>
+                </tr>
+                <tr>
+                  <td>Category: {review.categoryOfService}</td>
+                  <td colSpan={2}>Location: {`${review.reviewCity}, ${review.reviewState}`}</td>
                 </tr>
                 <tr>
                   <td colSpan={3}>{review.title}</td>

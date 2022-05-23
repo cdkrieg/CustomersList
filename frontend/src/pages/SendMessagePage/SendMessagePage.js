@@ -1,8 +1,8 @@
 import React, { useEffect, useContext } from 'react';
 import { useLocation } from 'react-router';
 import AxiosMessages from '../../Routes/messagesRoutes';
-import MessageForm from '../../components/Message/MessageForm';
 import AuthContext from '../../context/AuthContext';
+import MessageForm from '../../components/Message/MessageForm'
 
 
 const SendMessagePage = () => {
@@ -23,6 +23,7 @@ const SendMessagePage = () => {
     }
 
     useEffect(()=>{
+        console.log(location.state)
 
     },[])
 

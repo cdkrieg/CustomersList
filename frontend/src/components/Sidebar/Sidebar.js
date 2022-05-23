@@ -1,6 +1,6 @@
 import React, { useEffect, useContext } from "react";
 import { CDBSidebar, CDBSidebarMenuItem } from "cdbreact";
-import { NavLink } from "react-router-dom";
+import { Link } from "react-router-dom";
 import AuthContext from "../../context/AuthContext";
 
 const Sidebar = ({ showMenu, setShowMenu }) => {
@@ -23,35 +23,35 @@ const Sidebar = ({ showMenu, setShowMenu }) => {
         minWidth: "390px",
       }}>
       <CDBSidebarMenuItem className='sidebarMenu'>
-        <NavLink to='/' onClick={() => setShowMenu(!showMenu)}>
+        <Link to='/' onClick={() => setShowMenu(!showMenu)}>
           Home
-        </NavLink>
+        </Link>
       </CDBSidebarMenuItem>
       <hr />
       <CDBSidebarMenuItem className='sidebarMenu'>
-        <NavLink to='/profile' onClick={() => setShowMenu(!showMenu)}>
+        <Link to='/profile' onClick={() => setShowMenu(!showMenu)}>
           View/Edit Profile
-        </NavLink>
+        </Link>
       </CDBSidebarMenuItem>
       <hr />
 
       <CDBSidebarMenuItem className='sidebarMenu'>
-        <NavLink to='/addReviews' onClick={() => setShowMenu(!showMenu)}>
+        <Link to='/addReviews' onClick={() => setShowMenu(!showMenu)}>
           Add Contractor/Review
-        </NavLink>
+        </Link>
       </CDBSidebarMenuItem>
       <hr />
 
       <CDBSidebarMenuItem className='sidebarMenu'>
-        <NavLink to='/reviews' onClick={() => setShowMenu(!showMenu)}>
+        <Link to='/reviews' onClick={() => setShowMenu(!showMenu)}>
           View/Add "My Reviews"
-        </NavLink>
+        </Link>
       </CDBSidebarMenuItem>
       <hr />
       <CDBSidebarMenuItem className='sidebarMenu'>
-        <NavLink to='/messages' onClick={() => setShowMenu(!showMenu)}>
+        <Link to='/messages' onClick={() => setShowMenu(!showMenu)}>
           View Messages 
-        </NavLink>
+        </Link>
       </CDBSidebarMenuItem>
       <hr />
       <CDBSidebarMenuItem className='sidebarMenu'>
@@ -59,9 +59,9 @@ const Sidebar = ({ showMenu, setShowMenu }) => {
       </CDBSidebarMenuItem>
       <hr />
       <CDBSidebarMenuItem className='sidebarMenu'>
-      <NavLink to='/sendMessage' state={{webMaster: {id: webMaster.id, userName: webMaster.userName}}} onClick={() => setShowMenu(!showMenu)}>
+      <Link to='/sendMessage' state={{webMaster: {id: webMaster.id, userName: webMaster.userName}}} onClick={() => setShowMenu(!showMenu)}>
         Contact Support
-        </NavLink>
+        </Link>
       </CDBSidebarMenuItem>
     </CDBSidebar>
   );

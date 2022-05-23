@@ -12,7 +12,7 @@ import ProfilePage from "./pages/ProfilePage/ProfilePage";
 import ReviewsPage from "./pages/ReviewsPage/ReviewsPage"
 import AddReviewsPage from "./pages/AddReviewsPage/AddReviewsPage";
 import MessagesPage from "./pages/MessagesPage/MessagesPage";
-import SendMessagePage from "./pages/MessagesPage/SendMessagePage";
+import SendMessagePage from "./pages/SendMessagePage/SendMessagePage";
 import "./App.css";
 
 function App() {
