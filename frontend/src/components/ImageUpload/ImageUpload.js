@@ -4,7 +4,7 @@ import { Form, Button } from "react-bootstrap";
 import '../../utils/CommonMethods'
 
 
-const ImageUpload = ({uploadImage}) => {
+const ImageUpload = ({id,uploadImage}) => {
   const [newImage, setNewImage] = useState({ image: "" });
   const handlePhoto = (event) => {
     setNewImage({ image: event.target.files[0] });
@@ -15,7 +15,7 @@ const ImageUpload = ({uploadImage}) => {
 
     const formData = new FormData();
     formData.append("image", newImage.image);
-    uploadImage(formData);
+    uploadImage(id, formData);
     navigate('/')
   };
 

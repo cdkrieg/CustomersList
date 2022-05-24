@@ -17,18 +17,15 @@ const editUser = async (userId, userData) => {
   }
 };
 
-
 const getAllUsers = async () => {
   try {
-    let response = await axios.get(BASE_URL)
+    let response = await axios.get(BASE_URL);
     if (response)
-    return response.data.map((user)=>{
-      return{userId: user._id, userName: user.userName}
-    })
-  } catch (error) {
-    
-  }
-}
+      return response.data.map((user) => {
+        return { userId: user._id, userName: user.userName };
+      });
+  } catch (error) {}
+};
 
 const loginUser = async (loginData) => {
   try {
@@ -48,14 +45,25 @@ const registerUser = async (registerData) => {
   }
 };
 
-const uploadImage = async (userId ,imageData) => {
+const uploadImage = async (userId, imageData) => {
   try {
-    let response = await axios.put(`${BASE_URL}/updateImage/${userId}`, imageData);
-    if (response.status === 200) return response.data;
+    let response = await axios.put(
+      `${BASE_URL}/updateImage/${userId}`,
+      imageData
+    );
+    if (response.status === 200) {
+      return response.data;
+    }
   } catch (error) {
     console.log(error);
   }
-}
+};
 
-const AxiosUser = { loginUser, registerUser, editUser, getAllUsers, uploadImage };
+const AxiosUser = {
+  loginUser,
+  registerUser,
+  editUser,
+  getAllUsers,
+  uploadImage,
+};
 export default AxiosUser;

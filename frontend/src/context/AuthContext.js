@@ -32,6 +32,7 @@ export const AuthProvider = ({ children }) => {
   };
 
   const webMaster = {id: "62858a96c113086f6d55662a", userName: "cdkrieg"}
+
   const logoutUser = async () => {
     if (user) {
       navigate("/");
@@ -62,7 +63,8 @@ export const AuthProvider = ({ children }) => {
     try {
       let result = await AxiosUser.editUser(user._id, userData);
       if (result) {
-        setUser(result)
+        localStorage.setItem("token", JSON.stringify(result));
+        setUser(jwtDecode(result));
         setIsServerError(false);
       }
     } catch (error) {
@@ -71,11 +73,12 @@ export const AuthProvider = ({ children }) => {
     }
   };
 
-  const uploadImage = async (imageData) => {
+  const uploadImage = async (id, imageData) => {
     try {
-    let result = await AxiosUser.uploadImage(user._id, imageData);
+    let result = await AxiosUser.uploadImage(id, imageData);
       if (result) {
-        setUser(result)
+        localStorage.setItem("token", JSON.stringify(result));
+        setUser(jwtDecode(result));
         setIsServerError(false);
       }
     } catch (error) {

@@ -11,7 +11,7 @@ const ProfilePage = () => {
   return (
     <div className='container-profilePage'>
       {user && <EditProfile /> }
-      {user && <ImageUpload uploadImage={uploadImage}/>}
+      {user && <ImageUpload uploadImage={uploadImage} id={user._id} />}
       {!user && <p>User not logged in</p> }
     </div>
   );
