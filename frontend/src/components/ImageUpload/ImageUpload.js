@@ -1,14 +1,11 @@
-import React, { useContext, useState } from "react";
+import React, { useState } from "react";
 import { useNavigate } from "react-router";
 import { Form, Button } from "react-bootstrap";
-import AuthContext from "../../context/AuthContext";
 import '../../utils/CommonMethods'
-import useCustomForm from "../../hooks/UseCustomForm";
 
 
-const ImageUpload = () => {
+const ImageUpload = ({uploadImage}) => {
   const [newImage, setNewImage] = useState({ image: "" });
-  const { uploadImage } = useContext(AuthContext);
   const handlePhoto = (event) => {
     setNewImage({ image: event.target.files[0] });
   };

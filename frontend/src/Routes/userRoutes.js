@@ -50,9 +50,7 @@ const registerUser = async (registerData) => {
 
 const uploadImage = async (userId ,imageData) => {
   try {
-    console.log(`${BASE_URL}/updateImage/${userId}`)
     let response = await axios.put(`${BASE_URL}/updateImage/${userId}`, imageData);
-    console.log(response)
     if (response.status === 200) return response.data;
   } catch (error) {
     console.log(error);

@@ -5,7 +5,6 @@ import { useNavigate } from "react-router";
 import AuthContext from "../../context/AuthContext";
 import stateArray from "../../components/StateList/StateList";
 import useCustomForm from "../../hooks/UseCustomForm";
-import ImageUpload from "../ImageUpload/ImageUpload";
 import "./EditProfile.css";
 
 const EditProfile = () => {
@@ -177,7 +176,6 @@ const EditProfile = () => {
         </div>
       </Form>
       {user.image !== "" && <img src={`http://localhost:3010/uploads/images/${user.image}`} alt='Profile' />}
-      <ImageUpload />
     </div>
   );
 };
