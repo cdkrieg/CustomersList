@@ -8,31 +8,29 @@ import AuthContext from "../../context/AuthContext";
 import CommonMethods from "../../utils/CommonMethods";
 import "./ReviewsList.css";
 
-const ReviewsList = (props) => {
-  const [reviews, setReviews] = useState();
+const ReviewsList = ({ reviews, setReviews, filtered }) => {
   const [update, setUpdate] = useState(false);
   const { user } = useContext(AuthContext);
-  const formatDate = (date) => CommonMethods.formatDate(date)
+  const formatDate = (date) => CommonMethods.formatDate(date);
+  const [reviewsFiltered, setReviewsFiltered] = useState([])
 
   useEffect(() => {
     (async () => {
-      if (props.filter) {
-        try {
-          let temp = await getUserReviews(props.filter);
-          setReviews(temp);
-        } catch (error) {
-          console.log("Error with setReviews in useEffect");
-        }
-      } else if (user) {
-        try {
-          let temp = await getAllReviews();
-          setReviews(temp);
-        } catch (error) {
-          console.log("Error with setReviews in useEffect");
-        }
+      try {
+        let temp = await getAllReviews();
+        setReviews(temp);
+      } catch (error) {
+        console.log("Error with setReviews in useEffect");
       }
     })();
   }, [update]);
+
+  useEffect(() => {
+    if(reviews)
+  setReviewsFiltered(filteredReviews())
+
+  }, [reviews])
+  
 
   async function getAllReviews() {
     try {
@@ -46,24 +44,26 @@ const ReviewsList = (props) => {
     }
   }
 
-  async function getUserReviews(userName) {
-    try {
-      let tempReviews = AxiosReviews.getUserReviews(userName);
-      if (tempReviews) {
-        return tempReviews;
-      }
-      setUpdate(!update);
-    } catch (error) {
-      console.log(`Error getting all reviews on Reviews Page: ${error}`);
+  function filteredReviews(){
+    let temp;
+    if (filtered) {
+      temp = reviews.filter((review) => {
+        return review.reviewerId === user._id;
+      });
+      return temp;
+    } else {
+      return reviews;
     }
-  }
+  };
 
   function Td({ children, to, state }) {
-    const ContentTag = to ? Link : 'div';
-  
+    const ContentTag = to ? Link : "div";
+
     return (
       <td>
-        <ContentTag to={to} state={state}>{children}</ContentTag>
+        <ContentTag to={to} state={state}>
+          {children}
+        </ContentTag>
       </td>
     );
   }
@@ -71,19 +71,31 @@ const ReviewsList = (props) => {
   return (
     <div>
       <p></p>
-      {reviews && (
+      {Array.isArray(reviewsFiltered) && (
         <Table variant='dark'>
-          {reviews.map((review, index) => {
+          {reviewsFiltered.map((review, index) => {
             return (
               <tbody key={index}>
                 <tr>
                   <td>Date of Review: {formatDate(review.dateAdded)}</td>
-                  <td>Contractor: {review.contractorName}</td>        
-                  <Td to='/sendMessage' state={{receiver: {id: review.reviewerId, userName: review.reviewer}, messageToReply:{id: review._id, title: review.title}}} >Reviewer: {review.reviewer}</Td>
+                  <td>Contractor: {review.contractorName}</td>
+                  <Td
+                    to='/sendMessage'
+                    state={{
+                      receiver: {
+                        id: review.reviewerId,
+                        userName: review.reviewer,
+                      },
+                      messageToReply: { id: review._id, title: review.title },
+                    }}>
+                    Reviewer: {review.reviewer}
+                  </Td>
                 </tr>
                 <tr>
                   <td>Category: {review.categoryOfService}</td>
-                  <td colSpan={2}>Location: {`${review.reviewCity}, ${review.reviewState}`}</td>
+                  <td colSpan={2}>
+                    Location: {`${review.reviewCity}, ${review.reviewState}`}
+                  </td>
                 </tr>
                 <tr>
                   <td colSpan={3}>{review.title}</td>

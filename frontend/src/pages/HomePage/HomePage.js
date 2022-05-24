@@ -5,7 +5,7 @@ import { Dropdown } from "react-bootstrap";
 import ReviewsList from "../../components/Reviews/ReviewsList";
 import "./HomePage.css";
 
-const HomePage = () => {
+const HomePage = ({reviews, setReviews}) => {
   const { user } = useContext(AuthContext);
   return (
     <div className='container-homePage'>
@@ -20,7 +20,7 @@ const HomePage = () => {
           <Dropdown.Item>Item 3</Dropdown.Item>
         </Dropdown.Menu>
       </Dropdown>
-      <ReviewsList />
+      <ReviewsList reviews={reviews} setReviews={setReviews} filtered={false}/>
     </div>
   );
 };

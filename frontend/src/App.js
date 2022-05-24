@@ -17,6 +17,7 @@ import "./App.css";
 
 function App() {
   const [showMenu, setShowMenu] = useState(false);
+  const [reviews, setReviews] = useState([]);
 
   return (
     <div className='App'>
@@ -28,13 +29,13 @@ function App() {
             path='/'
             element={
               <PrivateRoute>
-                <HomePage />
+                <HomePage reviews={reviews} setReviews={setReviews}/>
               </PrivateRoute>
             }/>
             <Route path="/register" element={<RegisterPage />}/>
             <Route path="/login" element={<LoginPage />} />
             <Route path="/profile" element={<ProfilePage />} />
-            <Route path="/reviews" element={<ReviewsPage />} /> 
+            <Route path="/reviews" element={<ReviewsPage  reviews={reviews} setReviews={setReviews} />} /> 
             <Route path="/addReviews" element={<AddReviewsPage />} />
             <Route path="/messages" element={<MessagesPage />} />
             <Route path="/sendMessage" element={<SendMessagePage />} />
