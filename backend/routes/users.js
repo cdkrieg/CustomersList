@@ -119,7 +119,7 @@ router.get("/", async (req, res) => {
     try {
       const users = await User.findByIdAndUpdate(
         { _id: req.params.userId },
-        req.body.updates,
+        req.body,
         { new: true }
       );
   

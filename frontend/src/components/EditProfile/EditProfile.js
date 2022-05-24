@@ -5,6 +5,7 @@ import { useNavigate } from "react-router";
 import AuthContext from "../../context/AuthContext";
 import stateArray from "../../components/StateList/StateList";
 import useCustomForm from "../../hooks/UseCustomForm";
+import ImageUpload from "../ImageUpload/ImageUpload";
 import "./EditProfile.css";
 
 const EditProfile = () => {
@@ -15,7 +16,7 @@ const EditProfile = () => {
   const [showPasswordAlert1, setShowPasswordAlert1] = useState(false);
   const [showPasswordAlert2, setShowPasswordAlert2] = useState(false);
   const [showStateAlert, setShowStateAlert] = useState(false);
-  const { user, updateUser } = useContext(AuthContext);
+  const { user, editUser} = useContext(AuthContext);
   const defaultValues = {
     name: user.name,
     streetAddressLine1: user.streetAddressLine1,
@@ -26,7 +27,7 @@ const EditProfile = () => {
   };
   const [formData, handleInputChange, handleSubmit] = useCustomForm(
     defaultValues,
-    updateUser
+    editUser
   );
 
   useEffect(() => {
@@ -175,6 +176,8 @@ const EditProfile = () => {
           </Button>
         </div>
       </Form>
+      {user.image !== "" && <img src={`http://localhost:3010/uploads/images/${user.image}`} alt='Profile' />}
+      <ImageUpload />
     </div>
   );
 };

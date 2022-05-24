@@ -6,7 +6,7 @@ const editUser = async (userId, userData) => {
   try {
     let response = await axios.put(
       `${BASE_URL}/update/${userId}`,
-      { updates: userData },
+      { userData },
       { new: true }
     );
     if (response.status === 200) {
@@ -16,6 +16,7 @@ const editUser = async (userId, userData) => {
     console.log(error);
   }
 };
+
 
 const getAllUsers = async () => {
   try {
@@ -47,5 +48,16 @@ const registerUser = async (registerData) => {
   }
 };
 
-const AxiosUser = { loginUser, registerUser, editUser, getAllUsers };
+const uploadImage = async (userId ,imageData) => {
+  try {
+    console.log(`${BASE_URL}/updateImage/${userId}`)
+    let response = await axios.put(`${BASE_URL}/updateImage/${userId}`, imageData);
+    console.log(response)
+    if (response.status === 200) return response.data;
+  } catch (error) {
+    console.log(error);
+  }
+}
+
+const AxiosUser = { loginUser, registerUser, editUser, getAllUsers, uploadImage };
 export default AxiosUser;

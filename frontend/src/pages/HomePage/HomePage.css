@@ -12,3 +12,8 @@
     justify-content: right;
     
 }
+img {
+  width: 30vw;
+  height: 17vh;
+  margin-bottom: 1em;
+}

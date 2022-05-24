@@ -30,6 +30,7 @@ export const AuthProvider = ({ children }) => {
       setIsServerError(true);
     }
   };
+
   const webMaster = {id: "62858a96c113086f6d55662a", userName: "cdkrieg"}
   const logoutUser = async () => {
     if (user) {
@@ -57,10 +58,11 @@ export const AuthProvider = ({ children }) => {
     }
   };
 
-  const updateUser = async (userData) => {
+  const editUser = async (userData) => {
     try {
       let result = await AxiosUser.editUser(user._id, userData);
       if (result) {
+        setUser(result)
         setIsServerError(false);
       }
     } catch (error) {
@@ -68,6 +70,19 @@ export const AuthProvider = ({ children }) => {
       setIsServerError(true);
     }
   };
+
+  const uploadImage = async (imageData) => {
+    try {
+    let result = await AxiosUser.uploadImage(user._id, imageData);
+      if (result) {
+        setUser(result)
+        setIsServerError(false);
+      }
+    } catch (error) {
+      console.log(`Error updating user: ${error}`);
+      setIsServerError(true);
+    }
+  }
 
   const contextData = {
     user,
@@ -77,8 +92,9 @@ export const AuthProvider = ({ children }) => {
     isServerError,
     file,
     setFile,
-    updateUser,
-    webMaster
+    webMaster,
+    editUser,
+    uploadImage
   };
 
   return (

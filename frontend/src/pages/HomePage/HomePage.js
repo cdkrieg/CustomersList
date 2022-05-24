@@ -10,6 +10,8 @@ const HomePage = () => {
   return (
     <div className='container-homePage'>
       <p>Welcome, {user.userName} </p>
+      {user.image !== "" && <img src={`http://localhost:3010/uploads/images/${user.image}`} alt='profile'/>}
+      <br/>
       <Dropdown className='dropdown'>
         <Dropdown.Toggle variant='dark'>Select Filters</Dropdown.Toggle>
         <Dropdown.Menu variant='dark'>
