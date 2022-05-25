@@ -1,12 +1,27 @@
 import React, { useContext } from "react";
 import AuthContext from "../../context/AuthContext";
 import { Dropdown } from "react-bootstrap";
+import AxiosReviews from "../../Routes/reviewsRoutes";
 
 import ReviewsList from "../../components/Reviews/ReviewsList";
 import "./HomePage.css";
 
 const HomePage = ({reviews, setReviews}) => {
   const { user } = useContext(AuthContext);
+
+  const uploadImage = async (reviewId, imageData) => {
+    try {
+      let result = await AxiosReviews.uploadImage(reviewId, imageData)
+      if (result) {
+          let review = await AxiosReviews.getReviews()
+          if (review)
+          setReviews(review)
+      }
+    } catch (error) {
+      console.log('Error uploading review photo')
+    }
+
+  }
 
   return (
     <div className='container-homePage bg-secondary text-white'>
@@ -21,7 +36,7 @@ const HomePage = ({reviews, setReviews}) => {
           <Dropdown.Item>Item 3</Dropdown.Item>
         </Dropdown.Menu>
       </Dropdown>
-      <ReviewsList reviews={reviews} setReviews={setReviews} filtered={false}/>
+      <ReviewsList reviews={reviews} setReviews={setReviews} filtered={false} uploadImage={uploadImage} />
     </div>
   );
 };

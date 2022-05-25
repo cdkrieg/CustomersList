@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router";
 import { Form, Button } from "react-bootstrap";
 
-const ImageUpload = ({ id, uploadImage, setShow }) => {
+const ImageUpload = ({ id, uploadImage, setShow, title }) => {
   const [newImage, setNewImage] = useState({ image: "" });
   const handlePhoto = (event) => {
     setNewImage({ image: event.target.files[0] });
@@ -32,7 +32,7 @@ const ImageUpload = ({ id, uploadImage, setShow }) => {
           name='image'
           onChange={handlePhoto}
         />
-        <Button type='submit'>Upload/Change Profile Image</Button>
+        <Button type='submit'>Upload/Change {title} Image</Button>
       </Form>
     </div>
   );

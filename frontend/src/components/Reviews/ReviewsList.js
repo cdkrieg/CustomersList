@@ -1,6 +1,6 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import React, { useState, useEffect, useContext } from "react";
-import { Table } from "react-bootstrap";
+import { Table, Button } from "react-bootstrap";
 import ReactStars from "react-rating-stars-component";
 import { Link } from "react-router-dom";
 
@@ -8,12 +8,16 @@ import AxiosReviews from "../../Routes/reviewsRoutes";
 import AuthContext from "../../context/AuthContext";
 import CommonMethods from "../../utils/CommonMethods";
 import "./ReviewsList.css";
+import UploadPhoto from "../Images/UploadPhoto";
 
-const ReviewsList = ({ reviews, setReviews, filtered }) => {
+const ReviewsList = ({ reviews, setReviews, filtered, uploadImage }) => {
   const [update, setUpdate] = useState(false);
   const { user } = useContext(AuthContext);
   const formatDate = (date) => CommonMethods.formatDate(date);
-  const [reviewsFiltered, setReviewsFiltered] = useState([])
+  const [reviewsFiltered, setReviewsFiltered] = useState([]);
+  const [show, setShow] = useState(false);
+  const [selectedReview, setSelectedReview] = useState({});
+  const title = "Review";
 
   useEffect(() => {
     (async () => {
@@ -27,11 +31,8 @@ const ReviewsList = ({ reviews, setReviews, filtered }) => {
   }, [update]);
 
   useEffect(() => {
-    if(reviews)
-  setReviewsFiltered(filteredReviews())
-
-  }, [reviews])
-  
+    if (reviews) setReviewsFiltered(filteredReviews());
+  }, [reviews]);
 
   async function getAllReviews() {
     try {
@@ -45,7 +46,7 @@ const ReviewsList = ({ reviews, setReviews, filtered }) => {
     }
   }
 
-  function filteredReviews(){
+  function filteredReviews() {
     let temp;
     if (filtered) {
       temp = reviews.filter((review) => {
@@ -55,7 +56,7 @@ const ReviewsList = ({ reviews, setReviews, filtered }) => {
     } else {
       return reviews;
     }
-  };
+  }
 
   function Td({ children, to, state }) {
     const ContentTag = to ? Link : "div";
@@ -72,7 +73,7 @@ const ReviewsList = ({ reviews, setReviews, filtered }) => {
   return (
     <div>
       <p></p>
-      {Array.isArray(reviewsFiltered) && (
+      {!show && Array.isArray(reviewsFiltered) && (
         <Table variant='dark'>
           {reviewsFiltered.map((review, index) => {
             return (
@@ -80,18 +81,22 @@ const ReviewsList = ({ reviews, setReviews, filtered }) => {
                 <tr>
                   <td>Date of Review: {formatDate(review.dateAdded)}</td>
                   <td>Contractor: {review.contractorName}</td>
-                  {review.reviewerId !== user._id  && <Td
-                    to='/sendMessage'
-                    state={{
-                      receiver: {
-                        id: review.reviewerId,
-                        userName: review.reviewer,
-                      },
-                      messageToReply: { id: review._id, title: review.title },
-                    }}>
-                    Reviewer: {review.reviewer}
-                  </Td>}
-                  {review.reviewerId === user._id && <td>{`Reviewer: ${review.reviewer}`}</td>}
+                  {review.reviewerId !== user._id && (
+                    <Td
+                      to='/sendMessage'
+                      state={{
+                        receiver: {
+                          id: review.reviewerId,
+                          userName: review.reviewer,
+                        },
+                        messageToReply: { id: review._id, title: review.title },
+                      }}>
+                      Reviewer: {review.reviewer}
+                    </Td>
+                  )}
+                  {review.reviewerId === user._id && (
+                    <td>{`Reviewer: ${review.reviewer}`}</td>
+                  )}
                 </tr>
                 <tr>
                   <td>Category: {review.categoryOfService}</td>
@@ -121,10 +126,36 @@ const ReviewsList = ({ reviews, setReviews, filtered }) => {
                 <tr>
                   <td colSpan={3}>{review.body}</td>
                 </tr>
+                {review.reviewerId === user._id && (
+                  <tr>
+                    <td>
+                      <Button
+                        onClick={() => {
+                          setShow(true);
+                          setSelectedReview({
+                            id: review._id,
+                            currentImage: review.image,
+                          });
+                        }}>
+                        Change/Upload Photo
+                      </Button>
+                    </td>
+                  </tr>
+                )}
+                {review.image !== "" && <tr><td colSpan={3}><img src={`http://localhost:3010/uploads/images/${review.image}`} alt="review"  /></td></tr>}
               </tbody>
             );
           })}
         </Table>
+      )}
+      {show && (
+        <UploadPhoto
+          uploadImage={uploadImage}
+          id={selectedReview.id}
+          currentImage={selectedReview.currentImage}
+          title={title}
+          setShow={setShow}
+        />
       )}
     </div>
   );

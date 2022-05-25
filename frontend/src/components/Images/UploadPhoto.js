@@ -15,7 +15,12 @@ const UploadPhoto = ({ id, uploadImage, title, currentImage, setShow }) => {
         </>
       )}
       <h4>New Photo</h4>
-      <ImageUpload id={id} uploadImage={uploadImage} setShow={setShow} />
+      <ImageUpload
+        id={id}
+        uploadImage={uploadImage}
+        setShow={setShow}
+        title={title}
+      />
     </div>
   );
 };
