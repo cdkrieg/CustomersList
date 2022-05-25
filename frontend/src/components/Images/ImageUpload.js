@@ -10,6 +10,9 @@ const ImageUpload = ({ id, uploadImage, setShow }) => {
   const navigate = useNavigate();
   const handleSubmit = (event) => {
     event.preventDefault();
+    if (newImage.image === ""){
+      return
+    }
     const formData = new FormData();
     formData.append("image", newImage.image);
     uploadImage(id, formData);

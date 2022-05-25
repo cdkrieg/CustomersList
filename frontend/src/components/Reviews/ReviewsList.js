@@ -80,7 +80,7 @@ const ReviewsList = ({ reviews, setReviews, filtered }) => {
                 <tr>
                   <td>Date of Review: {formatDate(review.dateAdded)}</td>
                   <td>Contractor: {review.contractorName}</td>
-                  <Td
+                  {review.reviewerId !== user._id  && <Td
                     to='/sendMessage'
                     state={{
                       receiver: {
@@ -90,7 +90,8 @@ const ReviewsList = ({ reviews, setReviews, filtered }) => {
                       messageToReply: { id: review._id, title: review.title },
                     }}>
                     Reviewer: {review.reviewer}
-                  </Td>
+                  </Td>}
+                  {review.reviewerId === user._id && <td>{`Reviewer: ${review.reviewer}`}</td>}
                 </tr>
                 <tr>
                   <td>Category: {review.categoryOfService}</td>
