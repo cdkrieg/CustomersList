@@ -9,7 +9,7 @@ import "./RegisterPage.css";
 
 const RegisterPage = () => {
   const { registerUser } = useContext(AuthContext);
-  const [passwordConfirm, setPasswordConfirm] = useState(""); 
+  const [passwordConfirm, setPasswordConfirm] = useState("");
   const [passwordValidation, setPasswordValidation] = useState("notValid");
   const [showPasswordAlert1, setShowPasswordAlert1] = useState(false);
   const [showPasswordAlert2, setShowPasswordAlert2] = useState(false);
@@ -30,10 +30,7 @@ const RegisterPage = () => {
   );
 
   useEffect(() => {
-    if (
-      formData.password === "" ||
-      formData.password !== passwordConfirm
-    ) {
+    if (formData.password === "" || formData.password !== passwordConfirm) {
       setPasswordValidation("notValid");
     } else {
       setPasswordValidation("valid");
@@ -99,29 +96,29 @@ const RegisterPage = () => {
             name='passwordConfirm'
             autoComplete='off'
             value={passwordConfirm}
-            onChange={(e)=>setPasswordConfirm(e.target.value)}
+            onChange={(e) => setPasswordConfirm(e.target.value)}
           />
         </Form.Label>
         <p> (Password must be at least 8 characters long)</p>
 
-          {showPasswordAlert1 && (
-            <Alert
-              variant='danger'
-              onClose={() => setShowPasswordAlert1(false)}
-              dismissible>
-              <Alert.Heading>Passwords do not match!</Alert.Heading>
-            </Alert>
-          )}
+        {showPasswordAlert1 && (
+          <Alert
+            variant='danger'
+            onClose={() => setShowPasswordAlert1(false)}
+            dismissible>
+            <Alert.Heading>Passwords do not match!</Alert.Heading>
+          </Alert>
+        )}
 
-          {showPasswordAlert2 && (
-            <Alert
-              variant='danger'
-              onClose={() => setShowPasswordAlert2(false)}
-              dismissible>
-              <Alert.Heading>Password too short!</Alert.Heading>Passwords must
-              contain at least 8 characters.
-            </Alert>
-          )}
+        {showPasswordAlert2 && (
+          <Alert
+            variant='danger'
+            onClose={() => setShowPasswordAlert2(false)}
+            dismissible>
+            <Alert.Heading>Password too short!</Alert.Heading>Passwords must
+            contain at least 8 characters.
+          </Alert>
+        )}
 
         <Form.Label>
           Street Address Line 1:{" "}
@@ -150,7 +147,7 @@ const RegisterPage = () => {
             onChange={handleInputChange}
           />
         </Form.Label>
-        <Form.Label className="state">
+        <Form.Label className='state'>
           State:{" "}
           <Form.Select
             name='state'
@@ -184,7 +181,7 @@ const RegisterPage = () => {
           <Button
             id='submitButton'
             type='submit'
-            variant="dark"
+            variant='dark'
             onSubmit={(event) => passwordCheck(event)}>
             Submit
           </Button>

@@ -6,10 +6,9 @@ import AuthContext from "../../context/AuthContext";
 import ReviewsList from "../../components/Reviews/ReviewsList";
 import "./ReviewsPage.css";
 
-const ReviewsPage = ({reviews, setReviews}) => {
-
+const ReviewsPage = ({ reviews, setReviews }) => {
   const navigate = useNavigate();
-  const {user} = useContext(AuthContext)
+  const { user } = useContext(AuthContext);
 
   return (
     <div className='container-reviews'>
@@ -17,7 +16,12 @@ const ReviewsPage = ({reviews, setReviews}) => {
         className='material-icons'
         onClick={() => navigate("/addReviews")}
       />
-      <ReviewsList filter={user.userName} reviews={reviews} setReviews={setReviews} filtered={true}/>
+      <ReviewsList
+        filter={user.userName}
+        reviews={reviews}
+        setReviews={setReviews}
+        filtered={true}
+      />
     </div>
   );
 };

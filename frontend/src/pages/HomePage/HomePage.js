@@ -7,8 +7,9 @@ import "./HomePage.css";
 
 const HomePage = ({reviews, setReviews}) => {
   const { user } = useContext(AuthContext);
+
   return (
-    <div className='container-homePage'>
+    <div className='container-homePage bg-secondary text-white'>
       <p>Welcome, {user.userName} </p>
       {user.image !== "" && <img src={`http://localhost:3010/uploads/images/${user.image}`} alt='profile'/>}
       <br/>

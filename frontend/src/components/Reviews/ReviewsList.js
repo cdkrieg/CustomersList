@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import React, { useState, useEffect, useContext } from "react";
 import { Table } from "react-bootstrap";
 import ReactStars from "react-rating-stars-component";

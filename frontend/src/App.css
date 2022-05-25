@@ -6,7 +6,7 @@
 }
 
 #wrapper {
-  margin-bottom: -60px;
+  margin-bottom: -1em;
   min-height: 100vh;
 }
 
@@ -26,3 +26,7 @@
   cursor: pointer;
 
 }  
+.footer {
+  margin-top: 1em;
+  padding-top: 2em;
+}
