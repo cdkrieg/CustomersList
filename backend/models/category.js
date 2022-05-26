@@ -7,7 +7,7 @@ const categorySchema = new mongoose.Schema({
 
 const validateCategory = (category) => {
     const schema = Joi.object({
-        category: Joi.array.items(Joi.string())
+        category: Joi.array().items(Joi.string())
     })
     return schema.validate(category)
 }

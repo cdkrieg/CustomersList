@@ -10,7 +10,7 @@ import CommonMethods from "../../utils/CommonMethods";
 import "./ReviewsList.css";
 import UploadPhoto from "../Images/UploadPhoto";
 
-const ReviewsList = ({ reviews, setReviews, filtered, uploadImage }) => {
+const ReviewsList = ({ reviews, setReviews, filtered, uploadImage, filter }) => {
   const [update, setUpdate] = useState(false);
   const { user } = useContext(AuthContext);
   const formatDate = (date) => CommonMethods.formatDate(date);
@@ -31,8 +31,16 @@ const ReviewsList = ({ reviews, setReviews, filtered, uploadImage }) => {
   }, [update]);
 
   useEffect(() => {
-    if (reviews) setReviewsFiltered(filteredReviews());
-  }, [reviews]);
+    if (reviews && filter) {
+      setReviewsFiltered(filterReviews(reviews));
+    } else if(reviews) {
+      setReviewsFiltered(filteredReviewsByReviewer(reviews))
+    } 
+    
+    
+  }, [reviews, filter]);
+
+  
 
   async function getAllReviews() {
     try {
@@ -46,12 +54,31 @@ const ReviewsList = ({ reviews, setReviews, filtered, uploadImage }) => {
     }
   }
 
-  function filteredReviews() {
+  function filteredReviewsByReviewer(reviews) {
     let temp;
     if (filtered) {
       temp = reviews.filter((review) => {
         return review.reviewerId === user._id;
       });
+      return temp;
+    } else {
+      return reviews;
+    }
+  }
+
+  function filterReviews() {
+    let temp;
+    if (filter) {
+      if(filter === "None" && filtered){
+        return filteredReviewsByReviewer(reviews)
+      } else if(filter === "None"){
+        return true
+      } else {
+      temp = reviews.filter((review) => {
+        if(review.categoryOfService.toLowerCase() === filter.toLowerCase())
+        return filteredReviewsByReviewer(review)
+      });
+    }
       return temp;
     } else {
       return reviews;

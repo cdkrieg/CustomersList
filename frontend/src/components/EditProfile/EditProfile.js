@@ -39,6 +39,7 @@ const EditProfile = () => {
       }
     }
   }, [passwordConfirm]);
+  
 
   function passwordCheck(event) {
     event.preventDefault();

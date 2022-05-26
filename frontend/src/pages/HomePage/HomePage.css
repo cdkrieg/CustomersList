@@ -11,6 +11,7 @@
     margin-right: auto;
     margin-left: auto;
     justify-content: right;
+    z-index: 1000;
     
 }
 img {
