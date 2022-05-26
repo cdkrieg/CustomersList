@@ -1,32 +1,66 @@
-.App {
-  text-align: center;
-  max-width: 390px;
+@media screen and (max-width: 480px) {
+  .App {
+    text-align: center;
+    max-width: vw;
 
-  position: relative;
+    position: relative;
+  }
+
+  #wrapper {
+    margin-bottom: -1em;
+    min-height: 100vh;
+  }
+
+  .material-icons {
+    font-family: "Material Icons";
+    font-weight: normal;
+    font-style: normal;
+    font-size: 30px; /* Preferred icon size */
+    display: inline-block;
+    line-height: 1;
+    text-transform: none;
+    letter-spacing: normal;
+    word-wrap: normal;
+    white-space: nowrap;
+    direction: ltr;
+    margin-left: 15px;
+    cursor: pointer;
+  }
+  .footer {
+    margin-top: 1em;
+    padding-top: 2em;
+  }
 }
+@media screen and (min-width: 490px){
+  .App {
+    text-align: center;
+    max-width: 70vw;
 
-#wrapper {
-  margin-bottom: -1em;
-  min-height: 100vh;
-}
+    position: relative;
+  }
 
-.material-icons {
-  font-family: 'Material Icons';
-  font-weight: normal;
-  font-style: normal;
-  font-size: 30px;  /* Preferred icon size */
-  display: inline-block;
-  line-height: 1;
-  text-transform: none;
-  letter-spacing: normal;
-  word-wrap: normal;
-  white-space: nowrap;
-  direction: ltr;
-  margin-left: 15px;
-  cursor: pointer;
+  #wrapper {
+    margin-bottom: -1em;
+    min-height: 100vh;
+  }
 
-}  
-.footer {
-  margin-top: 1em;
-  padding-top: 2em;
+  .material-icons {
+    font-family: "Material Icons";
+    font-weight: normal;
+    font-style: normal;
+    font-size: 30px; /* Preferred icon size */
+    display: inline-block;
+    line-height: 1;
+    text-transform: none;
+    letter-spacing: normal;
+    word-wrap: normal;
+    white-space: nowrap;
+    direction: ltr;
+    margin-left: 15px;
+    cursor: pointer;
+  }
+  .footer {
+    margin-top: 1em;
+    padding-top: 2em;
+  }
 }

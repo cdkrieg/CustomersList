@@ -54,7 +54,7 @@ useEffect(() => {
       <p>Welcome, {user.userName} </p>
       {user.image !== "" && <img src={`http://localhost:3010/uploads/images/${user.image}`} alt='profile'/>}
       <br/>
-      {Array.isArray(categoryList) &&  categoryList.length && <Dropdown className='dropdown' value={dropdownValue} onSelect={(e)=>{setFilter(e);setDropdownValue(e.toUpperCase())}}>
+      {Array.isArray(categoryList) &&  categoryList.length && <Dropdown className='dropdown' value={dropdownValue} onSelect={(e)=>{setFilter(e)}}>
         <Dropdown.Toggle variant='dark'>Select Filters</Dropdown.Toggle>
         <Dropdown.Menu variant='dark'>
           <Dropdown.Item>None</Dropdown.Item>

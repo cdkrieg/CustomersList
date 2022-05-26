@@ -1,59 +1,72 @@
-
-.container-profilePage > .form{
-    display: flex;
-    flex-flow: wrap row;
-    margin-top: 1em;
-    width: 70vw;
-    align-items: center;
-    justify-content: center;
-    margin-left: auto;
-    margin-right: auto;
-
+.container-profilePage .form {
+  display: flex;
+  flex-flow: wrap row;
+  margin-top: 1em;
+  width: 70vw;
+  align-items: center;
+  justify-content: center;
+  margin-left: auto;
+  margin-right: auto;
 }
-.container-profilePage > .form>*:nth-child(1), /* name */
-.container-profilePage > .form>*:nth-child(2), /* streetAddressLine1 */
-.container-profilePage > .form>*:nth-child(3), /* streetAddressLine2 */
-
-.container-profilePage > .form>*:nth-child(4),  /* state */
-.container-profilePage > .form>*:nth-child(7), /* password */
-.container-profilePage > .form>*:nth-child(8), /* passwordConfirm */ 
-.container-profilePage > .form>*:nth-child(9), /* passwordConfirm */ 
-.container-profilePage > .form>*:nth-child(10) /* passwordConfirm */ 
-{
-    width: 100%;
-
+.container-profilePage  .form>*:nth-child(1), /* name */
+.container-profilePage  .form>*:nth-child(2), /* streetAddressLine1 */
+.container-profilePage  .form>*:nth-child(3), /* streetAddressLine2 */
+.container-profilePage  .form>*:nth-child(4),  /* state */
+.container-profilePage  .form>*:nth-child(7), /* password */
+.container-profilePage  .form>*:nth-child(8), /* passwordConfirm */ 
+.container-profilePage  .form>*:nth-child(9), /* passwordConfirm */ 
+.container-profilePage  .form>*:nth-child(10) /* passwordConfirm */ {
+  width: 100%;
+  margin-bottom: 0.5em;
 }
-.container-profilePage > .form>*:nth-child(6), /* zipCode */
-.container-profilePage > .form>*:nth-child(5) /* city */
-{
-    width: 47%;
-    margin-bottom: 2em;
+.container-profilePage  .form>*:nth-child(6), /* zipCode */
+.container-profilePage  .form>*:nth-child(5) /* city */ {
+  width: 40%;
+  margin-bottom: 2em;
 }
 .notValid {
-    color: red;
+  color: red;
 }
 .valid {
-    color: rgb(55, 208, 55);
+  color: rgb(55, 208, 55);
 }
 .container-profilePage > .form > .submitButton {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    position: relative;
-    margin: auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  margin: auto;
 }
-.container-profilePage > .form >  #submitButton{
-    background-color: rgb(51, 59, 65);
-    color: aliceblue;
-    font-size: large;
-    height: 3rem;
-    width: 6rem;
+.container-profilePage > .form > #submitButton {
+  background-color: rgb(51, 59, 65);
+  color: aliceblue;
+  font-size: large;
+  height: 3rem;
+  width: 6rem;
+}
+.alert {
+  width: 100%;
+}
+#profileCity {
+  margin-right: 1em;
+}
+button {
+    margin: 1em;
+}
 
+@media screen and (min-width: 481px) {
+  .container-profilePage .form {
+    width: 40vw;
+  }
+ 
+  .container-profilePage  .form>*:nth-child(8), /* passwordConfirm */ 
+  .container-profilePage  .form>*:nth-child(9), /* passwordConfirm */ 
+  .container-profilePage  .form>*:nth-child(10) /* passwordConfirm */ {
+    width: 45%;
+    margin-right: .5em;
+  }
 
-}
-.alert{
-    width: 100%;
-}
-#profileCity{
-    margin-right: 1em;
+  .alert {
+    width: 70%;
+  }
 }
