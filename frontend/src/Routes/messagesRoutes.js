@@ -40,6 +40,7 @@ const postMessage = async (message) => {
   try {
     let response = await axios.post(baseUrl, message);
     if (response) {
+      console.log(response.data)
       return response.data;
     }
   } catch (error) {
@@ -50,9 +51,7 @@ const postMessage = async (message) => {
 const updateMessage = async (messageId, message) => {
   try {
     let response = await axios.put(`${baseUrl}/${messageId}`, message);
-    if (response) {
-      return response.data;
-    }
+
   } catch (error) {
     console.log(`Error posting the message: ${error}`);
   }

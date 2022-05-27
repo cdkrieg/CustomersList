@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from "react";
 import { Table, Form } from "react-bootstrap";
-import { Link } from 'react-router-dom';
-import '../../utils/CommonMethods'
+import { Link } from "react-router-dom";
+import "../../utils/CommonMethods";
 import CommonMethods from "../../utils/CommonMethods";
+import AxiosMessages from "../../Routes/messagesRoutes";
 
 const MessageList = ({
   messages,
@@ -10,10 +11,10 @@ const MessageList = ({
   setMessages,
   getUserMessages,
   user,
-  sendMessageToUser
+  sendMessageToUser,
 }) => {
   const [checked, setChecked] = useState();
-  const formatDate = (date) => CommonMethods.formatDate(date)
+  const formatDate = (date) => CommonMethods.formatDate(date);
 
   const handleChecked = async (message, index) => {
     let temp = await updateMessage(message._id, { flagged: !message.flagged });
@@ -31,12 +32,18 @@ const MessageList = ({
       })
     );
   }, [messages]);
+  useEffect(() => {
+    messages.map((message) => {
+      if (message.receiverUserName === user.userName)
+        updateMessage(message._id, { read: true });
+    });
+  }, []);
 
   return (
     <div>
       <p></p>
       {messages && checked && (
-        <Table >
+        <Table>
           {messages.map((message, index) => {
             return (
               <tbody key={index}>
@@ -59,17 +66,33 @@ const MessageList = ({
                     />
                   </td>
                 </tr>
-
                 <tr>
                   <td colSpan={3}>{message.message}</td>
-                  
                 </tr>
+                {message.attachment && (
+                  <tr>
+                    <td colSpan={3}>{JSON.stringify(message.attachment)}</td>
+                  </tr>
+                )}
+
                 <tr>
-                    <td colSpan={3}>
-                  <Link to="/sendMessage" state= {{receiver:{userName: message.senderUserName, id: message.senderId}, messageToReply:{title: message.reviewTitle, id: message.reviewId }}}>Reply</Link>
+                  <td colSpan={3}>
+                    <Link
+                      to='/sendMessage'
+                      state={{
+                        receiver: {
+                          userName: message.senderUserName,
+                          id: message.senderId,
+                        },
+                        messageToReply: {
+                          title: message.reviewTitle,
+                          id: message.reviewId,
+                        },
+                      }}>
+                      Reply
+                    </Link>
                   </td>
                 </tr>
-                
               </tbody>
             );
           })}

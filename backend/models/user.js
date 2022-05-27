@@ -32,7 +32,7 @@ const userSchema = mongoose.Schema({
   image: { type: String, default: "" },
   admin: { type: Boolean, default: false },
   dateAdded: {type: Date, default: Date.now()},
-  coordinates: [{type:String, required: true}]
+  coordinates: [{type:String}]
 });
 
 userSchema.methods.generateAuthToken = function () {
@@ -66,7 +66,7 @@ const validateUser = (user) => {
     state: Joi.string().min(2).max(255).required(),
     zipCode: Joi.string().min(5).max(10).required(),
     admin: Joi.boolean().default(false),
-    coordinates: Joi.array().items(Joi.string()).required(),
+    coordinates: Joi.array().items(Joi.string()),
   });
   return schema.validate(user);
 };

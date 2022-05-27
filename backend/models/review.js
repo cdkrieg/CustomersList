@@ -15,7 +15,7 @@ const reviewSchema = mongoose.Schema({
     dateAdded: {type: Date, default: Date.now()},
     reviewCity: {type: String, required: true},
     reviewState: {type: String, required: true},
-    coordinates: [{type: String, required: true}],
+    coordinates: [{type: String}],
 })
 
 const validateReview = (review) => {
@@ -32,7 +32,7 @@ const validateReview = (review) => {
         image: Joi.string(),
         reviewCity: Joi.string().required(),
         reviewState: Joi.string().required(),
-        coordinates: Joi.array().items(Joi.string()).required(),
+        coordinates: Joi.array().items(Joi.string()),
     })
     return schema.validate(review)
 }

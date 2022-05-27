@@ -26,7 +26,10 @@ const RequestAccess = () => {
     contractorPhone: "",
     contractorEmail: "",
     userEmail: "",
-  };
+  };  const [formData, handleInputChange, handleSubmit] = useCustomForm(
+    defaultValues,
+    setAttachmentValue
+  );
   const formData2 = {
     senderId: user._id,
     senderUserName: user.userName,
@@ -35,20 +38,15 @@ const RequestAccess = () => {
     message: `Request Contractor Access: ${user.userName}  `,
     reviewId: " ",
     reviewTitle: `Contractor Access`,
-    attachment: attachmentValue,
+    attachment: formData,
   }
-  const [formData, handleInputChange, handleSubmit] = useCustomForm(
-    defaultValues,
-    setAttachmentValue
-  );
-  const [handleSubmit2] = useCustomForm(
-      formData2,
-      contractorAccess
-  )
-  const submit = (e) => {
+
+
+  const submit = async (e) => {
     e.preventDefault()
-    handleSubmit(e)
-    handleSubmit()
+    console.log(JSON.stringify(formData))
+    console.log(JSON.stringify(formData2))
+    contractorAccess(formData2)
     navigate('/')
   }
 
