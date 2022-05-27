@@ -50,13 +50,13 @@ useEffect(() => {
 
 
   return (
-    <div className='container-homePage bg-secondary text-white'>
+    <div className='container-homePage '>
       <p>Welcome, {user.userName} </p>
       {user.image !== "" && <img src={`http://localhost:3010/uploads/images/${user.image}`} alt='profile'/>}
       <br/>
       {Array.isArray(categoryList) &&  categoryList.length && <Dropdown className='dropdown' value={dropdownValue} onSelect={(e)=>{setFilter(e)}}>
-        <Dropdown.Toggle variant='dark'>Select Filters</Dropdown.Toggle>
-        <Dropdown.Menu variant='dark'>
+        <Dropdown.Toggle >Select Filters</Dropdown.Toggle>
+        <Dropdown.Menu >
           <Dropdown.Item>None</Dropdown.Item>
           {categoryList.map((cl, index) => {
             return (

@@ -14,13 +14,14 @@ import AddReviewsPage from "./pages/AddReviewsPage/AddReviewsPage";
 import MessagesPage from "./pages/MessagesPage/MessagesPage";
 import SendMessagePage from "./pages/SendMessagePage/SendMessagePage";
 import "./App.css";
+import RequestAccess from "./pages/RequestAccess/RequestAccess";
 
 function App() {
   const [showMenu, setShowMenu] = useState(false);
   const [reviews, setReviews] = useState([]);
 
   return (
-    <div className='App bg-secondary text-white'>
+    <div className='App '>
       <div id='wrapper'>
         <Navbar setShowMenu={setShowMenu} showMenu={showMenu} />
         {showMenu && <Sidebar setShowMenu={setShowMenu} showMenu={showMenu} />}
@@ -43,6 +44,7 @@ function App() {
           <Route path='/addReviews' element={<AddReviewsPage />} />
           <Route path='/messages' element={<MessagesPage />} />
           <Route path='/sendMessage' element={<SendMessagePage />} />
+          <Route path='/requestAccess' element={<RequestAccess />} />
         </Routes>
       </div>
       <Footer className='footer' />

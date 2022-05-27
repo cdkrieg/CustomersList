@@ -5,6 +5,7 @@ import { Form, Button } from "react-bootstrap";
 import AuthContext from "../../context/AuthContext";
 import useCustomForm from "../../hooks/UseCustomForm";
 import stateArray from "../../components/StateList/StateList";
+import AxiosAPI from "../../Routes/distanceRoutes";
 import "./RegisterPage.css";
 
 const RegisterPage = () => {
@@ -23,6 +24,7 @@ const RegisterPage = () => {
     city: "",
     state: "Choose State",
     zipCode: "",
+    coordinates: []
   };
   const [formData, handleInputChange, handleSubmit] = useCustomForm(
     defaultValues,
@@ -42,7 +44,7 @@ const RegisterPage = () => {
     if (formData.state !== stateArray[0].value) setShowStateAlert(false);
   }, [formData.state]);
 
-  function passwordCheck(event) {
+  async function passwordCheck(event) {
     event.preventDefault();
     if (formData.password !== passwordConfirm) {
       return setShowPasswordAlert1(true);
@@ -52,14 +54,26 @@ const RegisterPage = () => {
       console.log(formData.state);
       return setShowStateAlert(true);
     } else {
-      console.log(formData.state);
+      await getCoordinates(`${formData.streetAddressLine1} ${formData.city} ${formData.state}`)
+      console.log(formData.coordinates)
       handleSubmit(event);
+    }
+  }
+
+  const getCoordinates = async (address) => {
+    try {
+      let result = await AxiosAPI.getGeocode(address)
+      if (result)
+      formData.coordinates.push(`${result[0]}`)
+      formData.coordinates.push(`${result[1]}`)
+    } catch (error) {
+      console.log('Error getting coordinates')
     }
   }
 
   return (
     <div className='container-register'>
-      <Form className='form' onSubmit={(event) => passwordCheck(event)}>
+      <Form className='form' onSubmit={(event) => passwordCheck(event)}onKeyUp={(event)=> {if(event.key === 'Enter')handleSubmit(event)}} >
         <Form.Label>
           User Name:{" "}
           <Form.Control
@@ -81,7 +95,7 @@ const RegisterPage = () => {
         <Form.Label>
           Password:{" "}
           <Form.Control
-            type='text'
+            type='password'
             name='password'
             autoComplete='off'
             value={formData.password}
@@ -92,7 +106,7 @@ const RegisterPage = () => {
         <Form.Label className={passwordValidation}>
           Re-Enter Password:{" "}
           <Form.Control
-            type='text'
+            type='password'
             name='passwordConfirm'
             autoComplete='off'
             value={passwordConfirm}
@@ -181,7 +195,7 @@ const RegisterPage = () => {
           <Button
             id='submitButton'
             type='submit'
-            variant='dark'
+
             onSubmit={(event) => passwordCheck(event)}>
             Submit
           </Button>

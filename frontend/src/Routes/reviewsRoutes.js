@@ -49,7 +49,8 @@ const postReview = async (review) => {
   try {
     let response = await axios.post(baseUrl, review);
     if (response) {
-      return response.data;
+      let response1 = await axios.put(`${baseUrl}/${response.data._id}`, {$addToSet:{$each:[response.data.coordinates[0],response.data.coordinates[1]]}})
+      return response1.data;
     }
   } catch (error) {
     console.log(`Error posting the review: ${error}`);

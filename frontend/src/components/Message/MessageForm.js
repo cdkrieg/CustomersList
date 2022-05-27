@@ -50,12 +50,12 @@ const MessageForm = ({
   
 
   return <div>
-      <Form  className="form" onSubmit={(e)=> customSubmit(e)}>
+      <Form  className="form" onSubmit={(e)=> customSubmit(e)} onKeyUp={(event)=> {if(event.key === 'Enter')handleSubmit(event)}}>
           <Form.Control type="textarea" name="message" value={formData.message} onChange={handleInputChange} placeholder="Enter your message"/>
           <br/>
           {showAlert && <Alert>Message sent!</Alert>}
-          <Button type="submit" variant="dark" id="submitButton">Submit</Button>
-          <Button type="reset" variant="dark" id="cancelButton" onClick={()=> navigate(-1)}>Cancel</Button>
+          <Button type="submit" variant="info" id="submitButton">Submit</Button>
+          <Button type="reset" variant="info" id="cancelButton" onClick={()=> navigate(-1)}>Cancel</Button>
       </Form>
   </div>;
 };

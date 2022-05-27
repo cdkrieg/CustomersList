@@ -58,7 +58,7 @@ const ReviewsList = ({ reviews, setReviews, filtered, uploadImage, filter }) => 
     let temp;
     if (filtered) {
       temp = reviews.filter((review) => {
-        return review.reviewerId === user._id;
+        return review.reviewer === user.userName;
       });
       return temp;
     } else {
@@ -101,7 +101,7 @@ const ReviewsList = ({ reviews, setReviews, filtered, uploadImage, filter }) => 
     <div>
       <p></p>
       {!show && Array.isArray(reviewsFiltered) && (
-        <Table variant='dark'>
+        <Table >
           {reviewsFiltered.map((review, index) => {
             return (
               <tbody key={index}>

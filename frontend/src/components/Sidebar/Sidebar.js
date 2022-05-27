@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 import AuthContext from "../../context/AuthContext";
 
 const Sidebar = ({ showMenu, setShowMenu }) => {
-  const {webMaster} = useContext(AuthContext)
+  const { webMaster } = useContext(AuthContext);
   useEffect(() => {}, []);
 
   return (
@@ -50,17 +50,24 @@ const Sidebar = ({ showMenu, setShowMenu }) => {
       <hr />
       <CDBSidebarMenuItem className='sidebarMenu'>
         <Link to='/messages' onClick={() => setShowMenu(!showMenu)}>
-          View Messages 
+          View Messages
         </Link>
       </CDBSidebarMenuItem>
       <hr />
       <CDBSidebarMenuItem className='sidebarMenu'>
-        Request Contractor Access
+        <Link to='/requestAccess' onClick={() => setShowMenu(!showMenu)}>
+          Request Contractor Access
+        </Link>
       </CDBSidebarMenuItem>
       <hr />
       <CDBSidebarMenuItem className='sidebarMenu'>
-      <Link to='/sendMessage' state={{webMaster: {id: webMaster.id, userName: webMaster.userName}}} onClick={() => setShowMenu(!showMenu)}>
-        Contact Support
+        <Link
+          to='/sendMessage'
+          state={{
+            webMaster: { id: webMaster.id, userName: webMaster.userName },
+          }}
+          onClick={() => setShowMenu(!showMenu)}>
+          Contact Support
         </Link>
       </CDBSidebarMenuItem>
     </CDBSidebar>

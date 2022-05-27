@@ -31,7 +31,7 @@ const ReviewsPage = ({ reviews, setReviews }) => {
         onClick={() => navigate("/addReviews")}
       />
       <ReviewsList
-        filter={user.userName}
+        filter={null}
         reviews={reviews}
         setReviews={setReviews}
         filtered={true}

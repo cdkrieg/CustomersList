@@ -31,6 +31,7 @@ const ImageUpload = ({ id, uploadImage, setShow, title }) => {
           accept='.png,.jpg,.jpeg'
           name='image'
           onChange={handlePhoto}
+          onKeyUp={(event)=> {if(event.key === 'Enter')handleSubmit(event)}}
         />
         <Button type='submit'>Upload/Change {title} Image</Button>
       </Form>

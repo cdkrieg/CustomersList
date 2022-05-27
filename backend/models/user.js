@@ -32,7 +32,7 @@ const userSchema = mongoose.Schema({
   image: { type: String, default: "" },
   admin: { type: Boolean, default: false },
   dateAdded: {type: Date, default: Date.now()},
-  coordinates: [{type: String, required: true}]
+  coordinates: [{type:String, required: true}]
 });
 
 userSchema.methods.generateAuthToken = function () {

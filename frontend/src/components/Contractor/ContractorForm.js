@@ -5,9 +5,9 @@ import { useNavigate } from "react-router";
 import AuthContext from "../../context/AuthContext";
 import stateArray from "../../components/StateList/StateList";
 import useCustomForm from "../../hooks/UseCustomForm";
-import "./EditProfile.css";
 
-const EditProfile = () => {
+
+const ContractorForm = () => {
   const [checked, setChecked] = useState(false);
   const navigate = useNavigate();
   const [passwordConfirm, setPasswordConfirm] = useState("");
@@ -15,18 +15,18 @@ const EditProfile = () => {
   const [showPasswordAlert1, setShowPasswordAlert1] = useState(false);
   const [showPasswordAlert2, setShowPasswordAlert2] = useState(false);
   const [showStateAlert, setShowStateAlert] = useState(false);
-  const { user, editUser} = useContext(AuthContext);
+  const { contractor, editContractor} = useContext(AuthContext);
   const defaultValues = {
-    name: user.name,
-    streetAddressLine1: user.streetAddressLine1,
-    streetAddressLine2: user.streetAddressLine2,
-    city: user.city,
-    state: user.state,
-    zipCode: user.zipCode,
+    name: contractor.name,
+    streetAddressLine1: contractor.streetAddressLine1,
+    streetAddressLine2: contractor.streetAddressLine2,
+    city: contractor.city,
+    state: contractor.state,
+    zipCode: contractor.zipCode,
   };
   const [formData, handleInputChange, handleSubmit] = useCustomForm(
     defaultValues,
-    editUser
+    editContractor
   );
 
   useEffect(() => {
@@ -66,7 +66,7 @@ const EditProfile = () => {
 
   return (
     <div className='container-editProfile'>
-      <Form className='form' onSubmit={(event) => passwordCheck(event)} onKeyUp={(event)=> {if(event.key === 'Enter')handleSubmit(event)}}>
+      <Form className='form' onSubmit={(event) => passwordCheck(event)}>
         <Form.Control
           name='name'
           value={formData.name}
@@ -176,9 +176,9 @@ const EditProfile = () => {
           </Button>
         </div>
       </Form>
-      {user.image !== "" && <img src={`http://localhost:3010/uploads/images/${user.image}`} alt='Profile' />}
+      {contractor.image !== "" && <img src={`http://localhost:3010/uploads/images/${contractor.image}`} alt='Profile' />}
     </div>
   );
 };
 
-export default EditProfile;
+export default ContractorForm;

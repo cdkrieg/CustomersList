@@ -36,7 +36,7 @@ const MessageList = ({
     <div>
       <p></p>
       {messages && checked && (
-        <Table variant='dark'>
+        <Table >
           {messages.map((message, index) => {
             return (
               <tbody key={index}>

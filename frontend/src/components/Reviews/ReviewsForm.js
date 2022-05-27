@@ -8,6 +8,7 @@ import "react-datepicker/dist/react-datepicker.css";
 import AxiosReviews from "../../Routes/reviewsRoutes";
 import useCustomForm from "../../hooks/UseCustomForm";
 import AuthContext from "../../context/AuthContext";
+import AxiosAPI from "../../Routes/distanceRoutes";
 
 const ReviewsForm = ({ username, setShow }) => {
   const { user } = useContext(AuthContext);
@@ -28,6 +29,7 @@ const ReviewsForm = ({ username, setShow }) => {
     tempCategory2: "",
     reviewCity: user.city,
     reviewState: user.state,
+    coordinates: []
   };
   const [formData, handleInputChange, handleSubmit] = useCustomForm(
     defaultValues,
@@ -39,7 +41,7 @@ const ReviewsForm = ({ username, setShow }) => {
     else setShowNotListed(false);
   }, [formData.tempCategory]);
 
-  function submit(e) {
+  async function submit(e) {
     e.preventDefault();
     if (formData.tempCategory === "Other") {
       formData.categoryOfService = formData.tempCategory2.valueOf();
@@ -52,12 +54,25 @@ const ReviewsForm = ({ username, setShow }) => {
     }
     formData.dateOfService = date;
     console.log("submitting data");
+    await getCoordinates(`${formData.streetAddressLine1} ${formData.city} ${formData.state}`)
     handleSubmit(e);
+    navigate('/')
+  }
+
+  const getCoordinates = async (address) => {
+    try {
+      let result = await AxiosAPI.getGeocode(address)
+      if (result)
+      formData.coordinates.push(`${result[0]}`)
+      formData.coordinates.push(`${result[1]}`)
+    } catch (error) {
+      console.log('Error getting coordinates')
+    }
   }
 
   return (
     <div>
-      <Form onSubmit={(event) => submit(event)} variant='dark'>
+      <Form onSubmit={(event) => submit(event)} variant='info' onKeyUp={(event)=> {if(event.key === 'Enter')handleSubmit(event)}}>
         <Form.Text>
           <strong>Add a Review</strong>
         </Form.Text>
@@ -78,7 +93,7 @@ const ReviewsForm = ({ username, setShow }) => {
         <Form.Select
           name='tempCategory'
           value={formData.tempCategory}
-          variant='dark'
+          variant='info'
           onChange={handleInputChange}>
           <option>Select category of service</option>
           <option>Handyman</option>
@@ -126,10 +141,10 @@ const ReviewsForm = ({ username, setShow }) => {
         <Button
           type='submit'
           onSubmit={(event) => submit(event)}
-          variant='dark'>
+          variant='info'>
           Submit
         </Button>
-        <Button type='cancel' onClick={() => navigate("/")} variant='dark'>
+        <Button type='cancel' onClick={() => navigate("/")} variant='info'>
           Cancel
         </Button>
       </Form>

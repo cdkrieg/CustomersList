@@ -1,4 +1,5 @@
 import axios from "axios";
+import jwtDecode from "jwt-decode";
 
 const BASE_URL = "http://localhost:3010/api/users";
 
@@ -39,7 +40,20 @@ const loginUser = async (loginData) => {
 const registerUser = async (registerData) => {
   try {
     let response = await axios.post(`${BASE_URL}/register`, registerData);
-    if (response.status === 200) return response;
+    if (response) {
+      let response1 = await axios.put(
+        `${BASE_URL}/update/${response.data._id}`,
+        {
+          $push: {
+            coordinates: {
+              $each: [registerData.coordinates[0], registerData.coordinates[1]],
+            },
+          },
+        }
+      );
+
+      if (response1.status === 200) return response1;
+    }
   } catch (error) {
     console.log(error);
   }
