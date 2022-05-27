@@ -14,7 +14,8 @@ const reviewSchema = mongoose.Schema({
     reviewerId: {type: String, required: true},
     dateAdded: {type: Date, default: Date.now()},
     reviewCity: {type: String, required: true},
-    reviewState: {type: String, required: true}
+    reviewState: {type: String, required: true},
+    coordinates: {type: Array, default: []}
 })
 
 const validateReview = (review) => {
@@ -30,7 +31,8 @@ const validateReview = (review) => {
         reviewerId: Joi.string().required(),
         image: Joi.string(),
         reviewCity: Joi.string().required(),
-        reviewState: Joi.string().required()
+        reviewState: Joi.string().required(),
+        coordinates: Joi.array()
     })
     return schema.validate(review)
 }

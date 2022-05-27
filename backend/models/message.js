@@ -13,6 +13,7 @@ const messageSchema = new mongoose.Schema({
   reviewId: { type: String, required: true },
   reviewTitle: {type: String, required: true},
   flagged: { type: Boolean, default: false },
+  formData: {type: Object},
 });
 
 const validateMessage = (message) => {
@@ -23,7 +24,8 @@ const validateMessage = (message) => {
     reviewId: Joi.string().required(),
     senderUserName: Joi.string().required(),
     receiverUserName: Joi.string().required(),
-    reviewTitle: Joi.string().required()
+    reviewTitle: Joi.string().required(),
+    formData: Joi.object(),
   });
   return schema.validate(message);
 };

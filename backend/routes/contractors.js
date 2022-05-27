@@ -11,7 +11,7 @@ const router = express.Router();
 const fileUpload = require("../middleware/file-upload");
 
 //POST register a new contractor
-router.post("/", async (req, res) => {
+router.post("/", [admin], async (req, res) => {
   try {
     const { error } = validatecontractor(req.body);
     if (error) return res.status(400).send(error.details[0].message);
