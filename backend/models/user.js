@@ -25,14 +25,14 @@ const userSchema = mongoose.Schema({
     minLength: 5,
     maxLength: 255,
   },
-  streetAddressLine2: { type: String, default: "" },
+  streetAddressLine2: { type: String, default: "", minLength:0 },
   city: { type: String, minLength: 2, maxLength: 255, required: true },
   state: { type: String, required: true, minLength: 2, maxLength: 255 },
   zipCode: { type: String, required: true, minLength: 5, maxLength: 10 },
   image: { type: String, default: "" },
   admin: { type: Boolean, default: false },
   dateAdded: {type: Date, default: Date.now()},
-  coordinates: {type: Array, default:[]}
+  coordinates: [{type: String, required: true}]
 });
 
 userSchema.methods.generateAuthToken = function () {
@@ -61,12 +61,12 @@ const validateUser = (user) => {
     password: Joi.string().min(8).max(1024).required(),
     userName: Joi.string().min(4).max(255).required(),
     streetAddressLine1: Joi.string().min(5).max(255).required(),
-    streetAddressLine2: Joi.string(),
+    streetAddressLine2: Joi.string().min(0),
     city: Joi.string().min(2).max(255).required(),
     state: Joi.string().min(2).max(255).required(),
     zipCode: Joi.string().min(5).max(10).required(),
-    admin: Joi.boolean(),
-    coordinates: Joi.array()
+    admin: Joi.boolean().default(false),
+    coordinates: Joi.array().items(Joi.string()).required(),
   });
   return schema.validate(user);
 };
