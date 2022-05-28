@@ -25,6 +25,7 @@ const Navbar = ({ showMenu, setShowMenu }) => {
           <div className='navBarMenu'>
             <OverlayTrigger
               placement='top'
+              delay={{show: 250, hide: 400}}
               overlay={<Tooltip>Click to show/hide menu</Tooltip>}>
               <Button>
                 <MdMenu
@@ -33,8 +34,10 @@ const Navbar = ({ showMenu, setShowMenu }) => {
                 />
               </Button>
             </OverlayTrigger>
+            <label>Logged in: {user && user.userName}</label>
             <OverlayTrigger
               placement='top'
+              delay={{show: 250, hide: 400}}
               overlay={<Tooltip>Click to logout</Tooltip>}>
               <Button>
                 <MdLogout
