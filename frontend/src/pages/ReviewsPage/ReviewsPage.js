@@ -12,17 +12,15 @@ const ReviewsPage = ({ reviews, setReviews }) => {
 
   const uploadImage = async (reviewId, imageData) => {
     try {
-      let result = await AxiosReviews.uploadImage(reviewId, imageData)
+      let result = await AxiosReviews.uploadImage(reviewId, imageData);
       if (result) {
-          let review = await AxiosReviews.getReviews()
-          if (review)
-          setReviews(review)
+        let review = await AxiosReviews.getReviews();
+        if (review) setReviews(review);
       }
     } catch (error) {
-      console.log('Error uploading review photo')
+      console.log("Error uploading review photo");
     }
-
-  }
+  };
 
   return (
     <div className='container-reviews'>
@@ -36,6 +34,7 @@ const ReviewsPage = ({ reviews, setReviews }) => {
         setReviews={setReviews}
         filtered={true}
         uploadImage={uploadImage}
+        myReview={true}
       />
     </div>
   );

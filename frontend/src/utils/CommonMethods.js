@@ -1,16 +1,12 @@
-
+//Method to format date to mm/dd/yyyy
 function formatDate(date){
     let temp = new Date(date);
     temp = temp.toLocaleDateString();
     return temp;
   }
 
-  /**
-     * Calculates the haversine distance between point A, and B.
-     * @param {number[]} latlngA [lat, lng] point A
-     * @param {number[]} latlngB [lat, lng] point B
-     * @param {boolean} isMiles If we are using miles, else km.
-     */
+
+//Method to calculate distance between 2 coordinates
    const haversineDistance = ([lat1, lon1], [lat2, lon2], isMiles = false) => {
     const toRadian = angle => (Math.PI / 180) * angle;
     const distance = (a, b) => (Math.PI / 180) * (a - b);
@@ -22,7 +18,6 @@ function formatDate(date){
     lat1 = toRadian(lat1);
     lat2 = toRadian(lat2);
 
-    // Haversine Formula
     const a =
       Math.pow(Math.sin(dLat / 2), 2) +
       Math.pow(Math.sin(dLon / 2), 2) * Math.cos(lat1) * Math.cos(lat2);
@@ -37,6 +32,16 @@ function formatDate(date){
     return finalDistance;
   };
 
+  //Method to change text to sentence case
+  const titleCase = (string) => {
+    var sentence = string.toLowerCase().split(" ");
+    for(var i = 0; i< sentence.length; i++){
+       sentence[i] = sentence[i][0].toUpperCase() + sentence[i].slice(1);
+    }
+ document.write(sentence.join(" "));
+ return sentence;
+ }
 
-const CommonMethods = {formatDate, haversineDistance}
+
+const CommonMethods = {formatDate, haversineDistance, titleCase}
 export default CommonMethods

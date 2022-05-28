@@ -1,4 +1,19 @@
 tbody img {
-    width: 70vw;
-    height: 30vh;
+    width: 70%;
+    height: auto;
+}
+table {
+    padding: 1em 0 1em 0;
+
+    border: 2px solid black;
+}
+table td{
+    border: none;
+}
+tbody{
+    border-collapse: separate;
+    border-spacing: 0 2em;
+}
+tbody .head{
+    margin-bottom: 2em;
 }

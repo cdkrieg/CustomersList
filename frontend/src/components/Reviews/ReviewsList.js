@@ -10,7 +10,7 @@ import CommonMethods from "../../utils/CommonMethods";
 import "./ReviewsList.css";
 import UploadPhoto from "../Images/UploadPhoto";
 
-const ReviewsList = ({ reviews, setReviews, filtered, uploadImage, filter }) => {
+const ReviewsList = ({ reviews, setReviews, filtered, uploadImage, filter, myReview }) => {
   const [update, setUpdate] = useState(false);
   const { user } = useContext(AuthContext);
   const formatDate = (date) => CommonMethods.formatDate(date);
@@ -127,7 +127,7 @@ const ReviewsList = ({ reviews, setReviews, filtered, uploadImage, filter }) => 
                     <td>{`Reviewer: ${review.reviewer}`}</td>
                   )}
                 </tr>
-                <tr>
+                <tr className="head">
                   <td>Category: {review.categoryOfService}</td>
                   <td colSpan={2}>
                     Location: {`${review.reviewCity}, ${review.reviewState}`}
