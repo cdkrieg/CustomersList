@@ -13,6 +13,7 @@ const reviewSchema = mongoose.Schema({
     reviewer: {type: String, required: true}, // userName
     reviewerId: {type: String, required: true},
     dateAdded: {type: Date, default: Date.now()},
+    reviewStreetAddress: {type: String, required: true},
     reviewCity: {type: String, required: true},
     reviewState: {type: String, required: true},
     coordinates: [{type: String}],
@@ -30,6 +31,7 @@ const validateReview = (review) => {
         reviewer: Joi.string().required(),
         reviewerId: Joi.string().required(),
         image: Joi.string(),
+        reviewStreetAddress: Joi.string().required(),
         reviewCity: Joi.string().required(),
         reviewState: Joi.string().required(),
         coordinates: Joi.array().items(Joi.string()),

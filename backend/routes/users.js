@@ -30,6 +30,7 @@ router.post("/register", async (req, res) => {
       city: req.body.city,
       state: req.body.state,
       zipCode: req.body.zipCode,
+      coordinates: req.body.coordinates,
     });
 
     await user.save();
@@ -47,6 +48,7 @@ router.post("/register", async (req, res) => {
         state: user.state,
         zipCode: user.zipCode,
         admin: user.admin,
+        coordinates: user.coordinates,
       });
   } catch (err) {
     return res.status(500).send(`Internal Server Error: ${err}`);
