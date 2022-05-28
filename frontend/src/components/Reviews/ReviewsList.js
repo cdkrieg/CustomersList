@@ -77,6 +77,7 @@ const ReviewsList = ({ reviews, setReviews, filtered, uploadImage, filter }) => 
       temp = reviews.filter((review) => {
         if(review.categoryOfService.toLowerCase() === filter.toLowerCase())
         return filteredReviewsByReviewer(review)
+        else return null
       });
     }
       return temp;
@@ -103,6 +104,7 @@ const ReviewsList = ({ reviews, setReviews, filtered, uploadImage, filter }) => 
       {!show && Array.isArray(reviewsFiltered) && (
         <Table >
           {reviewsFiltered.map((review, index) => {
+            if(CommonMethods.haversineDistance([parseFloat(user.coordinates[0]), parseFloat(user.coordinates[1])], [parseFloat(review.coordinates[0]), parseFloat(review.coordinates[1])], true) <= 50 || filtered){
             return (
               <tbody key={index}>
                 <tr>
@@ -171,7 +173,9 @@ const ReviewsList = ({ reviews, setReviews, filtered, uploadImage, filter }) => 
                 )}
                 {review.image !== "" && <tr><td colSpan={3}><img src={`http://localhost:3010/uploads/images/${review.image}`} alt="review"  /></td></tr>}
               </tbody>
-            );
+            );} else {
+              return null
+            }
           })}
         </Table>
       )}

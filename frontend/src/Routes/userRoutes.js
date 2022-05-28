@@ -40,20 +40,21 @@ const loginUser = async (loginData) => {
 const registerUser = async (registerData) => {
   try {
     let response = await axios.post(`${BASE_URL}/register`, registerData);
-    if (response) {
-      let response1 = await axios.put(
-        `${BASE_URL}/update/${response.data._id}`,
-        {
-          $push: {
-            coordinates: {
-              $each: [registerData.coordinates[0], registerData.coordinates[1]],
-            },
-          },
-        }
-      );
+    // if (response) {
+    //   let response1 = await axios.put(
+    //     `${BASE_URL}/update/${response.data._id}`,
+    //     {
+    //       $push: {
+    //         coordinates: {
+    //           $each: [registerData.coordinates[0], registerData.coordinates[1]],
+    //         },
+    //       },
+    //     }
+    //   );
 
-      if (response1.status === 200) return response1;
-    }
+    //   if (response1.status === 200) return response1;
+    // }
+    if(response.status === 200) return response
   } catch (error) {
     console.log(error);
   }
