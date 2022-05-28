@@ -55,73 +55,89 @@ router.post("/register", async (req, res) => {
   }
 });
 
-
 //POST a valid login attempt
 router.post("/login", async (req, res) => {
-    try {
-      const { error } = validateLogin(req.body);
-      if (error) return res.status(400).send(error.details[0].message);
-  
-      let user = await User.findOne({ email: req.body.email });
-      if (!user) return res.status(400).send(`Invalid email or password.`);
-  
-      const validPassword = await bcrypt.compare(
-        req.body.password,
-        user.password
-      );
-      if (!validPassword)
-        return res.status(400).send("Invalid email or password.");
-  
-      const token = user.generateAuthToken();
-      return res.send(token);
-    } catch (err) {
-      return res.status(500).send(`Internal Server Error: ${err}`);
-    }
-  });
-  // Get all users
+  try {
+    const { error } = validateLogin(req.body);
+    if (error) return res.status(400).send(error.details[0].message);
+
+    let user = await User.findOne({ email: req.body.email });
+    if (!user) return res.status(400).send(`Invalid email or password.`);
+
+    const validPassword = await bcrypt.compare(
+      req.body.password,
+      user.password
+    );
+    if (!validPassword)
+      return res.status(400).send("Invalid email or password.");
+
+    const token = user.generateAuthToken();
+    return res.send(token);
+  } catch (err) {
+    return res.status(500).send(`Internal Server Error: ${err}`);
+  }
+});
+// Get all users
 router.get("/", async (req, res) => {
-    try {
-      const users = await User.find();
+  try {
+    const users = await User.find();
+    return res.send(users);
+  } catch (error) {
+    return res.status(500).send(`Internal Server Error: ${error}`);
+  }
+});
+
+// DELETE a single user from the database
+router.delete("/:userId", [auth, admin], async (req, res) => {
+  try {
+    const user = await User.findByIdAndDelete(req.params.userId);
+    if (!user)
+      return res
+        .status(400)
+        .send(`User with id ${req.params.userId} does not exist!`);
+    return res.send(user);
+  } catch (error) {
+    return res.status(500).send(`Internal Server Error: ${error}`);
+  }
+});
+
+// Get property of user
+router.get("/:userId", async (req, res) => {
+  try {
+    const users = await User.findById(req.params.userId);
+    if (users) {
       return res.send(users);
-    } catch (error) {
-      return res.status(500).send(`Internal Server Error: ${error}`);
+    } else {
+      return res.status(400).send("Error getting user");
     }
-  });
-  
-  // DELETE a single user from the database
-  router.delete("/:userId", [auth, admin], async (req, res) => {
-    try {
-      const user = await User.findByIdAndDelete(req.params.userId);
-      if (!user)
-        return res
-          .status(400)
-          .send(`User with id ${req.params.userId} does not exist!`);
-      return res.send(user);
-    } catch (error) {
-      return res.status(500).send(`Internal Server Error: ${error}`);
-    }
-  });
-  
-  // Get property of user
-  router.get("/:userId", async (req, res) => {
-    try {
-      const users = await User.findById(req.params.userId);
-      if (users) {
-        return res.send(users);
-      } else {
-        return res.status(400).send("Error getting user");
-      }
-    } catch (error) {
-      return res.status(500).send(`Internal Server Error: ${error}`);
-    }
-  });
-  
-  // Update property of user
-  router.put("/update/:userId", async (req, res) => {
+  } catch (error) {
+    return res.status(500).send(`Internal Server Error: ${error}`);
+  }
+});
+
+// Update property of user
+router.put("/update/:userId", [auth], async (req, res) => {
+  try {
+    const user = await User.findByIdAndUpdate(
+      { _id: req.params.userId },
+      req.body,
+      { new: true }
+    );
+    const token = user.generateAuthToken();
+    return res.status(200).send(token);
+  } catch (error) {
+    return res.status(500).send(`Internal Server Error: ${error}`);
+  }
+});
+router.put(
+  "/updateImage/:userId",
+  [auth],
+  fileUpload.single("image"),
+  async (req, res) => {
     try {
       const user = await User.findByIdAndUpdate(
         { _id: req.params.userId },
-        req.body,
+        { image: req.file.filename },
         { new: true }
       );
       const token = user.generateAuthToken();
@@ -129,19 +145,7 @@ router.get("/", async (req, res) => {
     } catch (error) {
       return res.status(500).send(`Internal Server Error: ${error}`);
     }
-  });
-  router.put("/updateImage/:userId", fileUpload.single('image'),async (req, res) => {
-    try {
-      const user = await User.findByIdAndUpdate(
-        { _id: req.params.userId },
-        {image: req.file.filename},
-        { new: true }
-      );
-      const token = user.generateAuthToken();
-      return res.status(200).send(token);
-    } catch (error) {
-      return res.status(500).send(`Internal Server Error: ${error}`);
-    }
-  });
-  
-  module.exports = router;
+  }
+);
+
+module.exports = router;

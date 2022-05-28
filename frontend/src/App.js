@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState} from "react";
 import { Routes, Route } from "react-router-dom";
 
 import HomePage from "./pages/HomePage/HomePage";
@@ -18,7 +18,8 @@ import RequestAccess from "./pages/RequestAccess/RequestAccess";
 
 function App() {
   const [showMenu, setShowMenu] = useState(false);
-  const [reviews, setReviews] = useState([]);
+  const [reviews, setReviews] = useState();
+
 
   return (
     <div className='App '>
@@ -41,7 +42,7 @@ function App() {
             path='/reviews'
             element={<ReviewsPage reviews={reviews} setReviews={setReviews} />}
           />
-          <Route path='/addReviews' element={<AddReviewsPage />} />
+          <Route path='/addReviews' element={<AddReviewsPage setReviews={setReviews} reviews={reviews} />} />
           <Route path='/messages' element={<MessagesPage />} />
           <Route path='/sendMessage' element={<SendMessagePage />} />
           <Route path='/requestAccess' element={<RequestAccess />} />

@@ -1,12 +1,12 @@
-import React, { useContext } from 'react';
+import React from 'react';
 
 import ReviewsForm from '../../components/Reviews/ReviewsForm';
-import AuthContext from '../../context/AuthContext';
 
-const AddReviewsPage = () => {
-    const {user} = useContext(AuthContext)
+
+const AddReviewsPage = ({reviews, setReviews}) => {
+
     return ( 
-        <ReviewsForm userName={user.userName}/>
+        <ReviewsForm reviews={reviews} setReviews={setReviews}/>
      );
 }
  

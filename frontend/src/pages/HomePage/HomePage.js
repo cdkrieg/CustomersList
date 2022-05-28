@@ -7,7 +7,7 @@ import ReviewsList from "../../components/Reviews/ReviewsList";
 import "./HomePage.css";
 
 const HomePage = ({ reviews, setReviews }) => {
-  const { user } = useContext(AuthContext);
+  const { user, getAllReviews } = useContext(AuthContext);
   const [filtered, setFiltered] = useState(false);
   const [filter, setFilter] = useState(null);
   const [dropdownValue, setDropdownValue] = useState("Select Filter");
@@ -39,14 +39,13 @@ const HomePage = ({ reviews, setReviews }) => {
       try {
         let temp = await getCategoryList();
         setCategoryList(temp.category);
+        let temp2 = await getAllReviews()
+        setReviews(temp2)
       } catch (error) {
         console.log("Error with setCategoryList in useEffect");
       }
     })();
   }, []);
-  useEffect(() => {
- console.log(dropdownValue)
-  }, [dropdownValue])
   
 
   return (
@@ -80,7 +79,7 @@ const HomePage = ({ reviews, setReviews }) => {
           </Dropdown.Menu>
         </Dropdown>
       )}
-      <ReviewsList
+      {reviews && <ReviewsList
         reviews={reviews}
         setReviews={setReviews}
         filtered={filtered}
@@ -88,7 +87,7 @@ const HomePage = ({ reviews, setReviews }) => {
         categoryList={categoryList}
         filter={filter}
         myReview={false}
-      />
+      />}
     </div>
   );
 };

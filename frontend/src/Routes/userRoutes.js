@@ -1,17 +1,18 @@
 import axios from "axios";
-import jwtDecode from "jwt-decode";
 
 const BASE_URL = "http://localhost:3010/api/users";
+const token = JSON.parse(localStorage.getItem("token")) || "";
+const header = { headers: { "x-auth-token": token } };
 
 const editUser = async (userId, userData) => {
   try {
     let response = await axios.put(
       `${BASE_URL}/update/${userId}`,
-      { userData },
-      { new: true }
+      userData,
+      header
     );
     if (response.status === 200) {
-      return response;
+      return response.data;
     }
   } catch (error) {
     console.log(error);
@@ -54,17 +55,20 @@ const registerUser = async (registerData) => {
 
     //   if (response1.status === 200) return response1;
     // }
-    if(response.status === 200) return response
+    if (response.status === 200) return response.data;
   } catch (error) {
     console.log(error);
   }
 };
 
 const uploadImage = async (userId, imageData) => {
+  console.log(token);
+  console.log(JSON.stringify(header));
   try {
     let response = await axios.put(
       `${BASE_URL}/updateImage/${userId}`,
-      imageData
+      imageData,
+      header
     );
     if (response.status === 200) {
       return response.data;

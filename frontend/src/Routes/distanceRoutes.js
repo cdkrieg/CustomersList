@@ -20,6 +20,7 @@ const getGeocode = async (address) => {
       },
     });
     if (response) 
+    console.log(response)
     return [response.data.result.addressMatches[0].coordinates.x,response.data.result.addressMatches[0].coordinates.y];
   } catch (error) {
       console.log(`Error getting coordinates from Geocoder: ${error}`)

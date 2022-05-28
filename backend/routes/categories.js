@@ -31,7 +31,7 @@ router.get("/", async (req, res) => {
 });
 // PUT add a category to categories
 // http://localhost:3010/api/add/:postId
-router.put("/add/:categoryId", async (req, res) => {
+router.put("/add/:categoryId", [auth, admin], async (req, res) => {
   try {
     const categories = await Category.updateOne(
       { _id: req.params.categoryId },
@@ -46,7 +46,7 @@ router.put("/add/:categoryId", async (req, res) => {
 });
 // PUT remove a category from categories
 // http://localhost:3010/api/remove/:postId
-router.put("/remove/:categoryId", async (req, res) => {
+router.put("/remove/:categoryId", [auth, admin] ,async (req, res) => {
   try {
     const categories = await Category.updateOne(
       { _id: req.params.categoryId },
@@ -59,7 +59,7 @@ router.put("/remove/:categoryId", async (req, res) => {
     return res.status(500).send(`Internal Server Error: ${error}`);
   }
 });
-router.delete("/:categoryid") , [admin], async (req, res) => {
+router.delete("/:categoryid") , [auth, admin], async (req, res) => {
   try {
     const categories = await Category.findByIdAndDelete({_id: req.params.categoryId})
     if (!categories) return res.status(400).send(`Category not found`)

@@ -1,10 +1,12 @@
 import axios from "axios";
 
 const baseUrl = "http://localhost:3010/api/reviews";
+const token = JSON.parse(localStorage.getItem('token'))
+const header = {headers: {"x-auth-token": token}}
 
 const deleteReview = async (reviewId) => {
   try {
-    let response = await axios.delete(`${baseUrl}/${reviewId}`);
+    let response = await axios.delete(`${baseUrl}/${reviewId}`, header);
     if (response) {
       return response.data;
     }
@@ -47,19 +49,19 @@ const getUserReviews = async (userName) => {
 
 const postReview = async (review) => {
   try {
-    let response = await axios.post(baseUrl, review);
+    let response = await axios.post(baseUrl, review, header);
     if (response) {
-      let response1 = await axios.put(`${baseUrl}/${response.data._id}`, {$addToSet:{$each:[response.data.coordinates[0],response.data.coordinates[1]]}})
-      return response1.data;
+     
+      return response.data;
     }
   } catch (error) {
     console.log(`Error posting the review: ${error}`);
   }
 };
 
-const updateReview = async (reviewId) => {
+const updateReview = async (reviewId, update) => {
   try {
-    let response = await axios.put(`${baseUrl}/${reviewId}`);
+    let response = await axios.put(`${baseUrl}/${reviewId}`, update, header);
     if (response) {
       return response.data;
     }
@@ -71,7 +73,7 @@ const uploadImage = async (reviewId, imageData) => {
   try {
     let response = await axios.put(
       `${baseUrl}/updateImage/${reviewId}`,
-      imageData
+      imageData, header
     );
     if (response) {
       return response.data;

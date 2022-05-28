@@ -37,7 +37,7 @@ const Sidebar = ({ showMenu, setShowMenu }) => {
 
       <CDBSidebarMenuItem className='sidebarMenu'>
         <Link to='/addReviews' onClick={() => setShowMenu(!showMenu)}>
-          Add Contractor/Review
+          Add Review
         </Link>
       </CDBSidebarMenuItem>
       <hr />

@@ -8,7 +8,7 @@ const fileUpload = require("../middleware/file-upload");
 //## POST METHODS
 // Post a review
 // http://localhost:3010/api/reviews
-router.post("/", async (req, res) => {
+router.post("/", [auth], async (req, res) => {
   try {
     const { error } = validateReview(req.body);
     if (error) return res.status(400).send(error);
@@ -60,7 +60,7 @@ router.get("/", async (req, res) => {
 //## PUT METHODS
 // PUT an existing review
 // http://localhost:3010/api/reviews/:reviewId
-router.put("/:reviewId", [auth, admin], async (req, res) => {
+router.put("/:reviewId", [auth], async (req, res) => {
   try {
     const review = await Review.UpdateOne(
       { _id: req.params.reviewId },
@@ -75,7 +75,7 @@ router.put("/:reviewId", [auth, admin], async (req, res) => {
 //Add an image to a review
 // http://localhost:3010/api/reviews/:reviewId
 router.put(
-  "/updateImage/:reviewId",
+  "/updateImage/:reviewId",[auth],
   fileUpload.single("image"),
   async (req, res) => {
     try {

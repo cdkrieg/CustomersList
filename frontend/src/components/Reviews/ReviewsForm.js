@@ -10,9 +10,10 @@ import useCustomForm from "../../hooks/UseCustomForm";
 import AuthContext from "../../context/AuthContext";
 import AxiosAPI from "../../Routes/distanceRoutes";
 
-const ReviewsForm = ({ username, setShow }) => {
-  const { user } = useContext(AuthContext);
+const ReviewsForm = ({ reviews, setReviews }) => {
+  const { user,getAllReviews } = useContext(AuthContext);
   const navigate = useNavigate();
+  const [update, setUpdate] = useState(false)
   const [date, setDate] = useState(new Date());
   const [showNotListed, setShowNotListed] = useState(false);
   const defaultValues = {
@@ -29,6 +30,7 @@ const ReviewsForm = ({ username, setShow }) => {
     tempCategory2: "",
     reviewCity: user.city,
     reviewState: user.state,
+    reviewStreetAddress: user.streetAddressLine1,
     coordinates: []
   };
   const [formData, handleInputChange, handleSubmit] = useCustomForm(
@@ -40,6 +42,13 @@ const ReviewsForm = ({ username, setShow }) => {
     if (formData.tempCategory === "Other") setShowNotListed(true);
     else setShowNotListed(false);
   }, [formData.tempCategory]);
+
+  useEffect(() => {
+    let temp = getReviews
+    if(temp)
+    setReviews(temp)
+  }, [update])
+  
 
   async function submit(e) {
     e.preventDefault();
@@ -53,10 +62,18 @@ const ReviewsForm = ({ username, setShow }) => {
       delete formData.tempCategory2;
     }
     formData.dateOfService = date;
-    console.log("submitting data");
-    await getCoordinates(`${formData.streetAddressLine1} ${formData.city} ${formData.state}`)
+    await getCoordinates(`${formData.reviewStreetAddress}, ${formData.reviewCity}, ${formData.reviewState}`)
     handleSubmit(e);
+    setUpdate(true)
     navigate('/')
+  }
+  const getReviews = async () => {
+    try {
+      let result = await getAllReviews
+      if (result) return result
+    } catch (error) {
+      
+    }
   }
 
   const getCoordinates = async (address) => {

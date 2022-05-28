@@ -1,15 +1,13 @@
-import React, { useContext, useState } from "react";
+import React from "react";
 import { useNavigate } from "react-router";
 import { MdAddCircle } from "react-icons/md";
-import AuthContext from "../../context/AuthContext";
+
 import AxiosReviews from "../../Routes/reviewsRoutes";
 import ReviewsList from "../../components/Reviews/ReviewsList";
 import "./ReviewsPage.css";
 
 const ReviewsPage = ({ reviews, setReviews }) => {
   const navigate = useNavigate();
-  const { user } = useContext(AuthContext);
-
   const uploadImage = async (reviewId, imageData) => {
     try {
       let result = await AxiosReviews.uploadImage(reviewId, imageData);
@@ -34,7 +32,6 @@ const ReviewsPage = ({ reviews, setReviews }) => {
         setReviews={setReviews}
         filtered={true}
         uploadImage={uploadImage}
-        myReview={true}
       />
     </div>
   );

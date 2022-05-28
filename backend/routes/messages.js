@@ -6,7 +6,7 @@ const router = express.Router();
 
 // Post a message
 // http://localhost:3007/api/messages
-router.post("/", async (req, res) => {
+router.post("/", [auth], async (req, res) => {
   try {
     const { error } = validateMessage(req.body);
     if (error) return res.status(400).send(error);
@@ -44,7 +44,7 @@ router.get("/:userId", async (req, res) => {
 });
 // PUT an existing message
 // http://localhost:3007/api/messages/:messageId
-router.put("/:messageId", async (req, res) => {
+router.put("/:messageId", [auth], async (req, res) => {
   try {
     const message = await Message.findByIdAndUpdate(
       { _id: req.params.messageId },

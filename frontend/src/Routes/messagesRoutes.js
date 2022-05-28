@@ -1,10 +1,12 @@
 import axios from "axios";
 
 const baseUrl = "http://localhost:3010/api/messages";
+const token = JSON.parse(localStorage.getItem('token'))
+const header = {headers: {"x-auth-token": token}}
 
 const deleteMessage = async (messageId) => {
   try {
-    let response = await axios.delete(`${baseUrl}/${messageId}`);
+    let response = await axios.delete(`${baseUrl}/${messageId}`, header);
     if (response) {
       return response.data;
     }
@@ -38,7 +40,7 @@ const getUserMessages = async (userId) => {
 
 const postMessage = async (message) => {
   try {
-    let response = await axios.post(baseUrl, message);
+    let response = await axios.post(baseUrl, message, header);
     if (response) {
       console.log(response.data)
       return response.data;
@@ -50,7 +52,7 @@ const postMessage = async (message) => {
 
 const updateMessage = async (messageId, message) => {
   try {
-    let response = await axios.put(`${baseUrl}/${messageId}`, message);
+    let response = await axios.put(`${baseUrl}/${messageId}`, message, header);
 
   } catch (error) {
     console.log(`Error posting the message: ${error}`);

@@ -2,6 +2,7 @@ import { createContext, useState } from "react";
 import jwtDecode from "jwt-decode";
 import { useNavigate } from "react-router-dom";
 import AxiosUser from "../Routes/userRoutes";
+import AxiosReviews from "../Routes/reviewsRoutes";
 
 const AuthContext = createContext();
 
@@ -47,7 +48,7 @@ export const AuthProvider = ({ children }) => {
     try {
       let result = await AxiosUser.registerUser(registerData);
       if (result) {
-        let token = result.headers["x-auth-token"];
+        let token = result;
         localStorage.setItem("token", JSON.stringify(token));
         setUser(jwtDecode(token));
         navigate("/");
@@ -86,6 +87,16 @@ export const AuthProvider = ({ children }) => {
       setIsServerError(true);
     }
   }
+  const getAllReviews = async() =>{
+    try {
+      let tempReviews = AxiosReviews.getReviews();
+      if (tempReviews) {
+        return tempReviews;
+      }
+    } catch (error) {
+      console.log(`Error getting all reviews on Reviews Page: ${error}`);
+    }
+  }
 
   const contextData = {
     user,
@@ -97,7 +108,8 @@ export const AuthProvider = ({ children }) => {
     setFile,
     webMaster,
     editUser,
-    uploadImage
+    uploadImage,
+    getAllReviews
   };
 
   return (
