@@ -26,7 +26,7 @@ const MessagesPage = () => {
     try {
       let messageList = await AxiosMessages.getUserMessages(userId);
       if (messageList) {
-        return messageList;
+        return messageList
       } else return "No Messages";
     } catch (error) {
       console.log(`Error getting messages for user`);

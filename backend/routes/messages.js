@@ -33,7 +33,7 @@ router.get("/", async (req, res) => {
 // http://localhost:3007/api/messages/:userId
 router.get("/:userId", async (req, res) => {
   try {
-    const messages = await Message.find({ userId: req.params.userId });
+    const messages = await Message.find({$or: [{receiverId: req.params.userId},{senderId: req.params.userId}]});
     if (!messages) return res.status(400).send(`No messages to show!`);
     return res.send(messages);
   } catch (error) {

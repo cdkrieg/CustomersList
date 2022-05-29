@@ -30,6 +30,7 @@ const getUserMessages = async (userId) => {
   try {
     let response = await axios.get(`${baseUrl}/${userId}`);
     if (response) {
+      console.log(response)
       return response.data;
     }
   } catch (error) {

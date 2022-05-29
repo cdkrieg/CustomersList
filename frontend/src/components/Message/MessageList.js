@@ -3,7 +3,6 @@ import { Table, Form } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import "../../utils/CommonMethods";
 import CommonMethods from "../../utils/CommonMethods";
-import AxiosMessages from "../../Routes/messagesRoutes";
 
 const MessageList = ({
   messages,
@@ -26,23 +25,19 @@ const MessageList = ({
   };
 
   useEffect(() => {
+    if(messages.length > 0)
     setChecked(
       messages.map((message) => {
         return message.flagged;
       })
     );
   }, [messages]);
-  useEffect(() => {
-    messages.map((message) => {
-      if (message.receiverUserName === user.userName)
-        updateMessage(message._id, { read: true });
-    });
-  }, []);
+ 
 
   return (
     <div>
       <p></p>
-      {messages && checked && (
+      {messages && (
         <Table>
           {messages.map((message, index) => {
             return (
@@ -98,6 +93,7 @@ const MessageList = ({
           })}
         </Table>
       )}
+      {messages.length === 0 && <p>No Messages to Show!</p>}
     </div>
   );
 };
