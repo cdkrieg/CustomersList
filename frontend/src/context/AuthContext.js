@@ -19,8 +19,9 @@ export const AuthProvider = ({ children }) => {
     try {
       let result = await AxiosUser.loginUser(loginData);
       if (result) {
-        localStorage.setItem("token", JSON.stringify(result));
-        setUser(jwtDecode(result));
+        let token = result.headers["x-auth-token"];
+        localStorage.setItem("token", JSON.stringify(token));
+        setUser(result.data);
         setIsServerError(false);
         navigate("/");
       } else {
@@ -48,9 +49,9 @@ export const AuthProvider = ({ children }) => {
     try {
       let result = await AxiosUser.registerUser(registerData);
       if (result) {
-        let token = result;
+        let token = result.headers["x-auth-token"];
         localStorage.setItem("token", JSON.stringify(token));
-        setUser(jwtDecode(token));
+        setUser(result.data);
         navigate("/");
       } else {
         navigate("/register");
@@ -64,8 +65,9 @@ export const AuthProvider = ({ children }) => {
     try {
       let result = await AxiosUser.editUser(user._id, userData);
       if (result) {
-        localStorage.setItem("token", JSON.stringify(result));
-        setUser(jwtDecode(result));
+        let token = result.headers["x-auth-token"];
+        localStorage.setItem("token", JSON.stringify(token));
+        setUser(result.data);
         setIsServerError(false);
       }
     } catch (error) {
@@ -78,8 +80,9 @@ export const AuthProvider = ({ children }) => {
     try {
     let result = await AxiosUser.uploadImage(id, imageData);
       if (result) {
-        localStorage.setItem("token", JSON.stringify(result));
-        setUser(jwtDecode(result));
+        let token = result.headers["x-auth-token"];
+        localStorage.setItem("token", JSON.stringify(token));
+        setUser(result.data);
         setIsServerError(false);
       }
     } catch (error) {

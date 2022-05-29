@@ -38,6 +38,7 @@ router.post("/register", async (req, res) => {
     return res
       .header("x-auth-token", token)
       .header("access-control-expose-headers", "x-auth-token")
+      .status(200)
       .send({
         _id: user._id,
         userName: user.userName,
@@ -49,6 +50,7 @@ router.post("/register", async (req, res) => {
         zipCode: user.zipCode,
         admin: user.admin,
         coordinates: user.coordinates,
+        image: user.image,
       });
   } catch (err) {
     return res.status(500).send(`Internal Server Error: ${err}`);
@@ -72,7 +74,23 @@ router.post("/login", async (req, res) => {
       return res.status(400).send("Invalid email or password.");
 
     const token = user.generateAuthToken();
-    return res.send(token);
+    return res
+      .header("x-auth-token", token)
+      .header("access-control-expose-headers", "x-auth-token")
+      .status(200)
+      .send({
+        _id: user._id,
+        userName: user.userName,
+        email: user.email,
+        streetAddressLine1: user.streetAddressLine1,
+        streetAddressLine2: user.streetAddressLine2,
+        city: user.city,
+        state: user.state,
+        zipCode: user.zipCode,
+        admin: user.admin,
+        coordinates: user.coordinates,
+        image: user.image,
+      });
   } catch (err) {
     return res.status(500).send(`Internal Server Error: ${err}`);
   }
@@ -95,6 +113,7 @@ router.delete("/:userId", [auth, admin], async (req, res) => {
       return res
         .status(400)
         .send(`User with id ${req.params.userId} does not exist!`);
+        
     return res.send(user);
   } catch (error) {
     return res.status(500).send(`Internal Server Error: ${error}`);
@@ -124,7 +143,23 @@ router.put("/update/:userId", [auth], async (req, res) => {
       { new: true }
     );
     const token = user.generateAuthToken();
-    return res.status(200).send(token);
+    return res
+      .header("x-auth-token", token)
+      .header("access-control-expose-headers", "x-auth-token")
+      .status(200)
+      .send({
+        _id: user._id,
+        userName: user.userName,
+        email: user.email,
+        streetAddressLine1: user.streetAddressLine1,
+        streetAddressLine2: user.streetAddressLine2,
+        city: user.city,
+        state: user.state,
+        zipCode: user.zipCode,
+        admin: user.admin,
+        coordinates: user.coordinates,
+        image: user.image,
+      });
   } catch (error) {
     return res.status(500).send(`Internal Server Error: ${error}`);
   }
@@ -141,7 +176,23 @@ router.put(
         { new: true }
       );
       const token = user.generateAuthToken();
-      return res.status(200).send(token);
+      return res
+      .header("x-auth-token", token)
+      .header("access-control-expose-headers", "x-auth-token")
+      .status(200)
+      .send({
+        _id: user._id,
+        userName: user.userName,
+        email: user.email,
+        streetAddressLine1: user.streetAddressLine1,
+        streetAddressLine2: user.streetAddressLine2,
+        city: user.city,
+        state: user.state,
+        zipCode: user.zipCode,
+        admin: user.admin,
+        coordinates: user.coordinates,
+        image: user.image,
+      });
     } catch (error) {
       return res.status(500).send(`Internal Server Error: ${error}`);
     }

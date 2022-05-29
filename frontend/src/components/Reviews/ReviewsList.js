@@ -24,6 +24,20 @@ const ReviewsList = ({
   const [show, setShow] = useState(false);
   const [selectedReview, setSelectedReview] = useState({});
   const title = "Review";
+  const distance = (review)=> {
+    let temp = CommonMethods.haversineDistance(
+      [
+        parseFloat(user.coordinates[1]),
+        parseFloat(user.coordinates[0]),
+      ],
+      [
+        parseFloat(review.coordinates[1]),
+        parseFloat(review.coordinates[0]),
+      ],
+      true
+    )
+    return temp
+  }
 
   useEffect(() => {
     (async () => {
@@ -106,20 +120,11 @@ const ReviewsList = ({
       {!show && Array.isArray(reviewsFiltered) && (
         <Table>
           {reviewsFiltered.map((review, index) => {
-            if (
-              CommonMethods.haversineDistance(
-                [
-                  parseFloat(user.coordinates[0]),
-                  parseFloat(user.coordinates[1]),
-                ],
-                [
-                  parseFloat(review.coordinates[0]),
-                  parseFloat(review.coordinates[1]),
-                ],
-                true
-              ) <= 50 ||
-              filtered
-            ) {
+            
+            if(distance(review) <= 50 || filter){
+
+            
+
               return (
                 <tbody key={index}>
                   <tr>

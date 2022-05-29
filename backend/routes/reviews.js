@@ -25,7 +25,6 @@ router.post("/", [auth], async (req, res) => {
 // http://localhost:3010/api/reviews
 router.get("/", async (req, res) => {
   try {
-    // console.log(req.review);
     const reviews = await Review.find();
     if (!reviews) return res.status(400).send(`No reviews to show!`);
     return res.send(reviews);
@@ -37,7 +36,6 @@ router.get("/", async (req, res) => {
 // http://localhost:3010/api/reviews/:userId
 router.get("/:userName", async (req, res) => {
   try {
-    // console.log(req.review);
     const reviews = await Review.find({ reviewer: req.params.userName });
     if (!reviews) return res.status(400).send(`No reviews to show!`);
     return res.send(reviews);
@@ -48,7 +46,6 @@ router.get("/:userName", async (req, res) => {
 
 router.get("/", async (req, res) => {
   try {
-    // console.log(req.review);
     const reviews = await Review.findById(req.body.reviewId);
     if (!reviews) return res.status(400).send(`No reviews to show!`);
     return res.send(reviews);
