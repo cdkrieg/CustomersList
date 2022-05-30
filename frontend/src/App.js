@@ -1,4 +1,4 @@
-import React, { useState} from "react";
+import React, { useState, useEffect} from "react";
 import { Routes, Route } from "react-router-dom";
 
 import HomePage from "./pages/HomePage/HomePage";
@@ -15,11 +15,17 @@ import MessagesPage from "./pages/MessagesPage/MessagesPage";
 import SendMessagePage from "./pages/SendMessagePage/SendMessagePage";
 import "./App.css";
 import RequestAccess from "./pages/RequestAccess/RequestAccess";
+import EditReviewPage from "./pages/EditReviewPage/EditReviewPage";
 
 function App() {
   const [showMenu, setShowMenu] = useState(false);
   const [reviews, setReviews] = useState();
+  const [reviewEdit, setReviewEdit] = useState()
 
+  useEffect(() => {
+
+  }, [reviewEdit])
+  
 
   return (
     <div className='App '>
@@ -40,12 +46,13 @@ function App() {
           <Route path='/profile' element={<ProfilePage />} />
           <Route
             path='/reviews'
-            element={<ReviewsPage reviews={reviews} setReviews={setReviews} />}
+            element={<ReviewsPage reviews={reviews} setReviews={setReviews} setReviewEdit={setReviewEdit}/>}
           />
           <Route path='/addReviews' element={<AddReviewsPage setReviews={setReviews} reviews={reviews} />} />
           <Route path='/messages' element={<MessagesPage />} />
           <Route path='/sendMessage' element={<SendMessagePage />} />
           <Route path='/requestAccess' element={<RequestAccess />} />
+          <Route path='/editReview' element={<EditReviewPage reviewEdit={reviewEdit} />}  />
         </Routes>
       </div>
       <Footer className='footer' />

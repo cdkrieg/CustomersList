@@ -2,7 +2,7 @@
 import React, { useState, useEffect, useContext } from "react";
 import { Table, Button } from "react-bootstrap";
 import ReactStars from "react-rating-stars-component";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 import AxiosReviews from "../../Routes/reviewsRoutes";
 import AuthContext from "../../context/AuthContext";
@@ -16,6 +16,7 @@ const ReviewsList = ({
   filtered,
   uploadImage,
   filter,
+  setReviewEdit
 }) => {
   const [update, setUpdate] = useState(false);
   const { user } = useContext(AuthContext);
@@ -24,6 +25,7 @@ const ReviewsList = ({
   const [show, setShow] = useState(false);
   const [selectedReview, setSelectedReview] = useState({});
   const title = "Review";
+  const navigate = useNavigate()
   const distance = (review)=> {
     let temp = CommonMethods.haversineDistance(
       [
@@ -191,6 +193,12 @@ const ReviewsList = ({
                           }}>
                           Change/Upload Photo
                         </Button>
+                      </td>
+                      <td>
+                        <Button  onClick={()=>{
+                          setReviewEdit(review)
+                          navigate('/editReview')
+                        }}>Edit Review</Button>
                       </td>
                     </tr>
                   )}

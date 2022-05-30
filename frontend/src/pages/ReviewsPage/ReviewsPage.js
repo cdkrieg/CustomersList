@@ -6,7 +6,7 @@ import AxiosReviews from "../../Routes/reviewsRoutes";
 import ReviewsList from "../../components/Reviews/ReviewsList";
 import "./ReviewsPage.css";
 
-const ReviewsPage = ({ reviews, setReviews }) => {
+const ReviewsPage = ({ reviews, setReviews, setReviewEdit }) => {
   const navigate = useNavigate();
   const uploadImage = async (reviewId, imageData) => {
     try {
@@ -32,6 +32,7 @@ const ReviewsPage = ({ reviews, setReviews }) => {
         setReviews={setReviews}
         filtered={true}
         uploadImage={uploadImage}
+        setReviewEdit={setReviewEdit}
       />
     </div>
   );
