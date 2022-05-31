@@ -32,7 +32,9 @@ const userSchema = mongoose.Schema({
   image: { type: String, default: "" },
   admin: { type: Boolean, default: false },
   dateAdded: {type: Date, default: Date.now()},
-  coordinates: [{type:String}]
+  coordinates: [{type:String}],
+  isContractor: {type: Boolean, default: false},
+  phone: {type: String, minLength: 10, maxLength: 11, default: ""},
 });
 
 userSchema.methods.generateAuthToken = function () {
@@ -49,7 +51,9 @@ userSchema.methods.generateAuthToken = function () {
       zipCode: this.zipCode,
       admin: this.admin,
       image: this.image,
-      coordinates: this.coordinates
+      coordinates: this.coordinates,
+      isContractor: this.isContractor,
+      phone: this.phone,
     },
     process.env.JWT_SECRET
   );
@@ -67,6 +71,8 @@ const validateUser = (user) => {
     zipCode: Joi.string().min(5).max(10).required(),
     admin: Joi.boolean().default(false),
     coordinates: Joi.array().items(Joi.string()),
+    isContractor: Joi.boolean().default(false),
+    phone: Joi.string().min(10).max(11).default(""),
   });
   return schema.validate(user);
 };
