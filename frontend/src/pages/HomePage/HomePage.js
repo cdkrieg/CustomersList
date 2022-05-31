@@ -6,12 +6,11 @@ import AxiosCategories from "../../Routes/categoriesRoutes";
 import ReviewsList from "../../components/Reviews/ReviewsList";
 import "./HomePage.css";
 
-const HomePage = ({ reviews, setReviews }) => {
+const HomePage = ({ reviews, setReviews, categoryList, setCategoryList, setReviewEdit, reviewEdit }) => {
   const { user, getAllReviews } = useContext(AuthContext);
   const [filtered, setFiltered] = useState(false);
   const [filter, setFilter] = useState(null);
   const [dropdownValue, setDropdownValue] = useState("Select Filter");
-  const [categoryList, setCategoryList] = useState();
 
   const uploadImage = async (reviewId, imageData) => {
     try {
@@ -82,6 +81,8 @@ const HomePage = ({ reviews, setReviews }) => {
       {reviews && <ReviewsList
         reviews={reviews}
         setReviews={setReviews}
+        reviewEdit={reviewEdit}
+        setReviewEdit={setReviewEdit}
         filtered={filtered}
         uploadImage={uploadImage}
         categoryList={categoryList}

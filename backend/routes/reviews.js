@@ -59,13 +59,14 @@ router.get("/", async (req, res) => {
 // http://localhost:3010/api/reviews/:reviewId
 router.put("/:reviewId", [auth], async (req, res) => {
   try {
-    const review = await Review.UpdateOne(
+    const review = await Review.findOneAndUpdate(
       { _id: req.params.reviewId },
-      req.body
+      req.body, {new: true}
     );
     if (!review) return res.status(400).send(`No review to show!`);
     return res.send(review);
   } catch (error) {
+    console.log(error)
     return res.status(500).send(`Internal Server Error: ${error}`);
   }
 });

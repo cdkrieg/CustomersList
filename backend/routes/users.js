@@ -31,6 +31,8 @@ router.post("/register", async (req, res) => {
       state: req.body.state,
       zipCode: req.body.zipCode,
       coordinates: req.body.coordinates,
+      image: "",
+      name: user.name,
     });
 
     await user.save();

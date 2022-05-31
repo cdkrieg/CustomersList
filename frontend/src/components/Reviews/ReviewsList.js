@@ -16,7 +16,8 @@ const ReviewsList = ({
   filtered,
   uploadImage,
   filter,
-  setReviewEdit
+  setReviewEdit,
+  reviewEdit
 }) => {
   const [update, setUpdate] = useState(false);
   const { user } = useContext(AuthContext);
@@ -154,7 +155,8 @@ const ReviewsList = ({
                   </tr>
                   <tr className='head'>
                     <td>Category: {review.categoryOfService}</td>
-                    <td colSpan={2}>
+                    <td>Contractor Phone: {CommonMethods.phoneFormat(review.contractorPhone) }</td>
+                    <td>
                       Location: {`${review.reviewCity}, ${review.reviewState}`}
                     </td>
                   </tr>

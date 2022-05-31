@@ -21,6 +21,7 @@ function App() {
   const [showMenu, setShowMenu] = useState(false);
   const [reviews, setReviews] = useState();
   const [reviewEdit, setReviewEdit] = useState()
+  const [categoryList, setCategoryList] = useState()
 
   useEffect(() => {
 
@@ -37,7 +38,7 @@ function App() {
             path='/'
             element={
               <PrivateRoute>
-                <HomePage reviews={reviews} setReviews={setReviews} />
+                <HomePage reviews={reviews} setReviews={setReviews} categoryList={categoryList} setReviewEdit={setReviewEdit} setCategoryList={setCategoryList} />
               </PrivateRoute>
             }
           />
@@ -46,13 +47,13 @@ function App() {
           <Route path='/profile' element={<ProfilePage />} />
           <Route
             path='/reviews'
-            element={<ReviewsPage reviews={reviews} setReviews={setReviews} setReviewEdit={setReviewEdit}/>}
+            element={<ReviewsPage reviews={reviews} setReviews={setReviews} setReviewEdit={setReviewEdit} reviewEdit={reviewEdit} categoryList={categoryList} setCategoryList={setCategoryList} />}
           />
-          <Route path='/addReviews' element={<AddReviewsPage setReviews={setReviews} reviews={reviews} />} />
+          <Route path='/addReviews' element={<AddReviewsPage setReviews={setReviews} reviews={reviews} reviewEdit={reviewEdit} setReviewEdit={setReviewEdit} categoryList={categoryList} setCategoryList={setCategoryList} />} />
           <Route path='/messages' element={<MessagesPage />} />
           <Route path='/sendMessage' element={<SendMessagePage />} />
           <Route path='/requestAccess' element={<RequestAccess />} />
-          <Route path='/editReview' element={<EditReviewPage reviewEdit={reviewEdit} />}  />
+          <Route path='/editReview' element={<EditReviewPage reviewEdit={reviewEdit} setReviewEdit={setReviewEdit} categoryList={categoryList} setCategoryList={setCategoryList} />}  />
         </Routes>
       </div>
       <Footer className='footer' />

@@ -13,7 +13,7 @@ const EditReviewForm = ({ reviewEdit, categoryList }) => {
   const navigate = useNavigate();
   const [date, setDate] = useState(Date.parse(reviewEdit.dateOfService));
   const [showNotListed, setShowNotListed] = useState(false);
-  
+
   const defaultValues = {
     contractorName: reviewEdit.contractorName,
     contractorPhone: reviewEdit.contractorPhone,
@@ -32,24 +32,16 @@ const EditReviewForm = ({ reviewEdit, categoryList }) => {
     coordinates: reviewEdit.coordinates,
   };
   const [formData, handleInputChange, handleSubmit] = useCustomForm(
-    defaultValues,
-    AxiosReviews.postReview
+    defaultValues
   );
 
   useEffect(() => {
     if (formData.tempCategory === "Other") setShowNotListed(true);
     else setShowNotListed(false);
-
   }, [formData.tempCategory]);
 
-  useEffect(() => {
-    console.log(categoryList)
-  }, [categoryList])
-  
+  useEffect(() => {}, [categoryList]);
 
-  
-
-  
   async function submit(e) {
     e.preventDefault();
     if (formData.tempCategory === "Other") {
@@ -61,36 +53,33 @@ const EditReviewForm = ({ reviewEdit, categoryList }) => {
       delete formData.tempCategory;
       delete formData.tempCategory2;
     }
-    await getCoordinates(`${formData.reviewStreetAddress}, ${formData.reviewCity}, ${formData.reviewState}`)
-    handleSubmit(e);
-    navigate('/')
+    await getCoordinates(
+      `${formData.reviewStreetAddress}, ${formData.reviewCity}, ${formData.reviewState}`
+    );
+    AxiosReviews.updateReview(reviewEdit._id, formData)
+    navigate("/");
   }
 
   const getCoordinates = async (address) => {
     try {
-      let result = await AxiosAPI.getGeocode(address)
-      if (result)
-      formData.coordinates.push(`${result[0]}`)
-      formData.coordinates.push(`${result[1]}`)
+      let result = await AxiosAPI.getGeocode(address);
+      if (result) formData.coordinates.push(`${result[0]}`);
+      formData.coordinates.push(`${result[1]}`);
     } catch (error) {
-      console.log('Error getting coordinates')
+      console.log("Error getting coordinates");
     }
-  }
+  };
 
-
-  const selectOptions =  () => {categoryList.length > 0 && 
-          categoryList.map((category, index)=>{
-              if(category === formData.categoryOfService)
-              return (<option key={index} selected>{category}</option>)
-              else return (
-                  <option key={index}>{category}</option> 
-              )
-          })}
+  const selectOptions = () => {};
 
   return (
     <div>
-      <Form onSubmit={(event) => submit(event)} variant='info' onKeyUp={(event)=> {if(event.key === 'Enter')handleSubmit(event)}}>
-    
+      <Form
+        onSubmit={(event) => submit(event)}
+        variant='info'
+        onKeyUp={(event) => {
+          if (event.key === "Enter") handleSubmit(event);
+        }}>
         <Form.Control
           type='text'
           value={formData.contractorName}
@@ -110,7 +99,21 @@ const EditReviewForm = ({ reviewEdit, categoryList }) => {
           value={formData.tempCategory}
           variant='info'
           onChange={handleInputChange}>
-          {selectOptions()}
+          {categoryList.map((category, index) => {
+            if (category === reviewEdit.categoryOfService) {
+              return (
+                <option key={index} value={category} selected>
+                  {category}
+                </option>
+              );
+            } else {
+              return (
+                <option key={index} value={category}>
+                  {category}
+                </option>
+              );
+            }
+          })}
         </Form.Select>
         {showNotListed && (
           <Form.Control

@@ -42,6 +42,17 @@ function formatDate(date){
  return sentence;
  }
 
+const phoneFormat = (str) => {
+  let cleaned = ('' + str).replace(/\D/g, '');
+  let match = cleaned.match(/^(1|)?(\d{3})(\d{3})(\d{4})$/);
+  if (match) {
+    let intlCode = (match[1] ? '+1 ' : '')
+    return [intlCode, '(', match[2], ') ', match[3], '-', match[4]].join('')
+  }
+  
+  return null;
+}
 
-const CommonMethods = {formatDate, haversineDistance, titleCase}
+
+const CommonMethods = {formatDate, haversineDistance, titleCase, phoneFormat}
 export default CommonMethods
