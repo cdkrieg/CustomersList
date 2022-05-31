@@ -15,7 +15,7 @@ const EditProfile = () => {
   const [showPasswordAlert1, setShowPasswordAlert1] = useState(false);
   const [showPasswordAlert2, setShowPasswordAlert2] = useState(false);
   const [showStateAlert, setShowStateAlert] = useState(false);
-  const { user, editUser} = useContext(AuthContext);
+  const { user, editUser } = useContext(AuthContext);
   const defaultValues = {
     name: user.name,
     streetAddressLine1: user.streetAddressLine1,
@@ -39,7 +39,6 @@ const EditProfile = () => {
       }
     }
   }, [passwordConfirm]);
-  
 
   function passwordCheck(event) {
     event.preventDefault();
@@ -66,7 +65,12 @@ const EditProfile = () => {
 
   return (
     <div className='container-editProfile'>
-      <Form className='form' onSubmit={(event) => passwordCheck(event)} onKeyUp={(event)=> {if(event.key === 'Enter')handleSubmit(event)}}>
+      <Form
+        className='editForm'
+        onSubmit={(event) => passwordCheck(event)}
+        onKeyUp={(event) => {
+          if (event.key === "Enter") handleSubmit(event);
+        }}>
         <Form.Control
           name='name'
           value={formData.name}
@@ -83,7 +87,12 @@ const EditProfile = () => {
           value={formData.streetAddressLine2}
           onChange={handleInputChange}
         />
-
+        <Form.Control
+          name='city'
+          value={formData.city}
+          onChange={handleInputChange}
+          id='profileCity'
+        />
         <Form.Select
           name='state'
           value={formData.state}
@@ -101,18 +110,15 @@ const EditProfile = () => {
             </Alert>
           )}
         </Form.Select>
-        <Form.Control
-          name='city'
-          value={formData.city}
-          onChange={handleInputChange}
-          id='profileCity'
-        />
+
         <Form.Control
           name='zipCode'
           value={formData.zipCode}
           onChange={handleInputChange}
         />
+        <br/>
         <Form.Check
+          id="checkBox"
           type='checkbox'
           label='Check to change password'
           onChange={() => {
@@ -176,7 +182,12 @@ const EditProfile = () => {
           </Button>
         </div>
       </Form>
-      {user.image !== "" && <img src={`http://localhost:3010/uploads/images/${user.image}`} alt='Profile' />}
+      {user.image !== "" && (
+        <img
+          src={`http://localhost:3010/uploads/images/${user.image}`}
+          alt='Profile'
+        />
+      )}
     </div>
   );
 };

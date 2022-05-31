@@ -30,7 +30,6 @@ const getUserMessages = async (userId) => {
   try {
     let response = await axios.get(`${baseUrl}/${userId}`);
     if (response) {
-      console.log(response)
       return response.data;
     }
   } catch (error) {
@@ -54,7 +53,7 @@ const postMessage = async (message) => {
 const updateMessage = async (messageId, message) => {
   try {
     let response = await axios.put(`${baseUrl}/${messageId}`, message, header);
-
+    return response.data
   } catch (error) {
     console.log(`Error posting the message: ${error}`);
   }

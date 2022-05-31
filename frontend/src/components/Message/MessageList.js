@@ -21,11 +21,10 @@ const MessageList = ({
     newArray[index] = temp.flagged;
     setChecked(newArray);
     let temp2 = await getUserMessages(user._id);
-    setMessages(temp2);
+    setMessages(temp2)
   };
 
   useEffect(() => {
-    if(messages.length > 0)
     setChecked(
       messages.map((message) => {
         return message.flagged;
@@ -51,14 +50,14 @@ const MessageList = ({
                   <td>Read: {message.read && "yes"}</td>
                   <td>Date Sent: {formatDate(message.dateSent)}</td>
                   <td>
-                    <Form.Check
+                    {checked && <Form.Check
                       type='checkbox'
                       label='Flag message'
-                      checked={checked[index]} // initially checked[index] = true and checkbox is 'checked'. doesn't update to 'not checked' when checked = [false] until reload
+                      checked={checked[index]} 
                       onChange={() => {
                         handleChecked(message, index);
                       }}
-                    />
+                    />}
                   </td>
                 </tr>
                 <tr>
@@ -99,3 +98,4 @@ const MessageList = ({
 };
 
 export default MessageList;
+

@@ -17,7 +17,7 @@ const ReviewsList = ({
   uploadImage,
   filter,
   setReviewEdit,
-  reviewEdit
+  reviewEdit,
 }) => {
   const [update, setUpdate] = useState(false);
   const { user } = useContext(AuthContext);
@@ -26,21 +26,15 @@ const ReviewsList = ({
   const [show, setShow] = useState(false);
   const [selectedReview, setSelectedReview] = useState({});
   const title = "Review";
-  const navigate = useNavigate()
-  const distance = (review)=> {
+  const navigate = useNavigate();
+  const distance = (review) => {
     let temp = CommonMethods.haversineDistance(
-      [
-        parseFloat(user.coordinates[1]),
-        parseFloat(user.coordinates[0]),
-      ],
-      [
-        parseFloat(review.coordinates[1]),
-        parseFloat(review.coordinates[0]),
-      ],
+      [parseFloat(user.coordinates[1]), parseFloat(user.coordinates[0])],
+      [parseFloat(review.coordinates[1]), parseFloat(review.coordinates[0])],
       true
-    )
-    return temp
-  }
+    );
+    return temp;
+  };
 
   useEffect(() => {
     (async () => {
@@ -118,21 +112,21 @@ const ReviewsList = ({
   }
 
   return (
-    <div>
-      <p></p>
+    <div className="container-reviewList">
       {!show && Array.isArray(reviewsFiltered) && (
-        <Table>
+        <Table  className="reviewTable" id="reviewTable">
           {reviewsFiltered.map((review, index) => {
-            
-            if(distance(review) <= 50 || filter){
-
-            
-
+            if (distance(review) <= 50 || filter) {
               return (
-                <tbody key={index}>
+                <tbody key={index} id="reviewTableBody">
+                  <tr id="bold">
+                    <td>Date:</td>
+                    <td>Contractor: </td>
+                    <td>Reviewer:</td>
+                  </tr>
                   <tr>
-                    <td>Date of Review: {formatDate(review.dateAdded)}</td>
-                    <td>Contractor: {review.contractorName}</td>
+                    <td>{formatDate(review.dateAdded)}</td>
+                    <td>{review.contractorName}</td>
                     {review.reviewerId !== user._id && (
                       <Td
                         to='/sendMessage'
@@ -150,27 +144,30 @@ const ReviewsList = ({
                       </Td>
                     )}
                     {review.reviewerId === user._id && (
-                      <td>{`Reviewer: ${review.reviewer}`}</td>
+                      <td>{`${review.reviewer}`}</td>
                     )}
                   </tr>
+                  <tr  id="bold">
+                    <td>Category:</td>
+                    <td>Phone:</td>
+                    <td>Location:</td>
+                  </tr>
                   <tr className='head'>
-                    <td>Category: {review.categoryOfService}</td>
-                    <td>Contractor Phone: {CommonMethods.phoneFormat(review.contractorPhone) }</td>
-                    <td>
-                      Location: {`${review.reviewCity}, ${review.reviewState}`}
-                    </td>
+                    <td>{review.categoryOfService}</td>
+                    <td>{CommonMethods.phoneFormat(review.contractorPhone)}</td>
+                    <td>{`${review.reviewCity}, ${review.reviewState}`}</td>
                   </tr>
                   <tr>
-                    <td colSpan={3}>{review.title}</td>
+                    <td id="reviewTitle" colSpan={3}>{review.title}</td>
                   </tr>
-                  <tr>
+                  <tr className="rating" id="rating">
                     <td>Rating</td>
-                    <td colSpan={2}>
+                    <td className="rating stars" id="stars" colSpan={2}>
                       <ReactStars
                         count={5}
                         edit={false}
                         value={review.rating}
-                        size={24}
+                        size={20}
                         isHalf={true}
                         emptyIcon={<i className='far fa-star'></i>}
                         halfIcon={<i className='fa fa-star-half-alt'></i>}
@@ -180,7 +177,7 @@ const ReviewsList = ({
                     </td>
                   </tr>
                   <tr>
-                    <td colSpan={3}>{review.body}</td>
+                    <td id="reviewBody" colSpan={3}>{review.body}</td>
                   </tr>
                   {review.reviewerId === user._id && (
                     <tr>
@@ -197,10 +194,13 @@ const ReviewsList = ({
                         </Button>
                       </td>
                       <td>
-                        <Button  onClick={()=>{
-                          setReviewEdit(review)
-                          navigate('/editReview')
-                        }}>Edit Review</Button>
+                        <Button
+                          onClick={() => {
+                            setReviewEdit(review);
+                            navigate("/editReview");
+                          }}>
+                          Edit Review
+                        </Button>
                       </td>
                     </tr>
                   )}

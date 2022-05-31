@@ -1,12 +1,36 @@
 
-  .container-editProfile .form {
+  .container-editProfile > .editForm {
     margin-left: auto;
     margin-right: auto;
     width: 70vw;
   }
 
 @media screen and (min-width: 481px) {
-    .container-editProfile .form {
-      width: 50vw;
+    .container-editProfile .editForm {
+      width: 40vw;
     }
+    .submitButton{
+
+      margin-right: auto;
+    }
+    .container-editProfile > .editForm > *:nth-child(9){
+      margin-right: auto;
+    }
+    .container-editProfile img{
+      width: 25vw;
   }
+  .container-editProfile > .editForm > *:nth-child(5), *:nth-child(6){
+    width: 40%;
+    display: inline-block;
+    margin-left: 1em;
+    margin-right: 1em;
+    margin-bottom: 2em;
+  }
+  .container-editProfile > .editForm > #checkBox {
+    justify-content: center;
+    align-items: center;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+}
