@@ -45,7 +45,7 @@ const MessagesPage = () => {
   };
 
   return (
-    <div>
+    <div className="container-messages">
       {messages && (
         <MessageList
           messages={messages}

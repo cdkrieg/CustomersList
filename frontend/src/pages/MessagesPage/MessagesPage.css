@@ -1,0 +1,8 @@
+.container-messages{
+    width: 90vw;
+}
+@media screen and (min-width: 481px) {
+    .container-messages{
+        width: 70vw;
+    }
+  }
