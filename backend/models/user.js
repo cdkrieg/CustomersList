@@ -3,7 +3,7 @@ const Joi = require("joi");
 const jwt = require("jsonwebtoken");
 
 const userSchema = mongoose.Schema({
-  name: { type: String, maxLength: 50, default: "" },
+  name: { type: String, maxLength: 50, default: "", required: false },
   userName: {
     type: String,
     unique: true,
@@ -34,14 +34,13 @@ const userSchema = mongoose.Schema({
   dateAdded: {type: Date, default: Date.now()},
   coordinates: [{type:String}],
   isContractor: {type: Boolean, default: false},
-  phone: {type: String, minLength: 10, maxLength: 11, default: ""},
+  phone: {type: String, minLength: 10, maxLength: 11, default: "1234567890"},
 });
 
 userSchema.methods.generateAuthToken = function () {
   return jwt.sign(
     {
       _id: this._id,
-      name: this.name,
       userName: this.userName,
       email: this.email,
       streetAddressLine1: this.streetAddressLine1,
@@ -72,7 +71,7 @@ const validateUser = (user) => {
     admin: Joi.boolean().default(false),
     coordinates: Joi.array().items(Joi.string()),
     isContractor: Joi.boolean().default(false),
-    phone: Joi.string().min(10).max(11).default(""),
+    phone: Joi.string().min(10).max(11).default("1234567890"),
   });
   return schema.validate(user);
 };

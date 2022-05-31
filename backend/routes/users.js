@@ -32,7 +32,6 @@ router.post("/register", async (req, res) => {
       zipCode: req.body.zipCode,
       coordinates: req.body.coordinates,
       image: "",
-      name: user.name,
     });
 
     await user.save();
@@ -53,9 +52,7 @@ router.post("/register", async (req, res) => {
         admin: user.admin,
         coordinates: user.coordinates,
         image: user.image,
-        name: user.name,
         isContractor: user.isContractor,
-        phone: user.phone,
       });
   } catch (err) {
     return res.status(500).send(`Internal Server Error: ${err}`);
@@ -168,7 +165,6 @@ router.put("/update/:userId", [auth], async (req, res) => {
         admin: user.admin,
         coordinates: user.coordinates,
         image: user.image,
-        name: user.name,
         isContractor: user.isContractor,
         phone: user.phone,
       });
@@ -204,9 +200,9 @@ router.put(
         admin: user.admin,
         coordinates: user.coordinates,
         image: user.image,
-        name: user.name,
         isContractor: user.isContractor,
         phone: user.phone,
+        name: user.name,
       });
     } catch (error) {
       return res.status(500).send(`Internal Server Error: ${error}`);

@@ -24,7 +24,7 @@ const RegisterPage = () => {
     city: "",
     state: "Choose State",
     zipCode: "",
-    coordinates: []
+    coordinates: [],
   };
   const [formData, handleInputChange, handleSubmit] = useCustomForm(
     defaultValues,

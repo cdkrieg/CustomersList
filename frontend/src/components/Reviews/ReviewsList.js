@@ -111,25 +111,13 @@ const ReviewsList = ({
     );
   }
 
-  function showResponse(review) {
-    return (
-      <>
-        <tr>
-          <td>Response:</td>
-        </tr>
-        <tr>
-          <td colSpan={3}>{review.response}</td>
-        </tr>
-      </>
-    );
-  }
 
   return (
     <div className='container-reviewList'>
       {!show && Array.isArray(reviewsFiltered) && (
         <Table className='reviewTable' id='reviewTable'>
           {reviewsFiltered.map((review, index) => {
-            if (distance(review) <= 50 || filter) {
+            if (distance(review) <= 50) {
               return (
                 <tbody key={index} id='reviewTableBody'>
                   <tr id='bold'>
