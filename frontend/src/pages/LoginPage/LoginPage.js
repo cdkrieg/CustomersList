@@ -10,7 +10,6 @@ import "./LoginPage.css";
 const LoginPage = () => {
   const { loginUser, isServerError } = useContext(AuthContext);
   const defaultValues = { email: "", password: "" };
-  const [checked, setChecked] = useState(false)
   const [formData, handleInputChange, handleSubmit, reset] = useCustomForm(
     defaultValues,
     loginUser
@@ -45,13 +44,6 @@ const LoginPage = () => {
             onChange={handleInputChange}
           />
         </Form.Label>
-        <Form.Check
-          type='checkbox'
-          label='Contractor'
-          onChange={() => {
-            setChecked(!checked);
-          }}
-        />
         {isServerError ? (
           <p className="error">Login failed, incorrect credentials!</p>
         ) : null}
