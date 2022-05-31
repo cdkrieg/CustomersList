@@ -9,6 +9,8 @@ import AxiosReviews from "../../Routes/reviewsRoutes";
 import useCustomForm from "../../hooks/UseCustomForm";
 import AxiosAPI from "../../Routes/distanceRoutes";
 import AuthContext from "../../context/AuthContext";
+import './EditReviewForm.css'
+import CommonMethods from "../../utils/CommonMethods";
 
 const EditReviewForm = ({ reviewEdit, categoryList }) => {
   const { user } = useContext(AuthContext);
@@ -34,7 +36,7 @@ const EditReviewForm = ({ reviewEdit, categoryList }) => {
     coordinates: reviewEdit.coordinates,
     response: reviewEdit.response,
   };
-  const [formData, handleInputChange, handleSubmit] = useCustomForm(
+  const [formData, handleInputChange] = useCustomForm(
     defaultValues
   );
 
@@ -76,18 +78,19 @@ const EditReviewForm = ({ reviewEdit, categoryList }) => {
     return (
       <div>
         <Form
-          onSubmit={(event) => submit(event)}
+          onSubmit={(event)=>submit(event)}
           variant='info'
           onKeyUp={(event) => {
-            if (event.key === "Enter") handleSubmit(event);
+            if (event.key === "Enter") submit(event);
           }}>
-          <Form.Label>{reviewEdit.contractorName}</Form.Label>
-          <Form.Label>{reviewEdit.contractorPhone}</Form.Label>
-          <Form.Label>{reviewEdit.categoryOfService}</Form.Label>
-          <Form.Label>{reviewEdit.dateOfService}</Form.Label>
-          <Form.Label>{reviewEdit.title}</Form.Label>
+          <Form.Label className="response label">{`Contractor: ${reviewEdit.contractorName}`}</Form.Label>
+          <Form.Label className="response label">{`Contractor Phone: ${CommonMethods.phoneFormat(reviewEdit.contractorPhone)}`}</Form.Label>
+          <Form.Label className="response label">{`Category: ${reviewEdit.categoryOfService}`}</Form.Label>
+          <Form.Label className="response label">{`Reviewer: ${reviewEdit.reviewer}`}</Form.Label>
+          <Form.Label className="response label">{`Date: ${CommonMethods.formatDate(reviewEdit.dateOfService)}`}</Form.Label>
+          <Form.Label className="response label">{`${reviewEdit.title}`}</Form.Label>
 
-          <ReactStars
+          <ReactStars className="response stars"
             edit={false}
             count={5}
             value={reviewEdit.rating}
@@ -97,13 +100,16 @@ const EditReviewForm = ({ reviewEdit, categoryList }) => {
             fullIcon={<i className='fa fa-star'></i>}
             activeColor='#ffd700'
           />
-          <Form.Label>{reviewEdit.body}</Form.Label>
+          <Form.Label className="responseReview">{reviewEdit.body}</Form.Label>
           <Form.Control
-            type='textarea'
+            as='textarea'
+            rows={5}
+            columns={30}
             name='response'
             value={formData.response}
             placeholder='Enter your response'
             onChange={handleInputChange}
+            className="response input"
           />
           <Button type="submit" onClick={(event)=>submit(event)}>Submit</Button>
         </Form>
@@ -116,7 +122,7 @@ const EditReviewForm = ({ reviewEdit, categoryList }) => {
           onSubmit={(event) => submit(event)}
           variant='info'
           onKeyUp={(event) => {
-            if (event.key === "Enter") handleSubmit(event);
+            if (event.key === "Enter") submit(event);
           }}>
           <Form.Control
             type='text'
@@ -180,7 +186,9 @@ const EditReviewForm = ({ reviewEdit, categoryList }) => {
             half={true}
           />
           <Form.Control
-            type='textarea'
+            as='textarea'
+            rows={8}
+            columns={30}
             name='body'
             value={formData.body}
             onChange={handleInputChange}

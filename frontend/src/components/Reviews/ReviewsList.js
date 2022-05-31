@@ -201,14 +201,14 @@ const ReviewsList = ({
                     review.contractorPhone === user.phone &&
                     review.response === "" && (
                       <tr>
-                        <td colSpan={3}>
-                          <Button
-                            onClick={() => {
+                        <td colSpan={3} onClick={() => {
                               setReviewEdit(review);
                               navigate("/editReview");
-                            }}>
-                            Respond to Review
-                          </Button>
+                            }} style={{color: "#0000EE", textDecoration: "underline"}}>
+                        Respond to Review
+                            
+                           
+                          
                         </td>
                       </tr>
                     )}
@@ -217,7 +217,7 @@ const ReviewsList = ({
                       <tr>
                         <td><strong>Response:</strong></td>
                       </tr>
-                      <tr>
+                      <tr className="reviewResponse">
                         <td colSpan={3}>{review.response}</td>
                       </tr>
                     </>

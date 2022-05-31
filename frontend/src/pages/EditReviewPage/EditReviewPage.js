@@ -1,8 +1,10 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import AxiosCategories from "../../Routes/categoriesRoutes";
-import EditReviewForm from "../../components/Reviews/EditReview";
+import EditReviewForm from "../../components/Reviews/EditReviewForm";
+import AuthContext from "../../context/AuthContext";
 
 const EditReviewPage = ({ reviewEdit }) => {
+  const {user} = useContext(AuthContext)
   const [categoryList, setCategoryList] = useState();
   const [update, setUpdate] = useState(false)
 
@@ -25,7 +27,9 @@ const EditReviewPage = ({ reviewEdit }) => {
 
   return (
     <div>
-      <h2>Edit Review</h2>
+      {user.phone === reviewEdit.contractorPhone && <h2>Respond To Review</h2>}
+      {user.phone !== reviewEdit.contractorPhone && <h2>Edit Review</h2>}
+      <br/>
       {reviewEdit && categoryList && categoryList.length && (
         <EditReviewForm reviewEdit={reviewEdit} categoryList={categoryList} />
       )}
