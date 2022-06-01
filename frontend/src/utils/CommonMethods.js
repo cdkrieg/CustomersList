@@ -53,6 +53,12 @@ const phoneFormat = (str) => {
   return null;
 }
 
+const removeBracesAndQuotes = (str) => {
+  str = str.replace(/[{}]/g, "");
+  str.replace(/^["'](.+(?=["']$))["']$/, '$1');
+  return str
+}
 
-const CommonMethods = {formatDate, haversineDistance, titleCase, phoneFormat}
+
+const CommonMethods = {formatDate, haversineDistance, titleCase, phoneFormat, removeBracesAndQuotes}
 export default CommonMethods
