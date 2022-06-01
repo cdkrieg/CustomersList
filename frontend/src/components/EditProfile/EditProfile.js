@@ -95,6 +95,7 @@ const EditProfile = () => {
         />
         <Form.Select
           name='state'
+          className="state"
           value={formData.state}
           onChange={(event) => handleInputChange(event)}>
           {stateArray.map((item, index) => {
@@ -113,6 +114,7 @@ const EditProfile = () => {
 
         <Form.Control
           name='zipCode'
+          className="zip"
           value={formData.zipCode}
           onChange={handleInputChange}
         />
