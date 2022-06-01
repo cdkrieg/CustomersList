@@ -38,7 +38,7 @@ const MessageList = ({
       <p></p>
       {messages && (
         <Table>
-          {messages.map((message, index) => {
+          {messages.reverse().map((message, index) => {
             return (
               <tbody key={index}>
                 <tr>
