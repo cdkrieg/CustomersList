@@ -45,8 +45,6 @@ const EditReviewForm = ({ reviewEdit, categoryList }) => {
     else setShowNotListed(false);
   }, [formData.tempCategory]);
 
-  useEffect(() => {}, [categoryList]);
-
   async function submit(e) {
     e.preventDefault();
     if (formData.tempCategory === "Other") {

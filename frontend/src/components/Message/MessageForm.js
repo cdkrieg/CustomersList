@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { Form, Button, Alert } from "react-bootstrap";
 import { useNavigate, useLocation } from "react-router";
 import useCustomForm from "../../hooks/UseCustomForm";
@@ -13,7 +13,6 @@ const MessageForm = ({
     const navigate = useNavigate()
     const location = useLocation()
     const {webMaster} = location.state
-
     const [showAlert, setShowAlert] = useState(false)
 
   const defaultValues = {
@@ -39,15 +38,9 @@ const MessageForm = ({
             setShowAlert(false)
             reset()
             navigate(-1)
-
         }, 1000);
 
     }
-  useEffect(() => {
-
-  
-  }, [])
-  
 
   return <div>
       <Form  className="form" onSubmit={(e)=> customSubmit(e)} onKeyUp={(event)=> {if(event.key === 'Enter')handleSubmit(event)}}>

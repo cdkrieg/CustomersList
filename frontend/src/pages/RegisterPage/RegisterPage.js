@@ -38,7 +38,7 @@ const RegisterPage = () => {
       setPasswordValidation("valid");
       setShowPasswordAlert1(false);
     }
-  }, [passwordConfirm]);
+  }, [passwordConfirm, formData.password]);
 
   useEffect(() => {
     if (formData.state !== stateArray[0].value) setShowStateAlert(false);

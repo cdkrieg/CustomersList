@@ -7,9 +7,7 @@ import AuthContext from "../../context/AuthContext";
 import "./Navbar.css";
 
 const Navbar = ({ showMenu, setShowMenu }) => {
-  const { logoutUser } = useContext(AuthContext);
-  const { user } = useContext(AuthContext);
-
+  const { logoutUser, user } = useContext(AuthContext);
   return (
     <div className='navBar'>
       <p className='brand'>

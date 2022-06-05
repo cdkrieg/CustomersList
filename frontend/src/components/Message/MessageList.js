@@ -10,7 +10,6 @@ const MessageList = ({
   setMessages,
   getUserMessages,
   user,
-  sendMessageToUser,
 }) => {
   const [checked, setChecked] = useState();
   const formatDate = (date) => CommonMethods.formatDate(date);

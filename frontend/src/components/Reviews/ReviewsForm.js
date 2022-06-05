@@ -44,7 +44,7 @@ const ReviewsForm = ({ reviews, setReviews }) => {
   }, [formData.tempCategory]);
 
   useEffect(() => {
-    let temp = getReviews
+    let temp = getReviews()
     if(temp)
     setReviews(temp)
   }, [update])

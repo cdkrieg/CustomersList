@@ -38,7 +38,7 @@ const EditProfile = () => {
         setShowPasswordAlert1(false);
       }
     }
-  }, [passwordConfirm]);
+  }, [passwordConfirm, formData.password]);
 
   function passwordCheck(event) {
     event.preventDefault();
