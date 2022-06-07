@@ -53,7 +53,7 @@ function App() {
           <Route path='/messages' element={<MessagesPage />} />
           <Route path='/sendMessage' element={<SendMessagePage />} />
           <Route path='/requestAccess' element={<RequestAccess />} />
-          <Route path='/editReview' element={<EditReviewPage reviewEdit={reviewEdit} setReviewEdit={setReviewEdit} categoryList={categoryList} setCategoryList={setCategoryList} />}  />
+          <Route path='/editReview' element={<EditReviewPage reviewEdit={reviewEdit} setReviewEdit={setReviewEdit} categoryList={categoryList} setCategoryList={setCategoryList} setReviews={setReviews} />}  />
         </Routes>
       </div>
       <Footer className='footer' />

@@ -14,12 +14,13 @@ const MessagesPage = () => {
       if (user) {
         try {
           let temp = await getUserMessages(user._id);
-          setMessages(temp);
+          setMessages(temp.reverse());
         } catch (error) {
           console.log("Error with setMessages in useEffect");
         }
       }
     })();
+    console.log(JSON.stringify(messages))
   }, []);
 
   const getUserMessages = async (userId) => {

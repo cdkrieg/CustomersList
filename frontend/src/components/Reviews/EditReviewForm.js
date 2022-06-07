@@ -12,7 +12,7 @@ import AuthContext from "../../context/AuthContext";
 import './EditReviewForm.css'
 import CommonMethods from "../../utils/CommonMethods";
 
-const EditReviewForm = ({ reviewEdit, categoryList }) => {
+const EditReviewForm = ({ reviewEdit, categoryList, setReviews }) => {
   const { user } = useContext(AuthContext);
   const navigate = useNavigate();
   const [date, setDate] = useState(Date.parse(reviewEdit.dateOfService));
@@ -60,6 +60,7 @@ const EditReviewForm = ({ reviewEdit, categoryList }) => {
       `${formData.reviewStreetAddress}, ${formData.reviewCity}, ${formData.reviewState}`
     );
     AxiosReviews.updateReview(reviewEdit._id, formData);
+    setReviews(undefined)
     navigate("/");
   }
 

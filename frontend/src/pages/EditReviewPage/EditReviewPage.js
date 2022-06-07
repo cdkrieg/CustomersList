@@ -3,10 +3,10 @@ import AxiosCategories from "../../Routes/categoriesRoutes";
 import EditReviewForm from "../../components/Reviews/EditReviewForm";
 import AuthContext from "../../context/AuthContext";
 
-const EditReviewPage = ({ reviewEdit }) => {
+const EditReviewPage = ({ reviewEdit, setReviews }) => {
   const {user} = useContext(AuthContext)
   const [categoryList, setCategoryList] = useState();
-  const [update, setUpdate] = useState(false)
+
 
   useEffect(() => {
       (async()=>{
@@ -31,7 +31,7 @@ const EditReviewPage = ({ reviewEdit }) => {
       {user.phone !== reviewEdit.contractorPhone && <h2>Edit Review</h2>}
       <br/>
       {reviewEdit && categoryList && categoryList.length && (
-        <EditReviewForm reviewEdit={reviewEdit} categoryList={categoryList} />
+        <EditReviewForm reviewEdit={reviewEdit} categoryList={categoryList} setReviews={setReviews}/>
       )}
     </div>
   );

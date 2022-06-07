@@ -49,7 +49,7 @@ const getUserReviews = async (userName) => {
 
 const postReview = async (review) => {
   try {
-    let response = await axios.post(baseUrl, review, header);
+    let response = await axios.post(baseUrl, review);
     if (response) {
      
       return response.data;
@@ -61,12 +61,12 @@ const postReview = async (review) => {
 
 const updateReview = async (reviewId, update) => {
   try {
-    let response = await axios.put(`${baseUrl}/${reviewId}`, update, header);
+    let response = await axios.put(`${baseUrl}/${reviewId}`, update);
     if (response) {
       return response.data;
     }
   } catch (error) {
-    console.log(`Error posting the review: ${error}`);
+    console.log(`Error updating the review: ${error}`);
   }
 };
 const uploadImage = async (reviewId, imageData) => {

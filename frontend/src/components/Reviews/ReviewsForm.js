@@ -65,6 +65,7 @@ const ReviewsForm = ({ reviews, setReviews }) => {
     await getCoordinates(`${formData.reviewStreetAddress}, ${formData.reviewCity}, ${formData.reviewState}`)
     handleSubmit(e);
     setUpdate(!update)
+    setReviews(undefined)
     navigate('/')
   }
   const getReviews = async () => {

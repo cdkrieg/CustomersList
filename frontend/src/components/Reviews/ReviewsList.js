@@ -37,6 +37,7 @@ const ReviewsList = ({
   };
 
   useEffect(() => {
+    if (reviews === undefined){
     (async () => {
       try {
         let temp = await getAllReviews();
@@ -45,6 +46,7 @@ const ReviewsList = ({
         console.log("Error with setReviews in useEffect");
       }
     })();
+  }
   }, [update]);
 
   useEffect(() => {
