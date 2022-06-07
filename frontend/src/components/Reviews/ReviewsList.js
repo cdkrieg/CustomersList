@@ -228,6 +228,7 @@ const ReviewsList = ({
                         <Button
                           onClick={() => {
                             setReviewEdit(review);
+                            setUpdate(!update)
                             navigate("/editReview");
                           }}>
                           Edit Review

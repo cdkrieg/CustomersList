@@ -1,5 +1,5 @@
 .container-messages{
-    width: 90vw;
+    width: 50vw;
 }
 @media screen and (min-width: 481px) {
     .container-messages{

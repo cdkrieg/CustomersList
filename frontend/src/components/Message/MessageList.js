@@ -3,6 +3,7 @@ import { Table, Form } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import "../../utils/CommonMethods";
 import CommonMethods from "../../utils/CommonMethods";
+import './MessageList.css'
 
 const MessageList = ({
   messages,
@@ -33,10 +34,10 @@ const MessageList = ({
  
 
   return (
-    <div>
+    <div className="container-messageList">
       <p></p>
       {messages && (
-        <Table>
+        <Table className="messageTable">
           {messages.reverse().map((message, index) => {
             return (
               <tbody key={index}>

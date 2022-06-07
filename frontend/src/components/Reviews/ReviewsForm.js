@@ -64,7 +64,7 @@ const ReviewsForm = ({ reviews, setReviews }) => {
     formData.dateOfService = date;
     await getCoordinates(`${formData.reviewStreetAddress}, ${formData.reviewCity}, ${formData.reviewState}`)
     handleSubmit(e);
-    setUpdate(true)
+    setUpdate(!update)
     navigate('/')
   }
   const getReviews = async () => {

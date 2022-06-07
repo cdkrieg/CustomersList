@@ -1,0 +1,4 @@
+.container-messageList > .messageTable{
+    display: grid;
+    width: 90vw;
+}

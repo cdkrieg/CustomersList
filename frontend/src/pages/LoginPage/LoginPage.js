@@ -31,6 +31,7 @@ const LoginPage = () => {
             name="email"
             value={formData.email}
             onChange={handleInputChange}
+            autoComplete="false"
           />
         </Form.Label>
         <Form.Label>
